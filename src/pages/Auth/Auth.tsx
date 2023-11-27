@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Auth.module.css";
 import Register from "../../components/Ui/Auth/Register/Register";
 import Login from "../../components/Ui/Auth/Login/Login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Font from "../../components/icons/Font";
+import { isLoggedIn } from "../../services/authService";
+import img from "../../assets/book-school.gif";
 
 const Auth = () => {
+  // Navigate If User logged In
+  const navigate = useNavigate();
+  const loggedUser = isLoggedIn();
+
+  useEffect(() => {
+    if (loggedUser) {
+      navigate("/profile");
+    }
+  }, [loggedUser]);
+
   // Set log/sign up stats
   const [register, setRegister] = useState(false);
   return (
@@ -26,12 +38,13 @@ const Auth = () => {
         </div>
         {/* Dimond shape */}
         <div
-          className="bg-secondary absolute h-[200px] bottom-20 left-20 w-[200px] "
+          className="text-center bg-secondary absolute h-[300px] bottom-0 left-0 w-[300px] "
           style={{
-            clipPath:
-              "polygon(50% 0%, 81% 10%, 100% 91%, 51% 33%, 26% 61%, 91% 100%, 9% 93%, 0% 70%, 0% 35%, 20% 10%)",
+            clipPath: " circle(59.6% at 33% 67%)",
           }}
-        ></div>
+        >
+          <img src={img} className="h-full w-full" alt="" />
+        </div>
         {/* shape */}
         <div
           className="bg-secondary absolute h-[500px] top-0 w-full "
@@ -45,17 +58,17 @@ const Auth = () => {
               setRegister(!register);
             }}
             type="submit"
-            className="w-full my-10 group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-r-full"
+            className="w-full my-10 group overflow-hidden flex justify-center items-center relative   bg-white px-6 py-4 text-base text-black font-semibold  rounded-r-full"
           >
             <span>{register ? "Log In" : "Register"}</span>{" "}
-            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
+            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gray opacity-40 group-hover:animate-shine" />
           </button>
         </div>
         {/* Home Button */}
         <div className="absolute top-0 right-0">
           <button
             type="submit"
-            className="w-full my-10 group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-l-full"
+            className="w-full my-10 group overflow-hidden flex justify-center items-center relative   bg-white px-6 py-4 text-base text-black font-semibold  rounded-l-full"
           >
             <Link to="/">
               <span>Home</span>{" "}
@@ -64,14 +77,14 @@ const Auth = () => {
                 <Font iconName="fa-house"></Font>
               </span>
             </Link>
-            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
+            <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gray opacity-40 group-hover:animate-shine" />
           </button>
         </div>
         {/* Log In */}
         {!register && <Login />}
 
         {/* Sign Up */}
-        {register && <Register />}
+        {register && <Register setRegister={setRegister} />}
       </div>{" "}
     </div>
   );

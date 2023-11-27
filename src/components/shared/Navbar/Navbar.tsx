@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
 import logo from "../../../assets/logo/black-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Font from "../../icons/Font";
 import MainButton from "../../Buttons/MainButton";
+import { isLoggedIn, removeUserInfo } from "../../../services/authService";
 const Navbar = () => {
+  // User logged data
+
+  const loggedUser = isLoggedIn();
+
+  const navigate = useNavigate();
+
   // Sticky Navbar
   const [isSticky, setSticky] = useState(false);
 
@@ -62,16 +69,21 @@ const Navbar = () => {
           title: "Class",
           dropdown: null,
         },
-         
       ],
     },
-    { title: "Contact", dropdown: null },
+    { title: "profile", dropdown: null },
   ];
+
+  // Handel Logout
+  const handelLogout = () => {
+    removeUserInfo("access_token");
+    navigate("/auth");
+  };
 
   return (
     <div
-      className={`container    mx-auto p-4 max-w-[1280px] ${
-        isSticky ? "fixed top-0 w-full z-10" : ""
+      className={`container fixed  fixed top-0 w-full  mx-auto p-4 max-w-[1280px] ${
+        isSticky ? " bg-gray z-10" : ""
       }`}
     >
       <nav className="flex items-center justify-between">
@@ -116,11 +128,28 @@ const Navbar = () => {
         </div>
         <ul className="flex space-x-4 hidden md:block">
           <li>
-            <MainButton
-              path="/auth"
-              content="log in / sign up"
-              icon="fa-right-to-bracket"
-            ></MainButton>
+            {loggedUser ? (
+              <button
+                onClick={() => {
+                  handelLogout();
+                }}
+                className=" group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-full"
+              >
+                <div className="flex items-center">
+                  <span className="mr-4 rotate-180">
+                    <Font iconName="fa-right-to-bracket"></Font>{" "}
+                  </span>
+                  <span>Log Out</span>{" "}
+                </div>
+                <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
+              </button>
+            ) : (
+              <MainButton
+                path="/auth"
+                content="log in / sign up"
+                icon="fa-right-to-bracket"
+              ></MainButton>
+            )}
           </li>
         </ul>
         {/* Mobile Menu */}
@@ -180,11 +209,28 @@ const Navbar = () => {
               </ul>
             </div>
             <div>
-              <MainButton
-                path="/auth"
-                content="log in / sign up"
-                icon="fa-right-to-bracket"
-              ></MainButton>
+              {loggedUser ? (
+                <button
+                  onClick={() => {
+                    handelLogout();
+                  }}
+                  className=" group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-full"
+                >
+                  <div className="flex items-center">
+                    <span className="mr-4 rotate-180">
+                      <Font iconName="fa-right-to-bracket"></Font>{" "}
+                    </span>
+                    <span>Log Out</span>{" "}
+                  </div>
+                  <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
+                </button>
+              ) : (
+                <MainButton
+                  path="/auth"
+                  content="log in / sign up"
+                  icon="fa-right-to-bracket"
+                ></MainButton>
+              )}
             </div>
           </div>
         )}

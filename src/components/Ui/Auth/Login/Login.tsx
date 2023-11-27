@@ -1,21 +1,34 @@
-
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainInput from "../../../Forms/Input/MainInput";
 import Font from "../../../icons/Font";
+import { useNavigate } from "react-router-dom";
+import { useUserLoginMutation } from "../../../../redux/api/auth/authAPI";
+import { setToLocalStorage } from "../../../../utils/localStorage";
 
 const Login = () => {
+  // Navigate If User logged In
+  const navigate = useNavigate();
+
   // React hook form
   type Inputs = {
-    email: string;
+    id: string;
     password: string;
   };
+
+  // Handle Redux Login
+  const [userLogin, { isLoading }] = useUserLoginMutation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const res = await userLogin(data).unwrap();
+    setToLocalStorage("access_token", res?.accessToken);
+    
+    navigate('/profile');
+  };
   return (
     <div className="max-w-[400px] mx-auto mt-[150px]">
       <div className="text-center">
@@ -25,11 +38,11 @@ const Login = () => {
       {/* Login Form */}
       <form className="my-6" onSubmit={handleSubmit(onSubmit)}>
         <MainInput
-          type="email"
-          placeholder="Email Address"
+          type="text"
+          placeholder="User Id  "
           icon="fa-envelope"
-          register={register("email", { required: true })}
-          error={errors.email}
+          register={register("id", { required: true })}
+          error={errors.id}
         />
 
         <MainInput
@@ -48,7 +61,6 @@ const Login = () => {
             <label
               htmlFor="checkbox-1"
               className="cursor-pointer select-none  ml-2"
-              
             >
               Remember me
             </label>
@@ -60,10 +72,16 @@ const Login = () => {
           type="submit"
           className="w-full my-10 group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-full"
         >
-          <span>Log in</span>{" "}
-          <span className="ml-4">
-            <Font iconName="fa-paper-plane"></Font>
-          </span>
+          <span>Log in</span> {/* Button Icon */}
+          {isLoading ? (
+            <span className="animate-spin">
+              <Font iconName="fa-spinner"></Font>
+            </span>
+          ) : (
+            <span className="ml-4">
+              <Font iconName="fa-paper-plane"></Font>{" "}
+            </span>
+          )}
           <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
         </button>
       </form>

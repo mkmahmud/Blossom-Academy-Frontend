@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainInput from "../../../Forms/Input/MainInput";
 import Font from "../../../icons/Font";
+import { useUserRegistrationMutation } from "../../../../redux/api/auth/authAPI";
+import { useState } from "react";
 
-const Register = () => {
+const Register = ({ setRegister }: any) => {
   // Handel Terms and Conditions
   const [terms, setTerms] = useState(false);
   // React hook form
@@ -13,12 +14,22 @@ const Register = () => {
     password: string;
   };
 
+  // Handle Redux registration
+  const [userRegistration, { isLoading }] = useUserRegistrationMutation();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const res = await userRegistration(data).unwrap();
+    if (res?.message === "Success") {
+      setRegister(false);
+    }
+  };
+
   return (
     <div className="max-w-[400px] mx-auto mt-[150px]">
       <div className="text-center">
@@ -77,10 +88,16 @@ const Register = () => {
             terms ? "primary" : "primaryHover"
           } px-6 py-4 text-base text-white font-semibold  rounded-full`}
         >
-          <span>Sign Up</span>{" "}
-          <span className="ml-4">
-            <Font iconName="fa-paper-plane"></Font>
-          </span>
+          <span>Sign Up</span> {/* Button Icon */}
+          {isLoading ? (
+            <span className="animate-spin">
+              <Font iconName="fa-spinner"></Font>
+            </span>
+          ) : (
+            <span className="ml-4">
+              <Font iconName="fa-paper-plane"></Font>{" "}
+            </span>
+          )}
           <div
             className={`absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 ${
               terms && "bg-primaryHover"

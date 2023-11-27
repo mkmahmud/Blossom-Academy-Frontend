@@ -13,6 +13,8 @@ const NotFound = () => {
       <div className="text-black text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <h2 className="text-extraLarge font-bold ">404</h2>
         <i className="fa-solid fa-triangle-exclamation text-primary text-[80px] my-4"></i>
+
+
         <p>Page Not Found</p>
         <Link to="/">
           <button
