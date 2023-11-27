@@ -1,0 +1,1 @@
+ This is Vite React-TypeScript-Tailwind Boilerplate
