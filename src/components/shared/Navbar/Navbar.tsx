@@ -82,8 +82,8 @@ const Navbar = () => {
 
   return (
     <div
-      className={`container fixed  fixed top-0 w-full  mx-auto p-4 max-w-[1280px] ${
-        isSticky ? " bg-gray z-10" : ""
+      className={`container  fixed top-0 w-full z-10  mx-auto p-4 max-w-[1280px] ${
+        isSticky ? " bg-white " : ""
       }`}
     >
       <nav className="flex items-center justify-between">

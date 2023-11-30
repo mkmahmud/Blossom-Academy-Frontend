@@ -4,6 +4,7 @@ import Auth from "../pages/Auth/Auth";
 import NotFound from "../pages/NotFound/NotFound";
 import Profile from "../pages/Profile/Profile";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import Home from "../pages/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -12,13 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (
-          <div className="h-[2000px] bg-secondaryHover">
-            <div className=" h-[500px] bg-primaryHover"></div>
-            <div className="bg-secondaryHover h-[500px]"></div>
-            <div className="bg-primaryHover h-[500px]"></div>
-          </div>
-        ),
+        element: <Home></Home>,
       },
       {
         path: "/profile",

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainInput from "../../../Forms/Input/MainInput";
 import Font from "../../../icons/Font";
@@ -8,6 +10,9 @@ import { setToLocalStorage } from "../../../../utils/localStorage";
 const Login = () => {
   // Navigate If User logged In
   const navigate = useNavigate();
+
+  // Show incorrect password
+  const [incorrectPassword, setincorrectPassword] = useState(" ");
 
   // React hook form
   type Inputs = {
@@ -25,9 +30,12 @@ const Login = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const res = await userLogin(data).unwrap();
-    setToLocalStorage("access_token", res?.accessToken);
-    
-    navigate('/profile');
+    if (res) {
+      setToLocalStorage("access_token", res?.accessToken);
+      navigate("/profile");
+    } else {
+      setincorrectPassword("Password or Id Not valid");
+    }
   };
   return (
     <div className="max-w-[400px] mx-auto mt-[150px]">
@@ -35,6 +43,7 @@ const Login = () => {
         <h2 className="font-bold text-extraLarge">Blossom</h2>
         <p className="text-xl my-4">Sign Into Your Accout</p>
       </div>
+      <h2 className="text-xl text-primary text-center">{incorrectPassword}</h2>
       {/* Login Form */}
       <form className="my-6" onSubmit={handleSubmit(onSubmit)}>
         <MainInput
