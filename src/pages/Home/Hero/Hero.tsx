@@ -30,7 +30,7 @@ const Hero = () => {
         <div className="w-full md:w-1/2 pt-20">
           <div className="pl-4">
             <p className="text-primary">Blossom Online Class</p>
-            <h2 className="text-extraLarge md:text-[4rem] font-bold my-6 leading-none">
+            <h2 className="text-extraLarge md:text-extraLargeXL font-bold my-6 leading-none">
               Want To Be A Career{" "}
               <span className="text-primary"> Coach Join!</span>
             </h2>

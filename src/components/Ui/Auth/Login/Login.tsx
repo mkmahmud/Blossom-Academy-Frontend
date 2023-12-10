@@ -29,10 +29,11 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    data.id = data.id.toUpperCase();
     const res = await userLogin(data).unwrap();
     if (res) {
       setToLocalStorage("access_token", res?.accessToken);
-      navigate("/profile");
+      navigate("/dashboard");
     } else {
       setincorrectPassword("Password or Id Not valid");
     }

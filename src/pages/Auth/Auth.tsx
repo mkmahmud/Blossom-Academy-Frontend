@@ -5,8 +5,7 @@ import Login from "../../components/Ui/Auth/Login/Login";
 import { Link, useNavigate } from "react-router-dom";
 import Font from "../../components/icons/Font";
 import { isLoggedIn } from "../../services/authService";
-import img from "../../assets/book-school.gif";
-
+ 
 const Auth = () => {
   // Navigate If User logged In
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (loggedUser) {
-      navigate("/profile");
+      navigate("/dashboard");
     }
   }, [loggedUser]);
 
@@ -37,14 +36,14 @@ const Auth = () => {
           </div>
         </div>
         {/* Dimond shape */}
-        <div
+        {/* <div
           className="text-center bg-secondary absolute h-[300px] bottom-0 left-0 w-[300px] "
           style={{
             clipPath: " circle(59.6% at 33% 67%)",
           }}
         >
           <img src={img} className="h-full w-full" alt="" />
-        </div>
+        </div> */}
         {/* shape */}
         <div
           className="bg-secondary absolute h-[500px] top-0 w-full "

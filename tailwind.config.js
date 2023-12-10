@@ -22,6 +22,7 @@ export default {
       xl: "1.25rem", // 20 pixels - Extra large font size
       large: "1.5rem", // 24 pixels - 2x large font size
       extraLarge: "2rem", //
+      extraLargeXL: "4rem", //
     },
     extend: {
       screens: {
@@ -41,4 +42,5 @@ export default {
     },
   },
   plugins: [],
+  
 };

@@ -1,0 +1,12 @@
+.comment:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: white;
+  height: 40px;
+  width: 40px;
+  transform: rotate(45deg);
+  border-top: 1px dashed #f55951;
+  border-left: 1px dashed #f55951;
+}
