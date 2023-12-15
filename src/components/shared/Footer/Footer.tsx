@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import logo from "../../../assets/logo/white-logo.png";
+import logo from "../../../assets/logo/black-logo.png";
 import Font from "../../icons/Font";
 const Footer = () => {
   return (
     <div>
-      <div className="bg-secondary text-white px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
+      <div className=" border-t-2 border-primaryHover px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
         <div className="my-6 leading-8">
           <img src={logo} alt="" />
           <p>
@@ -83,7 +83,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      <p className="text-center py-2 text-lg">
+      <p className="text-center py-4 text-lg bg-gray">
         Copyright @ 2023 Design & Developed By <Link to="/" className="text-primary">Blossom</Link>
       </p>
     </div>

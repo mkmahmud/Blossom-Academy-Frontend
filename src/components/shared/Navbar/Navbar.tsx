@@ -39,9 +39,9 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   //   Menus
-  const menus = [
-    { title: "home", dropdown: null },
-    { title: "About", dropdown: null },
+  const menus = [ 
+    { title: "about", dropdown: null },
+    { title: "teachers", dropdown: null },
     {
       title: "Courses",
       dropdown: [
@@ -112,7 +112,7 @@ const Navbar = () => {
                 </Link>
                 {/* Dropdown Menus */}
                 {menu?.dropdown && (
-                  <ul className="absolute bg-gray py-2 px-4 top-16 hidden group-hover:block z-10">
+                  <ul className="absolute bg-gray py-2 px-4 top-14 hidden group-hover:block z-10">
                     {menu?.dropdown.map((m, i) => (
                       <li className="my-2" key={i}>
                         {" "}

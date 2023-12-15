@@ -102,7 +102,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <Font iconName="fa-book" />{" "}
-                    <span className="ml-4">Courses</span>
+                    <span className="ml-4">Courses</span> 
                   </li>
                 </Link>
                 <Link to={`${urlPath}/batch`}>

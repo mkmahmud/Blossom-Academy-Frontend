@@ -3,7 +3,7 @@ import Events from "./Events/Events";
 import FreePDF from "./FreePDF/FreePDF";
 import Hero from "./Hero/Hero";
 import Solutions from "./Solutions/Solutions";
-import States from "./States/States";
+import Teachers from "./Teachers/Teachers";
 import Testimonials from "./Testimonials/Testimonials";
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <Hero />
       <Solutions />
-      <States />
+      <Teachers />
       <Courses />
       <FreePDF />
       <Testimonials />

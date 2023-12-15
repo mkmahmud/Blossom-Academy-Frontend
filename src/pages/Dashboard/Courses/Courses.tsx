@@ -12,11 +12,11 @@ import ViewCourseDetails from "./ViewCourseDetails";
 import { useState } from "react";
 
 interface DataType {
+  key: React.ReactNode;
   code: string;
   status: boolean;
   thumbnail: string;
   title: string;
-  _v: number;
   _id: string;
 }
 
@@ -27,9 +27,6 @@ const Courses = () => {
   //   User Role
   // const role = (user as { role: string }).role;
 
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    console.log(info?.source, value);
-
   // Actions
   const [isEdit, setIsEdit] = useState(false);
   const [isEditData, setIsEditData] = useState({});
@@ -39,7 +36,6 @@ const Courses = () => {
     // message.success(`Editing ${record.name}`);
     setIsEdit(!isEdit);
     setIsEditData(record);
-    console.log(record);
   };
 
   const [deleteCourse] = useDeleteCourseMutation();
@@ -119,8 +115,33 @@ const Courses = () => {
     },
   ];
 
+  let tableData: DataType[] = [];
+
+  const [searchVal, setSearchVal] = useState("");
+  const onSearch: SearchProps["onSearch"] = (value, _e) => setSearchVal(value);
+
   // Data
   const { data: coursesData } = useGetAlCourseQuery(undefined);
+
+  if (coursesData?.length > 0) {
+    coursesData.map((course: any) => {
+      tableData.push({
+        code: course.code,
+        title: course.title,
+        key: course._id,
+        status: course.status,
+        thumbnail: course.thumbnail,
+        _id: course._id,
+      });
+    });
+  }
+
+  // Filter data based on searchVal
+  const filteredData = tableData.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchVal.toLowerCase()) ||
+      item.code.toLowerCase().includes(searchVal.toLowerCase())
+  );
 
   return (
     <div>
@@ -132,25 +153,38 @@ const Courses = () => {
               <AddNewCourse />
             </div>
           </div>
-          <div className="my-4">
+          <div className="my-4 ease-in-out duration-300  ">
             <p>Serach User by Corse Name or Course Code </p>
-            <Search
-              placeholder="Type Course Code Or Course Name "
-              className="my-1 text-lg "
-              allowClear
-              enterButton={
-                <button className="bg-primary text-white px-4 py-2 rounded-full text-lg">
-                  Search
-                </button>
-              }
-              size="large"
-              onSearch={onSearch}
-            />
+            <div className="flex items-center w-full">
+              <Search
+                placeholder="Type Course Code Or Course Name "
+                className="my-1 text-lg "
+                allowClear
+                enterButton={
+                  <button className="bg-primary text-white px-4 py-2 rounded-full text-lg">
+                    Search
+                  </button>
+                }
+                size="large"
+                onSearch={onSearch}
+              />
+              {searchVal && (
+                <div className="mx-4 ease-in-out duration-300  ">
+                  <Button
+                    type="default"
+                    color="primary"
+                    onClick={() => setSearchVal("")}
+                  >
+                    <Font iconName="fa-rotate-right" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="my-4 p-4 ">
-          <MyTable data={coursesData} columns={columns} pageSize="5" />
+          <MyTable data={filteredData} columns={columns} pageSize="5" />
         </div>
       </div>
       <div>

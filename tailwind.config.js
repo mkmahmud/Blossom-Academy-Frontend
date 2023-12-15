@@ -13,6 +13,8 @@ export default {
       gray: "#f1e8e6",
       black: "#000000",
       white: "#FFFFFF",
+      green: "#52c41a",
+      red: "#f55951"
     },
     fontSize: {
       xs: "0.75rem", // 12 pixels - Extra small font size
@@ -42,5 +44,4 @@ export default {
     },
   },
   plugins: [],
-  
 };
