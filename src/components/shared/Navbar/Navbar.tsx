@@ -39,39 +39,18 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   //   Menus
-  const menus = [ 
+  const menus = [
     { title: "about", dropdown: null },
     { title: "teachers", dropdown: null },
     {
       title: "Courses",
       dropdown: [
         {
-          title: "Web-development",
+          title: "live-courses",
           dropdown: null,
         },
         {
-          title: "Digital-Marketing",
-          dropdown: null,
-        },
-      ],
-    },
-    {
-      title: "Class",
-      dropdown: [
-        {
-          title: "Class",
-          dropdown: null,
-        },
-        {
-          title: "Class",
-          dropdown: null,
-        },
-        {
-          title: "Class",
-          dropdown: null,
-        },
-        {
-          title: "Class",
+          title: "video-courses",
           dropdown: null,
         },
       ],
@@ -135,7 +114,7 @@ const Navbar = () => {
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
                 <div className="cursor-pointer">
-                  <Font iconName='fa-bell'/>
+                  <Font iconName="fa-bell" />
                 </div>
                 <img
                   src={userImage}

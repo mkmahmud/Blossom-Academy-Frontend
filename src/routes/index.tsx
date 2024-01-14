@@ -14,6 +14,9 @@ import BatchDetails from "../pages/Dashboard/Batch/BatchDetails/BatchDetails";
 import Teacher from "../pages/Teacher/Teacher";
 import TeacherDetails from "../pages/Teacher/TeacherDetails/TeacherDetails";
 import About from "../pages/About/About";
+import LiveCourses from "../pages/LiveCourses/LiveCourses";
+import VideoCourses from "../pages/VideoCourses/VideoCourses";
+import Checkout from "../pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/live-courses",
+        element: <LiveCourses />,
+      },
+      {
+        path: "/video-courses",
+        element: <VideoCourses />,
+      },
+      {
+        path: "/courses/checkout/:id",
+        element: <Checkout />,
       },
     ],
   },

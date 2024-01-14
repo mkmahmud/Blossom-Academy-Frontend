@@ -39,7 +39,7 @@ const Sidebar = () => {
           <div>
             <img
               src={userImage}
-              className="h-20 w-20 rounded-full p-1 border border-secondary mx-auto -mt-10 bg-white"
+              className="h-28 w-28 rounded-full p-1 border border-secondary mx-auto -mt-14 bg-white"
               alt="User Image"
             />
             <h2 className="text-xl font-semibold mt-4">Jhon Doe</h2>
@@ -144,6 +144,94 @@ const Sidebar = () => {
               </ul>
             )}
             {/*  Admin */}
+            {role === "admin" && (
+              <ul className="mt-4">
+                <Link to={`${urlPath}`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-home" />{" "}
+                    <span className="ml-4"> Dashboard</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/profile`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}/profile`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-user" />{" "}
+                    <span className="ml-4"> Profile</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/users`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}/users`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-users" />{" "}
+                    <span className="ml-4"> Users</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/courses`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/courses`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-book" />{" "}
+                    <span className="ml-4">Courses</span> 
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/batch`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/batch`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-layer-group" />{" "}
+                    <span className="ml-4">Batch</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/management`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/management`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-list-check" />{" "}
+                    <span className="ml-4">Managements</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/orders`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/orders`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-first-order" />{" "}
+                    <span className="ml-4">Orders</span>
+                  </li>
+                </Link>
+              </ul>
+            )}
             {/*  Management */}
             {role === "management" && (
               <ul className="mt-4">

@@ -22,6 +22,8 @@ const AddNewBatch = () => {
     status: boolean;
     category: string;
     startTime: string;
+    session: string;
+    thambnail: string;
     studentsId: [];
     teachersId: [];
     courseId: [];
@@ -128,6 +130,29 @@ const AddNewBatch = () => {
               )}
             />
             {errors.startTime && <span>{errors.startTime.message}</span>}
+          </div>
+          <CustomInput
+            name="thambnail"
+            placeholder="Enter Thambnail URL"
+            errors={errors}
+            control={control}
+          />
+          <div className="py-2 max-w-[450px] text-lg">
+            <p className="my-2 text-secondary">Slot:</p>
+            <Controller
+              rules={{ required: "Slot is required" }}
+              control={control}
+              name="session"
+              render={({ field }) => (
+                <Select className="w-full" {...field}>
+                  <Option value="10 AM">10 AM</Option>
+                  <Option value="12 PM">12 PM</Option>
+                  <Option value="06 PM">06 PM</Option>
+                  <Option value="09 PM">09 PM</Option>
+                </Select>
+              )}
+            />
+            {errors.session && <span>{errors.session.message}</span>}
           </div>
           {/* 
           <CustomInput

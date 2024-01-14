@@ -46,6 +46,22 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["batch"],
     }),
+    // Get Single Batch
+    getBatch: build.query({
+      query: (id) => ({
+        url: `/batch/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["batch"],
+    }),
+    // Get All Active Batch
+    getAllActiveBatch: build.query({
+      query: () => ({
+        url: `/batch/all-batches`,
+        method: "GET",
+      }),
+      providesTags: ["batch"],
+    }),
   }),
 });
 
@@ -55,4 +71,6 @@ export const {
   useAddStudentIntoBatchMutation,
   useAddTeacherIntoBatchMutation,
   useAddCourseIntoBatchMutation,
+  useGetAllActiveBatchQuery,
+  useGetBatchQuery,
 } = authApi;

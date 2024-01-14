@@ -1,12 +1,16 @@
 import Search, { SearchProps } from "antd/es/input/Search";
 
-import { Modal, Select, message } from "antd";
+import { Button, Modal, Popconfirm, Select, message } from "antd";
 import CustomButton from "../../../components/Buttons/CustomButton";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import CustomInput from "../../../components/Dashboard/Ui/Input/CustomInput";
 import { useUserRegistrationMutation } from "../../../redux/api/auth/authAPI";
 import { getUserInfo } from "../../../services/authService";
+import MyTable from "../../../components/Dashboard/Ui/Table/Table";
+import Font from "../../../components/icons/Font";
+import { ColumnsType } from "antd/es/table";
+import { useGetAllStudentsQuery } from "../../../redux/api/users/usersAPI";
 
 const { Option } = Select;
 
@@ -39,10 +43,33 @@ type Inputs = {
   password: string;
   role?: string;
 };
+interface DataType {
+  key: React.ReactNode;
+  userId: string;
+  fullName: string;
+  role: string;
+  email: string;
+  _id: string;
+}
 
 const Users = () => {
   // User Information
   const user = getUserInfo();
+  // Actions
+  const [isEdit, setIsEdit] = useState(false);
+  const [isEditData, setIsEditData] = useState({});
+  const handleEdit = (record: DataType) => {
+    // Handle edit action
+    // message.success(`Editing ${record.name}`);
+    setIsEdit(!isEdit);
+    setIsEditData(record);
+  };
+
+  const handleDelete = (record: DataType) => {
+    // Handle delete action
+    message.success(`Deleted ${record.fullName} Course`);
+    console.log(record);
+  };
 
   //   User Role
   const role = (user as { role: string }).role;
@@ -60,9 +87,6 @@ const Users = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
-  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
-    console.log(info?.source, value);
 
   // Handel Create user
   const [userRegistration] = useUserRegistrationMutation();
@@ -86,6 +110,85 @@ const Users = () => {
     }
   };
 
+  // Table Colmuns
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "User Id ",
+      dataIndex: "userId",
+      key: "userId",
+    },
+    {
+      title: "Full Name",
+      dataIndex: "fullName",
+      key: "fullName",
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+    },
+    {
+      title: "Email Address",
+      dataIndex: "email",
+      key: "email",
+    },
+
+    {
+      title: "Actions",
+      key: "actions",
+      render: (record) => (
+        <span>
+          <Button
+            className="bg-primary text-white"
+            onClick={() => handleEdit(record)}
+          >
+            <Font iconName="fa-eye" />
+          </Button>
+          <Popconfirm
+            title="Are you sure to delete this item?"
+            onConfirm={() => handleDelete(record)}
+            okText="Ok"
+            cancelText="No"
+          >
+            <Button className="bg-white text-primary">
+              {" "}
+              <Font iconName="fa-trash" />
+            </Button>
+          </Popconfirm>
+        </span>
+      ),
+    },
+  ];
+
+  let tableData: DataType[] = [];
+
+  const [searchVal, setSearchVal] = useState("");
+  const onSearch: SearchProps["onSearch"] = (value, _e) => setSearchVal(value);
+  // Data
+  const { data: studentsData } = useGetAllStudentsQuery(undefined);
+
+  if (studentsData?.length > 0) {
+    studentsData.map((student: any) => {
+      tableData.push({
+        fullName: student.code,
+        userId: student.title,
+        key: student._id,
+        role: student.role,
+        email: student.status,
+        _id: student._id,
+      });
+    });
+  }
+
+  // Filter data based on searchVal
+  const filteredData =
+    studentsData &&
+    studentsData.filter(
+      (item) =>
+        item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
+        item.userId.toLowerCase().includes(searchVal.toLowerCase())
+    );
+
   return (
     <div>
       <div>
@@ -96,26 +199,42 @@ const Users = () => {
               <CustomButton content="Add New User" icon="fa-user-plus" />
             </div>
           </div>
-          <div className="my-4">
-            <p>Serach User by Email </p>
-            <Search
-              placeholder="Type User Email Address"
-              className="my-1 text-lg "
-              allowClear
-              enterButton={
-                <button className="bg-primary text-white px-4 py-2 rounded-full text-lg">
-                  Search
-                </button>
-              }
-              size="large"
-              onSearch={onSearch}
-            />
+          <div className="my-4 ease-in-out duration-300  ">
+            <p>Serach User by Corse Name or Course Code </p>
+            <div className="flex items-center w-full">
+              <Search
+                placeholder="Type Course Code Or Course Name "
+                className="my-1 text-lg "
+                allowClear
+                enterButton={
+                  <button className="bg-primary text-white px-4 py-2 rounded-full text-lg">
+                    Search
+                  </button>
+                }
+                size="large"
+                onSearch={onSearch}
+              />
+              {searchVal && (
+                <div className="mx-4 ease-in-out duration-300  ">
+                  <Button
+                    type="default"
+                    color="primary"
+                    onClick={() => setSearchVal("")}
+                  >
+                    <Font iconName="fa-rotate-right" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+
         <div className="my-4 p-4 ">
-          {/* <MyTable data={data} columns={columns} pageSize="5" /> */}
+          <MyTable data={filteredData} columns={columns} pageSize="5" />
         </div>
       </div>
+
+      {/* Add New User  */}
       <div>
         <Modal
           title="Add User"
