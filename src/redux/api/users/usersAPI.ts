@@ -18,7 +18,19 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["batch"],
     }),
+    // Get User Details
+    getUserDetails: build.query({
+      query: (id) => ({
+        url: `/users/getSingleUserDetails/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
+    }),
   }),
 });
 
-export const { useGetAllStudentsQuery, useGetAllTeachersQuery } = authApi;
+export const {
+  useGetAllStudentsQuery,
+  useGetAllTeachersQuery,
+  useGetUserDetailsQuery,
+} = authApi;

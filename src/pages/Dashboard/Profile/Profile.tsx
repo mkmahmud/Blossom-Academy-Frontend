@@ -1,10 +1,10 @@
-import { useState } from "react";
 import userImage from "../../../assets/user/client-4.jpg";
-import { Input } from "antd";
-import CustomButton from "../../../components/Buttons/CustomButton";
+import { useAppSelector } from "../../../redux/hooks";
 
 const Profile = () => {
-  const [isEdit, setIsEdit] = useState(true);
+  // User Details Data
+  const { user } = useAppSelector((state) => state.userDetails);
+
   return (
     <div className=" ">
       <div>
@@ -12,120 +12,92 @@ const Profile = () => {
           <div className="flex space-x-4 p-4 justify-between    shadow">
             <div className=" ">
               <h2 className="text-xl font-semibold text-secondary">
-                Profile Details
+                {user.firstName} {user.lastName}
               </h2>
-              <p>You have full control to manage your own account setting.</p>
+              <p>{user.bio}</p>
+              <p>{user.phone}</p>
             </div>
             <img
-              src={userImage}
+              src={user?.profileImage ? user?.profileImage : userImage}
               className="h-[100px] w-[100px] rounded-full"
               alt="User Image"
             />
           </div>
+
+          {/* Profile Details */}
+
           <div className="my-10  shadow p-4">
-            <div className="flex justify-between  my-4">
+            <div className="flex justify-between  mb-4 cursor-pointer">
               <div>
                 <h2 className="text-xl font-semibold text-secondary">
                   Personal Details
                 </h2>
-                <p>Personal information and address.</p>
               </div>
-              <div
-                onClick={() => {
-                  setIsEdit(!isEdit);
-                }}
-              >
-                {isEdit ? (
-                  <CustomButton content="Edit Profile" icon="fa-user-pen" />
-                ) : (
-                  <div className="flex space-x-2">
-                    <div
-                      onClick={() => {
-                        setIsEdit(!isEdit);
-                      }}
-                    >
-                      <CustomButton content="Cancel" icon="fa-x" />
-                    </div>
-                    <CustomButton content="Save" icon="fa-check" />
+            </div>
+            <div>
+              {user &&
+                user?.career[0]?.aboutMe.map((p, index) => (
+                  <div key={index} className="my-4">
+                    {p.title}{" "}
                   </div>
-                )}
-              </div>
+                ))}
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 text-secondary">
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Full Name:</p>
-                <Input
-                  placeholder="Full Name"
-                  disabled={isEdit}
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Email:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Email"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
-              </div>
-              <div className="py-2 max-w-[450px] text-lg">
-                <p className="my-2 text-secondary">Phone Number:</p>
-                <Input
-                  disabled={isEdit}
-                  placeholder="Full Name"
-                  className={`text-lg`}
-                />
+          {/* Education */}
+          <div className="my-10 shadow p-4">
+            <div className="flex justify-between  mb-4 cursor-pointer">
+              <div>
+                <h2 className="text-xl font-semibold text-secondary">
+                  Education
+                </h2>
               </div>
             </div>
+            {user &&
+              user?.career[0]?.education.map((p, index) => (
+                <div key={index} className="my-4 shadow-lg p-2">
+                  <h2 className="text-xl font-semibold">
+                    {p.institution}, <span>{p.location}</span>
+                  </h2>
+                  <h3 className="text-lg font-semibold">{p.description}</h3>
+                  <p className="py-2">{p.description}</p>
+                  <div className="flex justify-between">
+                    <div className="flex space-x-2">
+                      <p>{p.startYear}</p>
+                      <p>~</p>
+                      <p>{p.endYear}</p>
+                    </div>
+                    <p>CGPA: {p.result}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+          {/* Experience */}
+          <div className="shadow my-10 p-4">
+            <div className="flex justify-between  mb-4 cursor-pointer">
+              <div>
+                <h2 className="text-xl font-semibold text-secondary">
+                  Experience
+                </h2>
+              </div>
+            </div>
+            {user &&
+              user?.career[0]?.experience.map((p, index) => (
+                <div key={index} className="my-4 shadow-lg p-2">
+                  <h2 className="text-xl font-semibold">
+                    {p.institution}, <span>{p.location}</span>
+                  </h2>
+                  <h3 className="text-lg font-semibold">{p.description}</h3>
+                  <p className="py-2">{p.description}</p>
+                  <div className="flex justify-between">
+                    <div className="flex space-x-2">
+                      <p>{p.startYear}</p>
+                      <p>~</p>
+                      <p>{p.endYear}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </div>

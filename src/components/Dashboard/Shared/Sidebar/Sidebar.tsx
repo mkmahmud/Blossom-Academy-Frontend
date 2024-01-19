@@ -1,8 +1,9 @@
 import MainButton from "../../../Buttons/MainButton";
-import userImage from "../../../../assets/user/client-4.jpg";
+import userImage from "../../../../assets/user/dummy.png";
 import Font from "../../../icons/Font";
 import { Link, useLocation } from "react-router-dom";
 import { getUserInfo } from "../../../../services/authService";
+import { useAppSelector } from "../../../../redux/hooks";
 
 const Sidebar = () => {
   // User Information
@@ -31,6 +32,9 @@ const Sidebar = () => {
     profileBG = "primaryHover";
   }
 
+  // User Details Data
+  const userDetails = useAppSelector((state) => state.userDetails);
+
   return (
     <div>
       <div className="px-2 py-4">
@@ -38,12 +42,26 @@ const Sidebar = () => {
           <div className={`h-[100px] bg-${profileBG}`}></div>
           <div>
             <img
-              src={userImage}
+              src={
+                userDetails?.user?.profileImage
+                  ? userDetails?.user?.profileImage
+                  : userImage
+              }
               className="h-28 w-28 rounded-full p-1 border border-secondary mx-auto -mt-14 bg-white"
               alt="User Image"
             />
-            <h2 className="text-xl font-semibold mt-4">Jhon Doe</h2>
-            <p>{role}</p>
+            <h2 className="text-xl font-semibold mt-4">
+              {" "}
+              {userDetails?.user?.firstName ? (
+                <>
+                  {userDetails?.user?.firstName}{" "}
+                  <span>{userDetails?.user?.lastName}</span>
+                </>
+              ) : (
+                "User Name"
+              )}
+            </h2>
+            <p> {userDetails?.user?.bio ? userDetails?.user?.bio : "Bio"}</p>
             <div className="flex justify-center my-2">
               <MainButton path="/" content="Go To Dashboard" />
             </div>
@@ -102,7 +120,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <Font iconName="fa-book" />{" "}
-                    <span className="ml-4">Courses</span> 
+                    <span className="ml-4">Courses</span>
                   </li>
                 </Link>
                 <Link to={`${urlPath}/batch`}>
@@ -191,7 +209,7 @@ const Sidebar = () => {
                     }`}
                   >
                     <Font iconName="fa-book" />{" "}
-                    <span className="ml-4">Courses</span> 
+                    <span className="ml-4">Courses</span>
                   </li>
                 </Link>
                 <Link to={`${urlPath}/batch`}>

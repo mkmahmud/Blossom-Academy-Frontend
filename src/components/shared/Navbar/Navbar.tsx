@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Font from "../../icons/Font";
 import MainButton from "../../Buttons/MainButton";
 import { isLoggedIn, removeUserInfo } from "../../../services/authService";
-import userImage from "../../../assets/user/client-4.jpg";
+import userImage from "../../../assets/user/dummy.png";
+import { useAppSelector } from "../../../redux/hooks";
 
 const Navbar = () => {
   // User logged data
@@ -32,8 +33,11 @@ const Navbar = () => {
     };
   }, []);
 
-  // Handel Profile Menus
+  // Handle Profile Menus
   const [profile, setProfile] = useState(false);
+
+  // Handle Notifications
+  const [notification, setNotification] = useState(false);
 
   //   Handele Mobile Menus
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -62,6 +66,9 @@ const Navbar = () => {
     removeUserInfo("access_token");
     navigate("/auth");
   };
+
+  // User Details Data
+  const userDetails = useAppSelector((state) => state.userDetails);
 
   return (
     <div
@@ -114,12 +121,61 @@ const Navbar = () => {
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
                 <div className="cursor-pointer">
-                  <Font iconName="fa-bell" />
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setNotification(!notification);
+                    }}
+                  >
+                    <i className="fa-regular fa-bell"></i>
+                    {/* <Font iconName="fa-bell" /> */}
+                  </div>
+                  {notification && (
+                    <div className="absolute top-10 right-10 bg-white shadow-lg pb-2 w-[400px] mt-2">
+                      <h2 className="font-semibold p-4">Notifications (0)</h2>
+                      <div className="h-[400px]  overflow-y-scroll">
+                        <div className="px-4 py-2 flex items-center border-b border-gray">
+                          <div className="text-large w-[70px]   text-center">
+                            <Font iconName="fa-bell" />
+                          </div>
+                          <div className="mx-2">
+                            <h2 className="text-sm">
+                              <strong>
+                                Dont Forget To update Your Profile! Update
+                                Profile
+                              </strong>
+                              <span>Update your Profile</span>
+                            </h2>
+                            <p className="my-2 text-sm">10 minute ago</p>
+                          </div>
+                        </div>
+                        <div className="px-4 py-2 flex items-center border-b border-gray">
+                          <div className="text-large w-[70px]   text-center">
+                            <i className="fa-regular fa-bell"></i>
+                          </div>
+                          <div className="mx-2">
+                            <h2 className="text-sm">
+                              <strong>
+                                Dont Forget To update Your Profile! Update
+                                Profile
+                              </strong>
+                              <span>Update your Profile</span>
+                            </h2>
+                            <p className="my-2 text-sm">10 minute ago</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <img
-                  src={userImage}
+                  src={
+                    userDetails?.user?.profileImage
+                      ? userDetails?.user?.profileImage
+                      : userImage
+                  }
                   alt="Profile Image"
-                  className="rounded-full h-10 w-10 cursor-pointer"
+                  className="rounded-full h-10 w-10 cursor-pointer border"
                   onClick={() => {
                     setProfile(!profile);
                   }}
@@ -128,13 +184,26 @@ const Navbar = () => {
                   <div className="absolute top-10 right-0 bg-white shadow-lg p-4 w-[250px] mt-2">
                     <div className="flex items-center">
                       <img
-                        src={userImage}
+                        src={
+                          userDetails?.user?.profileImage
+                            ? userDetails?.user?.profileImage
+                            : userImage
+                        }
                         alt="Profile Image"
                         className="rounded-full h-10 w-10 "
                       />
                       <div className="ml-4">
-                        <h2 className="font-semibold">Jhon Doe</h2>
-                        <p>Teacher</p>
+                        <h2 className="font-semibold">
+                          {userDetails?.user?.firstName
+                            ? userDetails?.user?.firstName
+                            : "User Name"}
+                        </h2>
+                        <p>
+                          {" "}
+                          {userDetails?.user?.role
+                            ? userDetails?.user?.role
+                            : "Role"}
+                        </p>
                       </div>
                     </div>
                     <ul className="mt-4">
@@ -235,7 +304,11 @@ const Navbar = () => {
               {loggedUser ? (
                 <div className="relative  ">
                   <img
-                    src={userImage}
+                    src={
+                      userDetails?.user?.profileImage
+                        ? userDetails?.user?.profileImage
+                        : userImage
+                    }
                     alt="Profile Image"
                     className="rounded-full h-10 w-10 cursor-pointer"
                     onClick={() => {
@@ -246,13 +319,25 @@ const Navbar = () => {
                     <div className="absolute right-0 bg-white shadow-lg p-4 w-[250px] mt-2">
                       <div className="flex items-center">
                         <img
-                          src={userImage}
+                          src={
+                            userDetails?.user?.profileImage
+                              ? userDetails?.user?.profileImage
+                              : userImage
+                          }
                           alt="Profile Image"
                           className="rounded-full h-10 w-10 "
                         />
                         <div className="ml-4">
-                          <h2 className="font-semibold">Jhon Doe</h2>
-                          <p>Teacher</p>
+                          <h2 className="font-semibold">
+                            {userDetails?.user?.firstName
+                              ? userDetails?.user?.firstName
+                              : "user Namw"}
+                          </h2>
+                          <p>
+                            {userDetails?.user?.role
+                              ? userDetails?.user?.role
+                              : "Role"}
+                          </p>
                         </div>
                       </div>
                       <ul className="mt-4">

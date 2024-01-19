@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import { Controller } from "react-hook-form";
 
-const CustomInput = ({ name, placeholder, errors, control, type }: any) => {
+const CustomInput = ({ name, placeholder, errors, control, type, disabled,defaultValue }: any) => {
   const isPasswordType = type === "password";
 
   return (
@@ -10,7 +10,9 @@ const CustomInput = ({ name, placeholder, errors, control, type }: any) => {
       <Controller
         rules={{ required: `${placeholder} is required` }}
         control={control}
+        disabled={disabled}
         name={name}
+        defaultValue={defaultValue}
         render={({ field }) =>
           isPasswordType ? (
             <Input.Password
