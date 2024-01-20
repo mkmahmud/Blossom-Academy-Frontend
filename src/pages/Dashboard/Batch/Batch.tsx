@@ -82,7 +82,6 @@ const Batch = () => {
       });
     });
   }
-
   // Course Details Data
   type courseTableType = {
     title: string;

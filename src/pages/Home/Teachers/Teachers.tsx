@@ -4,7 +4,7 @@ import { useGetAllTeachersQuery } from "../../../redux/api/users/teachers/teache
 const Teachers = () => {
   // Teachers Data
   const { data } = useGetAllTeachersQuery(undefined);
-
+console.log(data);
   return (
     <div className="mt-20">
       <div className="text-center mb-10">

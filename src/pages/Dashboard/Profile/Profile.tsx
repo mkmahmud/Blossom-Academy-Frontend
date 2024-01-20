@@ -12,10 +12,10 @@ const Profile = () => {
           <div className="flex space-x-4 p-4 justify-between    shadow">
             <div className=" ">
               <h2 className="text-xl font-semibold text-secondary">
-                {user.firstName} {user.lastName}
+                {user?.firstName} {user?.lastName}
               </h2>
-              <p>{user.bio}</p>
-              <p>{user.phone}</p>
+              <p>{user?.bio}</p>
+              <p>{user?.phone}</p>
             </div>
             <img
               src={user?.profileImage ? user?.profileImage : userImage}

@@ -5,7 +5,7 @@ export const authApi = baseApi.injectEndpoints({
     // Get All Teachers
     getAllTeachers: build.query({
       query: () => ({
-        url: `/teachersRoutes/getAllTeacher`,
+        url: `/users/getAllUsers/teacher`,
         method: "GET",
       }),
       providesTags: ["user"],
@@ -13,7 +13,7 @@ export const authApi = baseApi.injectEndpoints({
     // Get Single Teacher
     getSingleTeachers: build.query({
       query: (id) => ({
-        url: `/teachersRoutes/getSingleTeacher/${id}`,
+        url: `/users/getSingleUserDetails/${id}`,
         method: "GET",
       }),
       providesTags: ["user"],

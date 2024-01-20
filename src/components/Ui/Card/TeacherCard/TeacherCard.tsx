@@ -3,10 +3,10 @@ import user from "../../../../assets/user/user7.jpg";
 import Font from "../../../icons/Font";
 
 const TeacherCard = ({ data }: any) => {
-  const { _id, firstName, lastName, bio, profileImage } = data;
-
+  const { id, firstName, lastName, bio, profileImage } = data;
+ 
   return (
-    <Link to={`/teacher/${_id}`}>
+    <Link to={`/teacher/${id}`}>
       <div className="my-6 mx-auto max-w-[300px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white ">
         <div className="">
           <div className="h-[300px] bg-primary overflow-hidden">

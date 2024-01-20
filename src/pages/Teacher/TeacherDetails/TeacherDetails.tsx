@@ -13,7 +13,7 @@ const TeacherDetails = () => {
 
   // Get Teacher Details
   const { data } = useGetSingleTeachersQuery(id);
-  console.log();
+  console.log(data);
   return (
     <div>
       <div className="mt-20"></div>
