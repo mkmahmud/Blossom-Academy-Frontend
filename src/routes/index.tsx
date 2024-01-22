@@ -18,6 +18,7 @@ import LiveCourses from "../pages/LiveCourses/LiveCourses";
 import VideoCourses from "../pages/VideoCourses/VideoCourses";
 import Checkout from "../pages/Checkout/Checkout";
 import Profile_dev from "../pages/Dashboard/Profile/Profile_dev";
+import Skills from "../pages/Dashboard/Skills/Skills";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/courses",
         element: <Courses />,
+      },
+      {
+        path: "/dashboard/skills",
+        element: <Skills />,
       },
       {
         path: "/dashboard/batch",

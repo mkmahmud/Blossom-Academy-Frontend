@@ -367,6 +367,18 @@ const Sidebar = () => {
                     <span className="ml-4">Batch</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/skills`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/skills`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-layer-group" />{" "}
+                    <span className="ml-4">Skills</span>
+                  </li>
+                </Link>
                 <Link to={`${urlPath}/schedule`}>
                   <li
                     className={`hover:bg-gray p-4  border-l-4    ${
