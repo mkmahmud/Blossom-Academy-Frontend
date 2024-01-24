@@ -11,7 +11,7 @@ const CustomTextArea = ({
 }: any) => {
   return (
     <div className="py-2 max-w-full w-full text-lg">
-      <p className="my-2 text-secondary">{placeholder}:</p>
+      {placeholder && <p className="my-2 text-secondary">{placeholder}:</p>}{" "}
       <Controller
         rules={{ required: `${placeholder} is required` }}
         control={control}

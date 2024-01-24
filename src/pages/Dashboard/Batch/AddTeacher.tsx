@@ -24,6 +24,7 @@ const AddTeacher = ({ batchId }: any) => {
 
   //   Get students Data
   const { data } = useGetAllTeachersQuery(undefined);
+
   // Handel Create Course
   const [addTeacherIntoBatch] = useAddTeacherIntoBatchMutation();
 
@@ -52,10 +53,10 @@ const AddTeacher = ({ batchId }: any) => {
   const options: SelectProps["options"] = [];
 
   data &&
-    data.map((d: { fullName: string; _id: string; userId: string }) => {
+    data.map((d: { fullName: any; lastName: any; id: any }) => {
       options.push({
         label: <>{d.fullName}</>,
-        value: d._id,
+        value: d.id,
       });
     });
 
