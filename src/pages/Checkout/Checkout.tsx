@@ -3,15 +3,26 @@ import CustomInput from "../../components/Dashboard/Ui/Input/CustomInput";
 import PageHead from "../../components/Ui/PageHead/PageHead";
 import { useForm } from "react-hook-form";
 import { getUserInfo } from "../../services/authService";
-import { redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetBatchQuery } from "../../redux/api/batch/batchAPI";
 import { generateTransactionId } from "../../helpers/generateTranId/generateTranId";
 import { useInitPaymentMutation } from "../../redux/api/Payments/paymentsAPI";
+import { useEffect } from "react";
 
 const Checkout = () => {
+  // Navigate
+  const naviage = useNavigate();
+
   // User Details
 
   const user = getUserInfo();
+
+  useEffect(() => {
+    // @ts-expect-error
+    if (user?.role != "student") {
+      naviage("/live-courses");
+    }
+  }, [user]);
 
   // Batch / Course Id
   const { id } = useParams();
@@ -37,8 +48,10 @@ const Checkout = () => {
   const [initPayment] = useInitPaymentMutation();
 
   const onSubmit = async (data: Inputs) => {
+    // @ts-expect-error
     const tranId = generateTransactionId(user.userId, 3333);
     const initData = {
+      // @ts-expect-error
       userId: user.userId,
       fullName: data.fullName,
       phone: data.phoneNumber,
@@ -50,11 +63,13 @@ const Checkout = () => {
       status: false,
       tranID: tranId,
       courseId: id,
+      // @ts-expect-error
       email: user._id,
     };
     const response = await initPayment(initData);
-    console.log(response.data);
+
     if (response) {
+      // @ts-expect-error
       window.location.href = response.data;
     }
   };
@@ -105,7 +120,11 @@ const Checkout = () => {
                 />
               </div>
               <div className="flex justify-center w-full my-6">
-                <CustomButton content="Make Payment" icon="fa-arrow-right" />
+                <CustomButton
+                  type="submit"
+                  content="Make Payment"
+                  icon="fa-arrow-right"
+                />
               </div>
             </form>
           </div>

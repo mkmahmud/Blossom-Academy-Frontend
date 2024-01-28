@@ -10,9 +10,10 @@ import { addUserDetails } from "../redux/features/users/userSlice";
 
 const Dashboard = () => {
   const user = getUserInfo();
+  const dispatch = useAppDispatch();
+  // @ts-expect-error
   const { data } = useGetUserDetailsQuery(user._id);
 
-  const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(addUserDetails(data));
   }, [user]);

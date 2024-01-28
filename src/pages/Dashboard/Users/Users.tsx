@@ -57,7 +57,7 @@ const Users = () => {
   const user = getUserInfo();
   // Actions
   const [isEdit, setIsEdit] = useState(false);
-  const [isEditData, setIsEditData] = useState({});
+  const [, setIsEditData] = useState({});
   const handleEdit = (record: DataType) => {
     // Handle edit action
     // message.success(`Editing ${record.name}`);
@@ -184,7 +184,7 @@ const Users = () => {
   const filteredData =
     studentsData &&
     studentsData.filter(
-      (item) =>
+      (item: { fullName: string; userId: string }) =>
         item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
         item.userId.toLowerCase().includes(searchVal.toLowerCase())
     );

@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
-import userImage from "../../../assets/user/client-4.jpg";
+import userImage from "../../../assets/user/dummy.png";
 import CustomInput from "../../../components/Dashboard/Ui/Input/CustomInput";
 import { useAppSelector } from "../../../redux/hooks";
-import {
-  useForm,
-  FormProvider,
-  useFormContext,
-  useFieldArray,
-} from "react-hook-form";
+import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 import CustomTextArea from "../../../components/Dashboard/Ui/Input/CustomTextArea";
 import Font from "../../../components/icons/Font";
 import CustomButton from "../../../components/Buttons/CustomButton";
 import { useUpdateUserDetailsMutation } from "../../../redux/api/users/usersAPI";
+import { message } from "antd";
 
 const Profile = () => {
   // Handle Edit
@@ -36,22 +32,25 @@ const Profile = () => {
     control: methods.control,
     name: "career.0.aboutMe",
   });
-
+  console.log(fields);
   const { fields: educationFields, append: educationAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.education",
   });
+  console.log(educationFields);
 
   const { fields: experienceFields, append: experienceAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.experience",
   });
+  console.log(experienceFields);
 
   const { fields: certificationsFields, append: certificationsAppend } =
     useFieldArray({
       control: methods.control,
       name: "career.0.certifications",
     });
+  console.log(certificationsFields);
 
   // Update User Detail By
   const [updateUserDetails] = useUpdateUserDetailsMutation();
@@ -60,9 +59,8 @@ const Profile = () => {
     const res = await updateUserDetails(data);
     if (res) {
       // setEdtiProfile(false);
-      console.log("ok");
+      message.success("Profile Updated successfully");
     }
-    console.log(res);
   };
 
   return (
@@ -246,7 +244,7 @@ const Profile = () => {
                 {editProfile && methods.getValues("career.0.education")
                   ? methods
                       .getValues("career.0.education")
-                      .map((education, index) => (
+                      .map((_education, index) => (
                         <div
                           key={index}
                           className="px-4 my-4 border-b-2 border-primaryHover"
@@ -345,7 +343,7 @@ const Profile = () => {
                 {editProfile && methods.getValues("career.0.experience")
                   ? methods
                       .getValues("career.0.experience")
-                      .map((experience, index) => (
+                      .map((_experience, index) => (
                         <div
                           key={index}
                           className="px-4 my-4 border-b-2 border-primaryHover"
@@ -431,7 +429,7 @@ const Profile = () => {
                 {editProfile && methods.getValues("career.0.certifications")
                   ? methods
                       .getValues("career.0.certifications")
-                      .map((certification, index) => (
+                      .map((_certification, index) => (
                         <div
                           key={index}
                           className="px-4 my-4 border-b-2 border-primaryHover"

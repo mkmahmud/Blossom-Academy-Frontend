@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import heroImage from "../../../assets/images/hero2.png";
 import shape1 from "../../../assets/images/shape/1.png";
-import shape2 from "../../../assets/images/shape/3.png"; 
 import userimage from "../../../assets/user/client-4.jpg";
 
 import MainButton from "../../../components/Buttons/MainButton";
@@ -11,7 +10,7 @@ const Hero = () => {
   return (
     <div className="   ">
       <div className="  flex justify-between items-center relative overflow-hidden h-full">
-      {/* Shapes */}
+        {/* Shapes */}
         {/* <img
           src={shape2}
           className="absolute -z-10 top-20 -left-[100px] animate-spin"
