@@ -19,6 +19,7 @@ import VideoCourses from "../pages/VideoCourses/VideoCourses";
 import Checkout from "../pages/Checkout/Checkout";
 import Skills from "../pages/Dashboard/Skills/Skills";
 import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
+import SuccessPayment from "../pages/Checkout/SuccessPayment";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/courses/checkout/success",
+        element: (
+          <ProtectedRoute>
+            <SuccessPayment />
           </ProtectedRoute>
         ),
       },

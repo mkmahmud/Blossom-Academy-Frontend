@@ -291,7 +291,7 @@ const Users = () => {
             />
 
             <div className="flex justify-center w-full my-4">
-              <CustomButton content="Add User" icon="fa-paper-plane" />
+              <CustomButton type="submit" content="Add User" icon="fa-paper-plane" />
             </div>
           </form>
         </Modal>
