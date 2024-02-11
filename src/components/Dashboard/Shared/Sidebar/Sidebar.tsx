@@ -375,8 +375,20 @@ const Sidebar = () => {
                         : "border-white"
                     }`}
                   >
-                    <Font iconName="fa-layer-group" />{" "}
+                    <Font iconName="fa-brands fa-hive" />{" "}
                     <span className="ml-4">Skills</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/social-links`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/social-links`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-link" />{" "}
+                    <span className="ml-4">Social Links</span>
                   </li>
                 </Link>
                 <Link to={`${urlPath}/schedule`}>
@@ -437,6 +449,18 @@ const Sidebar = () => {
                 >
                   <Font iconName="fa-user-pen" />{" "}
                   <span className="ml-4">Edit Profile</span>
+                </li>
+              </Link>
+              <Link to={`${urlPath}/notification`}>
+                <li
+                  className={`hover:bg-gray p-4 border-l-4   ${
+                    isActive(`${urlPath}/notification`)
+                      ? "bg-gray    border-primary "
+                      : "border-white"
+                  }`}
+                >
+                  <Font iconName="fa-bell" />{" "}
+                  <span className="ml-4">Notifications</span>
                 </li>
               </Link>
               <Link to={`${urlPath}/security`}>

@@ -19,6 +19,9 @@ import VideoCourses from "../pages/VideoCourses/VideoCourses";
 import Checkout from "../pages/Checkout/Checkout";
 import Profile_dev from "../pages/Dashboard/Profile/Profile_dev";
 import Skills from "../pages/Dashboard/Skills/Skills";
+import Security from "../pages/Dashboard/Security/Security";
+import Notifications from "../pages/Dashboard/Notifications/Notifications";
+import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +90,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/skills",
         element: <Skills />,
+      },
+      {
+        path: "/dashboard/social-links",
+        element: <SocialLinks />,
+      },
+      {
+        path: "/dashboard/security",
+        element: <Security />,
+      },
+      {
+        path: "/dashboard/notification",
+        element: <Notifications />,
       },
       {
         path: "/dashboard/batch",
