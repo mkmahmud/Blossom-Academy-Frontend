@@ -13,6 +13,7 @@ import { useAppDispatch } from "../../redux/hooks";
 
 const Home = () => {
   const user = getUserInfo();
+  // @ts-expect-error
   const { data } = useGetUserDetailsQuery(user._id);
 
   const dispatch = useAppDispatch();

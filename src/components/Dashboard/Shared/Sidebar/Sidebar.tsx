@@ -403,6 +403,18 @@ const Sidebar = () => {
                     <span className="ml-4">Schedule</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/social-links`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}/social-links`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-link" />
+                    <span className="ml-4">Social Links</span>
+                  </li>
+                </Link>
               </ul>
             )}
             {/*  Student */}
@@ -428,8 +440,20 @@ const Sidebar = () => {
                         : "border-white"
                     }`}
                   >
-                    <Font iconName="fa-user" />{" "}
+                    <Font iconName="fa-user" />
                     <span className="ml-4"> Profile</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/social-links`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}/social-links`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-link" />
+                    <span className="ml-4">Social Links</span>
                   </li>
                 </Link>
               </ul>

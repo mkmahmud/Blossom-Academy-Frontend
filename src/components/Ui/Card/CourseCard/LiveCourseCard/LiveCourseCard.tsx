@@ -3,8 +3,7 @@ import Font from "../../../../icons/Font";
 
 const LiveCourseCard = ({ data }: any) => {
   const { _id, thambnail, title, studentsId, session, startTime } = data;
-
-  //   User
+   //   User
   // const user = getUserInfo();
 
   // const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
@@ -29,7 +28,7 @@ const LiveCourseCard = ({ data }: any) => {
   // };
 
   return (
-    <div className="md:flex items-center  shadow-lg shadow-gray my-10    ">
+    <div className="md:flex items-center relative  shadow-lg shadow-gray my-10  w-full  ">
       <div>
         <img
           src={thambnail}
@@ -55,7 +54,11 @@ const LiveCourseCard = ({ data }: any) => {
         </h2>
       </div>
       <div className="mx-2">
-        <MainButton path={`/courses/checkout/${_id}`} content="Enroll" icon="fa-plus" />
+        <MainButton
+          path={`/courses/checkout/${_id}`}
+          content="Enroll"
+          icon="fa-plus"
+        />
       </div>
     </div>
   );

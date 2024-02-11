@@ -17,11 +17,8 @@ import About from "../pages/About/About";
 import LiveCourses from "../pages/LiveCourses/LiveCourses";
 import VideoCourses from "../pages/VideoCourses/VideoCourses";
 import Checkout from "../pages/Checkout/Checkout";
-import Profile_dev from "../pages/Dashboard/Profile/Profile_dev";
 import Skills from "../pages/Dashboard/Skills/Skills";
-import Security from "../pages/Dashboard/Security/Security";
-import Notifications from "../pages/Dashboard/Notifications/Notifications";
-import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
+
 
 const router = createBrowserRouter([
   {
@@ -54,7 +51,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/courses/checkout/:id",
-        element: <Checkout />,
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/courses/checkout/success",
+        element: (
+          <ProtectedRoute>
+            <SuccessPayment />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -75,10 +84,7 @@ const router = createBrowserRouter([
         path: "/dashboard/profile",
         element: <Profile />,
       },
-      {
-        path: "/dashboard/profile_dev",
-        element: <Profile_dev />,
-      },
+
       {
         path: "/dashboard/users",
         element: <Users />,
@@ -94,14 +100,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/social-links",
         element: <SocialLinks />,
-      },
-      {
-        path: "/dashboard/security",
-        element: <Security />,
-      },
-      {
-        path: "/dashboard/notification",
-        element: <Notifications />,
       },
       {
         path: "/dashboard/batch",

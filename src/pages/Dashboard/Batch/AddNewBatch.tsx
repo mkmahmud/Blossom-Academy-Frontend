@@ -40,14 +40,14 @@ const AddNewBatch = () => {
   } = useForm<Inputs>();
 
   const onSubmit = async (data: Inputs) => {
-    data.studentsId = [];
+     data.studentsId = [];
     data.teachersId = [];
     data.courseId = [];
 
     const res = await createbatch(data).unwrap();
 
     if (res?._id) {
-      message.success("Course added successfully");
+      message.success("Batch added successfully");
       reset();
     }
   };
@@ -163,7 +163,7 @@ const AddNewBatch = () => {
           /> */}
 
           <div className="flex justify-center w-full my-4">
-            <CustomButton content="Add Course" icon="fa-paper-plane" />
+            <CustomButton type='submit' content="Add Batch" icon="fa-paper-plane" />
           </div>
         </form>
       </Drawer>

@@ -57,7 +57,7 @@ const Users = () => {
   const user = getUserInfo();
   // Actions
   const [isEdit, setIsEdit] = useState(false);
-  const [isEditData, setIsEditData] = useState({});
+  const [, setIsEditData] = useState({});
   const handleEdit = (record: DataType) => {
     // Handle edit action
     // message.success(`Editing ${record.name}`);
@@ -184,7 +184,7 @@ const Users = () => {
   const filteredData =
     studentsData &&
     studentsData.filter(
-      (item) =>
+      (item: { fullName: string; userId: string }) =>
         item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
         item.userId.toLowerCase().includes(searchVal.toLowerCase())
     );
@@ -291,7 +291,7 @@ const Users = () => {
             />
 
             <div className="flex justify-center w-full my-4">
-              <CustomButton content="Add User" icon="fa-paper-plane" />
+              <CustomButton type="submit" content="Add User" icon="fa-paper-plane" />
             </div>
           </form>
         </Modal>

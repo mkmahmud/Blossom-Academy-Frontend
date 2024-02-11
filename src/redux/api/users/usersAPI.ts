@@ -26,6 +26,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+    // Update User Details
+    updateUserDetails: build.mutation({
+      query: (data) => ({
+        url: `/users/updateuser/${data.userId}`,
+        method: "PATCH",
+        data: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
@@ -33,4 +42,5 @@ export const {
   useGetAllStudentsQuery,
   useGetAllTeachersQuery,
   useGetUserDetailsQuery,
+  useUpdateUserDetailsMutation,
 } = authApi;

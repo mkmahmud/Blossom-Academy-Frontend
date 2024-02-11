@@ -101,7 +101,7 @@ const AddStudent = ({ batchId }: any) => {
           </div>
 
           <div className="flex justify-center w-full my-4">
-            <CustomButton content="Add Student" icon="fa-paper-plane" />
+            <CustomButton type='submit' content="Add Student" icon="fa-paper-plane" />
           </div>
         </form>
       </Drawer>

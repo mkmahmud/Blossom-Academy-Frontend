@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import MainInput from "../../../Forms/Input/MainInput";
 import Font from "../../../icons/Font";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUserLoginMutation } from "../../../../redux/api/auth/authAPI";
 import { setToLocalStorage } from "../../../../utils/localStorage";
 
 const Login = () => {
   // Navigate If User logged In
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Show incorrect password
   const [incorrectPassword, setincorrectPassword] = useState(" ");
@@ -33,7 +34,9 @@ const Login = () => {
     const res = await userLogin(data).unwrap();
     if (res) {
       setToLocalStorage("access_token", res?.accessToken);
-      navigate("/dashboard");
+      const intendedDestination = location.state?.from || "/dashboard";
+
+      navigate(intendedDestination);
     } else {
       setincorrectPassword("Password or Id Not valid");
     }

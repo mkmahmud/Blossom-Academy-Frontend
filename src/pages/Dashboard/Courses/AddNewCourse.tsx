@@ -96,7 +96,7 @@ const AddNewCourse = () => {
           />
 
           <div className="flex justify-center w-full my-4">
-            <CustomButton content="Add Course" icon="fa-paper-plane" />
+            <CustomButton type='submit' content="Add Course" icon="fa-paper-plane" />
           </div>
         </form>
       </Drawer>

@@ -22,8 +22,9 @@ const AddTeacher = ({ batchId }: any) => {
     batchId?: string;
   };
 
-  //   Get students Data
+  //   Get Teachers Data
   const { data } = useGetAllTeachersQuery(undefined);
+
   // Handel Create Course
   const [addTeacherIntoBatch] = useAddTeacherIntoBatchMutation();
 
@@ -52,10 +53,14 @@ const AddTeacher = ({ batchId }: any) => {
   const options: SelectProps["options"] = [];
 
   data &&
-    data.map((d: { fullName: string; _id: string; userId: string }) => {
+    data.map((d: { firstName: any; lastName: any; id: any }) => {
       options.push({
-        label: <>{d.fullName}</>,
-        value: d._id,
+        label: (
+          <>
+            {d.firstName} {d.lastName}
+          </>
+        ),
+        value: d.id,
       });
     });
 
@@ -101,7 +106,11 @@ const AddTeacher = ({ batchId }: any) => {
           </div>
 
           <div className="flex justify-center w-full my-4">
-            <CustomButton content="Add Teacher" icon="fa-paper-plane" />
+            <CustomButton
+              type="submit"
+              content="Add Teacher"
+              icon="fa-paper-plane"
+            />
           </div>
         </form>
       </Drawer>

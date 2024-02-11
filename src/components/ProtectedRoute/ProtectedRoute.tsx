@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { isLoggedIn } from "../../services/authService";
 
 const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -7,14 +7,16 @@ const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   // Get logged User
   const loggedUser = isLoggedIn();
+  const location = useLocation();
 
   useEffect(() => {
     if (!loggedUser) {
-      navigate("/auth");
+      // Redirect to login and store the intended location
+      navigate("/auth", { state: { from: location.pathname } });
     }
 
     setLoading(false);
-  }, [loggedUser, navigate]);
+  }, [loggedUser, navigate, location.pathname]);
 
   // Loading Spinner
   if (loading) {

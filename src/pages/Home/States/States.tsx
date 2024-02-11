@@ -7,7 +7,7 @@ const States = () => {
       <div className=" h-[100px]"></div>
       <div className="-mt-[50px] grid grid-cols-2 md:grid-cols-4 ">
         <div className="mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
-          <div className="text-extraLarge p-2  text-primary rounded-full     border-l-8  border-primary mx-2">
+          <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-book" />
           </div>
           <div>
@@ -16,7 +16,7 @@ const States = () => {
           </div>
         </div>
         <div className="mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
-          <div className="text-extraLarge p-2  text-primary rounded-full     border-l-8  border-primary mx-2">
+          <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-chalkboard-user" />
           </div>
           <div>
@@ -25,7 +25,7 @@ const States = () => {
           </div>
         </div>
         <div className="mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
-          <div className="text-extraLarge p-2  text-primary rounded-full     border-l-8  border-primary mx-2">
+          <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-users" />
           </div>
           <div>
@@ -38,7 +38,7 @@ const States = () => {
           </div>
         </div>
         <div className="mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
-          <div className="text-extraLarge p-2  text-primary rounded-full     border-l-8  border-primary mx-2">
+          <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-certificate" />
           </div>
           <div>

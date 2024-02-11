@@ -3,7 +3,6 @@ import shape1 from "../../../assets/images/shape/1.png";
 import teacherImage from "../../../assets/user/user8.jpg";
 import Font from "../../../components/icons/Font";
 import MainTag from "../../../components/Ui/Tag/MainTag";
-import TeacherReviewCard from "../../../components/Ui/Card/TeacherCard/TeacherReviewCard/TeacherReviewCard";
 import { useParams } from "react-router-dom";
 import { useGetSingleTeachersQuery } from "../../../redux/api/users/teachers/teachersApi";
 import { Key } from "react";
