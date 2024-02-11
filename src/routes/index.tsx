@@ -18,6 +18,8 @@ import LiveCourses from "../pages/LiveCourses/LiveCourses";
 import VideoCourses from "../pages/VideoCourses/VideoCourses";
 import Checkout from "../pages/Checkout/Checkout";
 import Skills from "../pages/Dashboard/Skills/Skills";
+import SuccessPayment from "../pages/Checkout/SuccessPayment";
+import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
 
 
 const router = createBrowserRouter([

@@ -32,25 +32,22 @@ const Profile = () => {
     control: methods.control,
     name: "career.0.aboutMe",
   });
-  console.log(fields);
+
   const { fields: educationFields, append: educationAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.education",
   });
-  console.log(educationFields);
 
   const { fields: experienceFields, append: experienceAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.experience",
   });
-  console.log(experienceFields);
 
   const { fields: certificationsFields, append: certificationsAppend } =
     useFieldArray({
       control: methods.control,
       name: "career.0.certifications",
     });
-  console.log(certificationsFields);
 
   // Update User Detail By
   const [updateUserDetails] = useUpdateUserDetailsMutation();
@@ -63,6 +60,44 @@ const Profile = () => {
     }
   };
 
+  const handleProfileImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const files = e.target.files;
+
+    if (files && files.length > 0) {
+      const formData = new FormData();
+      formData.append("image", files[0]);
+
+      try {
+        const response = await fetch(
+          `https://api.imgbb.com/1/upload?key=1d6ada8096c65528a8b7c88a0c385e22`,
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.json();
+          const imageUrl = responseData.data.display_url;
+          const data = {
+            userId: user.userId,
+            email: user.email,
+            profileImage: imageUrl,
+          };
+          const res = await updateUserDetails(data);
+          if (res) {
+            // setEdtiProfile(false);
+            message.success("Profile Image successfully");
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
   return (
     <div className=" ">
       <FormProvider {...methods}>
@@ -71,11 +106,32 @@ const Profile = () => {
             <div className="">
               <div className="md:flex space-x-4 p-4 border-2  border-primaryHover">
                 <div className="w-full md:w-3/12">
-                  <img
-                    src={user?.profileImage ? user?.profileImage : userImage}
-                    className="h-[200px] w-[200px] rounded"
-                    alt="User Image"
-                  />
+                  <div>
+                    <label
+                      className="relative overflow-hidded group"
+                      htmlFor="profile"
+                    >
+                      <img
+                        src={
+                          user?.profileImage ? user?.profileImage : userImage
+                        }
+                        className="h-[200px] w-[200px] rounded"
+                        alt="User Image"
+                      />
+                      <div className="hidden group-hover:block">
+                        <div className="  flex items-center justify-center absolute top-0 bg-gray text-extraLarge h-full w-full  rounded  ">
+                          <Font iconName="fa-edit" />
+                        </div>
+                      </div>
+                    </label>
+                    <input
+                      type="file"
+                      className="bg-whiteGray hidden outline-none border border-gray px-4 py-2 w-full text-[16px] "
+                      name="profile"
+                      id="profile"
+                      onChange={handleProfileImage}
+                    />
+                  </div>
                   <div className=" my-4">
                     <div className="my-1 flex space-x-2">
                       {" "}

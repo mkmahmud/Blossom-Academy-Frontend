@@ -198,11 +198,12 @@ const Navbar = () => {
                             ? userDetails?.user?.firstName
                             : "User Name"}
                         </h2>
-                        <p>
+                        <p className="font-bold">
                           {" "}
-                          {userDetails?.user?.role
-                            ? userDetails?.user?.role
-                            : "Role"}
+                          ID:{" "}
+                          {userDetails?.user?.userId
+                            ? userDetails?.user?.userId
+                            : "ID"}
                         </p>
                       </div>
                     </div>
@@ -333,10 +334,11 @@ const Navbar = () => {
                               ? userDetails?.user?.firstName
                               : "user Namw"}
                           </h2>
-                          <p>
-                            {userDetails?.user?.role
-                              ? userDetails?.user?.role
-                              : "Role"}
+                          <p className="font-bold">
+                            ID:{" "}
+                            {userDetails?.user?.userId
+                              ? userDetails?.user?.userId
+                              : "ID"}
                           </p>
                         </div>
                       </div>
