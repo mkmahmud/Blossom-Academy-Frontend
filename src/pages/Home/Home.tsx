@@ -10,6 +10,8 @@ import Teachers from "./Teachers/Teachers";
 import Testimonials from "./Testimonials/Testimonials";
 import { addUserDetails } from "../../redux/features/users/userSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import Blogs from "./Blogs/Blogs";
+import Mentor from "./Mentor/Mentor";
 
 const Home = () => {
   const user = getUserInfo();
@@ -29,7 +31,9 @@ const Home = () => {
       <Courses />
       <FreePDF />
       <Testimonials />
+      <Mentor />
       <Events />
+      <Blogs />
       <div className="mt-20"></div>
     </div>
   );

@@ -10,7 +10,10 @@ import { getUserInfo } from "../../../services/authService";
 import MyTable from "../../../components/Dashboard/Ui/Table/Table";
 import Font from "../../../components/icons/Font";
 import { ColumnsType } from "antd/es/table";
-import { useGetAllStudentsQuery } from "../../../redux/api/users/usersAPI";
+import {
+  useGetAllStudentsQuery,
+  useGetAllUsersByRoleQuery,
+} from "../../../redux/api/users/usersAPI";
 
 const { Option } = Select;
 
@@ -43,11 +46,11 @@ type Inputs = {
   password: string;
   role?: string;
 };
+
 interface DataType {
   key: React.ReactNode;
   userId: string;
-  fullName: string;
-  role: string;
+  firstName: string;
   email: string;
   _id: string;
 }
@@ -55,6 +58,7 @@ interface DataType {
 const Users = () => {
   // User Information
   const user = getUserInfo();
+
   // Actions
   const [isEdit, setIsEdit] = useState(false);
   const [, setIsEditData] = useState({});
@@ -67,7 +71,7 @@ const Users = () => {
 
   const handleDelete = (record: DataType) => {
     // Handle delete action
-    message.success(`Deleted ${record.fullName} Course`);
+    message.success(`Deleted ${record.firstName} Course`);
     console.log(record);
   };
 
@@ -118,15 +122,11 @@ const Users = () => {
       key: "userId",
     },
     {
-      title: "Full Name",
-      dataIndex: "fullName",
-      key: "fullName",
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
     },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-    },
+
     {
       title: "Email Address",
       dataIndex: "email",
@@ -164,28 +164,49 @@ const Users = () => {
 
   const [searchVal, setSearchVal] = useState("");
   const onSearch: SearchProps["onSearch"] = (value, _e) => setSearchVal(value);
-  // Data
-  const { data: studentsData } = useGetAllStudentsQuery(undefined);
 
-  if (studentsData?.length > 0) {
-    studentsData.map((student: any) => {
+  // Select Users to display thier Data
+  const [selectedUsers, setSelectedUsers] = useState("student");
+
+  // Init users display Data
+  let usersData;
+
+  // Change users display Data by Role change
+  if (selectedUsers === "student") {
+    const { data } = useGetAllUsersByRoleQuery("student");
+    usersData = data;
+  } else if (selectedUsers === "teacher") {
+    const { data } = useGetAllUsersByRoleQuery("teacher");
+    usersData = data;
+  } else if (selectedUsers === "admin") {
+    const { data } = useGetAllUsersByRoleQuery("admin");
+    usersData = data;
+  } else if (selectedUsers === "management") {
+    const { data } = useGetAllUsersByRoleQuery("management");
+    usersData = data;
+  }
+
+  // Data
+
+  if (usersData?.length > 0) {
+    console.log(usersData);
+    usersData.map((users: any) => {
       tableData.push({
-        fullName: student.code,
-        userId: student.title,
-        key: student._id,
-        role: student.role,
-        email: student.status,
-        _id: student._id,
+        firstName: users.firstName,
+        userId: users.title,
+        key: users._id,
+        email: users.status,
+        _id: users._id,
       });
     });
   }
 
   // Filter data based on searchVal
   const filteredData =
-    studentsData &&
-    studentsData.filter(
-      (item: { fullName: string; userId: string }) =>
-        item.fullName.toLowerCase().includes(searchVal.toLowerCase()) ||
+    usersData &&
+    usersData.filter(
+      (item: { firstName: string; userId: string }) =>
+        item.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
         item.userId.toLowerCase().includes(searchVal.toLowerCase())
     );
 
@@ -226,6 +247,56 @@ const Users = () => {
                 </div>
               )}
             </div>
+          </div>
+          <div>
+            <ul className="flex space-x-4">
+              {user && (
+                <>
+                  {user.role === "super_admin" && (
+                    <>
+                      {["admin", "teacher", "management", "student"].map(
+                        (role) => (
+                          <li
+                            key={role}
+                            onClick={() => setSelectedUsers(role)}
+                            className="bg-primary p-2 text-white cursor-pointer"
+                          >
+                            {role.charAt(0).toUpperCase() + role.slice(1)}
+                          </li>
+                        )
+                      )}
+                    </>
+                  )}
+
+                  {user.role === "admin" && (
+                    <>
+                      {["teacher", "management", "student"].map((role) => (
+                        <li
+                          key={role}
+                          onClick={() => setSelectedUsers(role)}
+                          className="bg-primary p-2 text-white cursor-pointer"
+                        >
+                          {role.charAt(0).toUpperCase() + role.slice(1)}
+                        </li>
+                      ))}
+                    </>
+                  )}
+                  {user.role === "management" && (
+                    <>
+                      {["teacher", "student"].map((role) => (
+                        <li
+                          key={role}
+                          onClick={() => setSelectedUsers(role)}
+                          className="bg-primary p-2 text-white cursor-pointer"
+                        >
+                          {role.charAt(0).toUpperCase() + role.slice(1)}
+                        </li>
+                      ))}
+                    </>
+                  )}
+                </>
+              )}
+            </ul>
           </div>
         </div>
 
@@ -291,7 +362,11 @@ const Users = () => {
             />
 
             <div className="flex justify-center w-full my-4">
-              <CustomButton type="submit" content="Add User" icon="fa-paper-plane" />
+              <CustomButton
+                type="submit"
+                content="Add User"
+                icon="fa-paper-plane"
+              />
             </div>
           </form>
         </Modal>

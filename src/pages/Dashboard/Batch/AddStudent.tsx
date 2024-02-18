@@ -24,6 +24,7 @@ const AddStudent = ({ batchId }: any) => {
 
   //   Get students Data
   const { data } = useGetAllStudentsQuery(undefined);
+  
   // Handel Create Course
   const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
 
@@ -47,6 +48,8 @@ const AddStudent = ({ batchId }: any) => {
       message.error("student already exists");
     }
   };
+
+  // Berlin Sans FB
 
   //   Modify Options Value
   const options: SelectProps["options"] = [];
@@ -110,3 +113,11 @@ const AddStudent = ({ batchId }: any) => {
 };
 
 export default AddStudent;
+
+
+// NA, 30F, Mirza Ghalib St, opp. Fire Brigade HQ, Fire Brigade Head Quarter, Esplanade, Dharmatala, Taltala, Kolkata, West Bengal 700016, India +911 2462 01612
+// +91 82405
+// 39395
+
+// 06122310BYSCHCQ
+

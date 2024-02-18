@@ -43,8 +43,8 @@ const TeacherDetails = () => {
                   <li>
                     <a
                       href={
-                        data.socialProfile
-                          ? data.socialProfile[0].facebook
+                        data?.socialProfile
+                          ? data?.socialProfile[0]?.facebook
                           : "#"
                       }
                     >
@@ -54,8 +54,8 @@ const TeacherDetails = () => {
                   <li>
                     <a
                       href={
-                        data.socialProfile
-                          ? data.socialProfile[0].linkedin
+                        data?.socialProfile
+                          ? data?.socialProfile[0]?.linkedin
                           : "#"
                       }
                     >
@@ -65,8 +65,8 @@ const TeacherDetails = () => {
                   <li>
                     <a
                       href={
-                        data.socialProfile
-                          ? data.socialProfile[0].instagram
+                        data?.socialProfile
+                          ? data?.socialProfile[0]?.instagram
                           : "#"
                       }
                     >
@@ -76,7 +76,7 @@ const TeacherDetails = () => {
                   <li>
                     <a
                       href={
-                        data.socialProfile ? data.socialProfile[0].github : "#"
+                        data?.socialProfile ? data?.socialProfile[0]?.github : "#"
                       }
                     >
                       <Font iconName="fa-brands fa-github" />{" "}

@@ -1,31 +1,33 @@
-import MainButton from "../../../../Buttons/MainButton";
+import { message } from "antd";
+import { useAddStudentIntoBatchMutation } from "../../../../../redux/api/batch/batchAPI";
+import { getUserInfo } from "../../../../../services/authService";
 import Font from "../../../../icons/Font";
+import CustomButton from "../../../../Buttons/CustomButton";
 
 const LiveCourseCard = ({ data }: any) => {
   const { _id, thambnail, title, studentsId, session, startTime } = data;
-   //   User
-  // const user = getUserInfo();
+  //   User
+  const user = getUserInfo();
 
-  // const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
+  const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
 
-  // const addStudent = async () => {
-  //   console.log('clicked');
-  //   //   Add student Data
-  //   const addStudentData = {
-  //     studentId: user?._id,
-  //     batchId: _id,
-  //   };
+  const addStudent = async () => {
+    //   Add student Data
+    const addStudentData = {
+      studentId: user?._id,
+      batchId: _id,
+    };
 
-  //   const res = await addStudentIntoBatch(addStudentData).unwrap();
+    const res = await addStudentIntoBatch(addStudentData).unwrap();
 
-  //   if (res?._id) {
-  //     message.success("Student added successfully");
-  //   }
+    if (res?._id) {
+      message.success("Student added successfully");
+    }
 
-  //   if (res === "student already exists") {
-  //     message.error("student already exists");
-  //   }
-  // };
+    if (res === "student already exists") {
+      message.error("student already exists");
+    }
+  };
 
   return (
     <div className="md:flex items-center relative  shadow-lg shadow-gray my-10  w-full  ">
@@ -53,12 +55,14 @@ const LiveCourseCard = ({ data }: any) => {
           <span className="text-primary font-semibold ">{session}</span>
         </h2>
       </div>
-      <div className="mx-2">
-        <MainButton
+      <div className="mx-2" onClick={addStudent}>
+        {/* <MainButton
           path={`/courses/checkout/${_id}`}
           content="Enroll"
           icon="fa-plus"
-        />
+        /> */}
+
+        <CustomButton type="button" content="Enroll" icon="fa-plus" />
       </div>
     </div>
   );

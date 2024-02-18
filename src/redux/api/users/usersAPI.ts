@@ -10,6 +10,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["batch"],
     }),
+    // Get User details by role
+    getAllUsersByRole: build.query({
+      query: (role) => ({
+        url: `/users/getAllUsers/${role}`,
+        method: "GET",
+      }),
+      providesTags: ["batch"],
+    }),
     // Get All Teachers
     getAllTeachers: build.query({
       query: () => ({
@@ -43,4 +51,5 @@ export const {
   useGetAllTeachersQuery,
   useGetUserDetailsQuery,
   useUpdateUserDetailsMutation,
+  useGetAllUsersByRoleQuery,
 } = authApi;

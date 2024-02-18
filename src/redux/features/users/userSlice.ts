@@ -17,6 +17,12 @@ export const usersSlice = createSlice({
       address: "",
       city: "",
       zipCode: 0,
+      skills: [
+        {
+          index: 1,
+          title: "",
+        },
+      ],
       socialProfile: {
         facebook: "",
         instagram: "",
