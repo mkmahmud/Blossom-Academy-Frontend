@@ -159,6 +159,18 @@ const Sidebar = () => {
                     <span className="ml-4">Orders</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/notifications`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/notifications`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-first-order" />{" "}
+                    <span className="ml-4">Notifications</span>
+                  </li>
+                </Link>
               </ul>
             )}
             {/*  Admin */}
@@ -289,18 +301,6 @@ const Sidebar = () => {
                     <span className="ml-4"> Users</span>
                   </li>
                 </Link>
-                <Link to={`${urlPath}/courses`}>
-                  <li
-                    className={`hover:bg-gray p-4  border-l-4    ${
-                      isActive(`${urlPath}/courses`)
-                        ? "bg-gray border-primary"
-                        : "border-white"
-                    }`}
-                  >
-                    <Font iconName="fa-book" />{" "}
-                    <span className="ml-4">Courses</span>
-                  </li>
-                </Link>
                 <Link to={`${urlPath}/batch`}>
                   <li
                     className={`hover:bg-gray p-4  border-l-4    ${
@@ -313,6 +313,19 @@ const Sidebar = () => {
                     <span className="ml-4">Batch</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/courses`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/courses`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-book" />{" "}
+                    <span className="ml-4">Courses</span>
+                  </li>
+                </Link>
+               
               </ul>
             )}
             {/*  Teacher */}
@@ -355,18 +368,7 @@ const Sidebar = () => {
                     <span className="ml-4">My Courses</span>
                   </li>
                 </Link>
-                <Link to={`${urlPath}/batch`}>
-                  <li
-                    className={`hover:bg-gray p-4  border-l-4    ${
-                      isActive(`${urlPath}/batch`)
-                        ? "bg-gray border-primary"
-                        : "border-white"
-                    }`}
-                  >
-                    <Font iconName="fa-layer-group" />{" "}
-                    <span className="ml-4">Batch</span>
-                  </li>
-                </Link>
+
                 <Link to={`${urlPath}/skills`}>
                   <li
                     className={`hover:bg-gray p-4  border-l-4    ${
@@ -375,7 +377,7 @@ const Sidebar = () => {
                         : "border-white"
                     }`}
                   >
-                    <Font iconName="fa-brands fa-hive" />{" "}
+                    <Font iconName="fa-brands fa-hive" />
                     <span className="ml-4">Skills</span>
                   </li>
                 </Link>
@@ -403,18 +405,7 @@ const Sidebar = () => {
                     <span className="ml-4">Schedule</span>
                   </li>
                 </Link>
-                <Link to={`${urlPath}/social-links`}>
-                  <li
-                    className={`hover:bg-gray p-4 border-l-4   ${
-                      isActive(`${urlPath}/social-links`)
-                        ? "bg-gray    border-primary "
-                        : "border-white"
-                    }`}
-                  >
-                    <Font iconName="fa-link" />
-                    <span className="ml-4">Social Links</span>
-                  </li>
-                </Link>
+             
               </ul>
             )}
             {/*  Student */}
@@ -475,18 +466,18 @@ const Sidebar = () => {
                   <span className="ml-4">Edit Profile</span>
                 </li>
               </Link>
-              <Link to={`${urlPath}/notification`}>
-                <li
-                  className={`hover:bg-gray p-4 border-l-4   ${
-                    isActive(`${urlPath}/notification`)
-                      ? "bg-gray    border-primary "
-                      : "border-white"
-                  }`}
-                >
-                  <Font iconName="fa-bell" />{" "}
-                  <span className="ml-4">Notifications</span>
-                </li>
-              </Link>
+              <Link to={`${urlPath}/notifications`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/notifications`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-first-order" />{" "}
+                    <span className="ml-4">Notifications</span>
+                  </li>
+                </Link>
               <Link to={`${urlPath}/security`}>
                 <li
                   className={`hover:bg-gray p-4 border-l-4   ${

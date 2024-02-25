@@ -6,6 +6,7 @@ import MainButton from "../../Buttons/MainButton";
 import { isLoggedIn, removeUserInfo } from "../../../services/authService";
 import userImage from "../../../assets/user/dummy.png";
 import { useAppSelector } from "../../../redux/hooks";
+import { Popover, Space } from "antd";
 
 const Navbar = () => {
   // User logged data
@@ -59,6 +60,7 @@ const Navbar = () => {
         },
       ],
     },
+    { title: "faq", dropdown: null },
   ];
 
   // Handel Logout
@@ -116,125 +118,138 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
+
         <ul className="flex space-x-4 hidden md:block ">
           <li>
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
-                <div className="cursor-pointer">
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setNotification(!notification);
-                    }}
+                <div>
+                  <Popover
+                    content={
+                      <div className="  pb-2 w-[400px] mt-2">
+                        <h2 className="font-semibold p-4">Notifications (0)</h2>
+                        <div className="h-[400px]  overflow-y-scroll">
+                          <div className="px-4 py-2 flex items-center border-b border-gray">
+                            <div className="text-large w-[70px]   text-center">
+                              <Font iconName="fa-bell" />
+                            </div>
+                            <div className="mx-2">
+                              <h2 className="text-sm">
+                                <strong>
+                                  Dont Forget To update Your Profile! Update
+                                  Profile
+                                </strong>
+                                <span>Update your Profile</span>
+                              </h2>
+                              <p className="my-2 text-sm">10 minute ago</p>
+                            </div>
+                          </div>
+                          <div className="px-4 py-2 flex items-center border-b border-gray">
+                            <div className="text-large w-[70px]   text-center">
+                              <i className="fa-regular fa-bell"></i>
+                            </div>
+                            <div className="mx-2">
+                              <h2 className="text-sm">
+                                <strong>
+                                  Dont Forget To update Your Profile! Update
+                                  Profile
+                                </strong>
+                                <span>Update your Profile</span>
+                              </h2>
+                              <p className="my-2 text-sm">10 minute ago</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                    trigger="click"
+                    placement="bottomLeft"
                   >
-                    <i className="fa-regular fa-bell"></i>
-                    {/* <Font iconName="fa-bell" /> */}
-                  </div>
-                  {notification && (
-                    <div className="absolute top-10 right-10 bg-white shadow-lg pb-2 w-[400px] mt-2">
-                      <h2 className="font-semibold p-4">Notifications (0)</h2>
-                      <div className="h-[400px]  overflow-y-scroll">
-                        <div className="px-4 py-2 flex items-center border-b border-gray">
-                          <div className="text-large w-[70px]   text-center">
-                            <Font iconName="fa-bell" />
-                          </div>
-                          <div className="mx-2">
-                            <h2 className="text-sm">
-                              <strong>
-                                Dont Forget To update Your Profile! Update
-                                Profile
-                              </strong>
-                              <span>Update your Profile</span>
-                            </h2>
-                            <p className="my-2 text-sm">10 minute ago</p>
-                          </div>
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>
+                        <div className="cursor-pointer">
+                          <i className="fa-regular fa-bell"></i>
+                          {/* <Font iconName="fa-bell" /> */}
                         </div>
-                        <div className="px-4 py-2 flex items-center border-b border-gray">
-                          <div className="text-large w-[70px]   text-center">
-                            <i className="fa-regular fa-bell"></i>
-                          </div>
-                          <div className="mx-2">
-                            <h2 className="text-sm">
-                              <strong>
-                                Dont Forget To update Your Profile! Update
-                                Profile
-                              </strong>
-                              <span>Update your Profile</span>
-                            </h2>
-                            <p className="my-2 text-sm">10 minute ago</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                      </Space>
+                    </a>
+                  </Popover>
                 </div>
-                <img
-                  src={
-                    userDetails?.user?.profileImage
-                      ? userDetails?.user?.profileImage
-                      : userImage
-                  }
-                  alt="Profile Image"
-                  className="rounded-full h-10 w-10 cursor-pointer border"
-                  onClick={() => {
-                    setProfile(!profile);
-                  }}
-                />
-                {profile && (
-                  <div className="absolute top-10 right-0 bg-white shadow-lg p-4 w-[250px] mt-2">
-                    <div className="flex items-center">
-                      <img
-                        src={
-                          userDetails?.user?.profileImage
-                            ? userDetails?.user?.profileImage
-                            : userImage
-                        }
-                        alt="Profile Image"
-                        className="rounded-full h-10 w-10 "
-                      />
-                      <div className="ml-4">
-                        <h2 className="font-semibold">
-                          {userDetails?.user?.firstName
-                            ? userDetails?.user?.firstName
-                            : "User Name"}
-                        </h2>
-                        <p className="font-bold">
-                          {" "}
-                          ID:{" "}
-                          {userDetails?.user?.userId
-                            ? userDetails?.user?.userId
-                            : "ID"}
-                        </p>
+                <div>
+                  <Popover
+                    content={
+                      <div className="     p-4 w-[250px] mt-2">
+                        <div className="flex items-center">
+                          <img
+                            src={
+                              userDetails?.user?.profileImage
+                                ? userDetails?.user?.profileImage
+                                : userImage
+                            }
+                            alt="Profile Image"
+                            className="rounded-full h-10 w-10 "
+                          />
+                          <div className="ml-4">
+                            <h2 className="font-semibold">
+                              {userDetails?.user?.firstName
+                                ? userDetails?.user?.firstName
+                                : "User Name"}
+                            </h2>
+                            <p className="font-bold">
+                              {" "}
+                              ID:{" "}
+                              {userDetails?.user?.userId
+                                ? userDetails?.user?.userId
+                                : "ID"}
+                            </p>
+                          </div>
+                        </div>
+                        <ul className="mt-4">
+                          <li className=" py-2   ">
+                            <Link to="/dashboard">
+                              {" "}
+                              <Font iconName="fa-table-columns" />{" "}
+                              <span className="ml-2">Dashboard</span>
+                            </Link>
+                          </li>
+                          <li className=" py-2   ">
+                            <Link to="/">
+                              {" "}
+                              <Font iconName="fa-pen-to-square" />{" "}
+                              <span className="ml-2">Edit Profile</span>
+                            </Link>
+                          </li>
+                          <li
+                            className=" py-2  text-primary cursor-pointer"
+                            onClick={() => {
+                              handelLogout();
+                            }}
+                          >
+                            {" "}
+                            <Font iconName="fa-right-to-bracket"></Font>{" "}
+                            <span className="ml-2">Log Out</span>
+                          </li>
+                        </ul>
                       </div>
-                    </div>
-                    <ul className="mt-4">
-                      <li className=" py-2   ">
-                        <Link to="/dashboard">
-                          {" "}
-                          <Font iconName="fa-table-columns" />{" "}
-                          <span className="ml-2">Dashboard</span>
-                        </Link>
-                      </li>
-                      <li className=" py-2   ">
-                        <Link to="/">
-                          {" "}
-                          <Font iconName="fa-pen-to-square" />{" "}
-                          <span className="ml-2">Edit Profile</span>
-                        </Link>
-                      </li>
-                      <li
-                        className=" py-2  text-primary cursor-pointer"
-                        onClick={() => {
-                          handelLogout();
-                        }}
-                      >
-                        {" "}
-                        <Font iconName="fa-right-to-bracket"></Font>{" "}
-                        <span className="ml-2">Log Out</span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                    }
+                    trigger="click"
+                    placement="bottomRight"
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>
+                        <img
+                          src={
+                            userDetails?.user?.profileImage
+                              ? userDetails?.user?.profileImage
+                              : userImage
+                          }
+                          alt="Profile Image"
+                          className="rounded-full h-10 w-10 cursor-pointer border"
+                        />
+                      </Space>
+                    </a>
+                  </Popover>
+                </div>
               </div>
             ) : (
               <MainButton

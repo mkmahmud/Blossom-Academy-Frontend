@@ -13,7 +13,7 @@ const TeacherCard = ({ data }: any) => {
             <img
               src={profileImage ? profileImage : user}
               alt=""
-              className="  origin-bottom	 group-hover:scale-110 h-full ease-in-out duration-300  "
+              className=" w-full origin-bottom	 group-hover:scale-110 h-full ease-in-out duration-300  "
             />
           </div>
           <div className="mx-4 mb-10 mt-4  ">

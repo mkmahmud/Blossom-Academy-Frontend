@@ -20,7 +20,8 @@ import Checkout from "../pages/Checkout/Checkout";
 import Skills from "../pages/Dashboard/Skills/Skills";
 import SuccessPayment from "../pages/Checkout/SuccessPayment";
 import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
-
+import Notifications from "../pages/Dashboard/Notifications/Notifications";
+import Faq from "../pages/Faq/Faq";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
       },
       {
         path: "/live-courses",
@@ -86,7 +91,10 @@ const router = createBrowserRouter([
         path: "/dashboard/profile",
         element: <Profile />,
       },
-
+      {
+        path: "/dashboard/notifications",
+        element: <Notifications />,
+      },
       {
         path: "/dashboard/users",
         element: <Users />,

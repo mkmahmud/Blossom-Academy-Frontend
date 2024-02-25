@@ -12,7 +12,7 @@ const TeacherDetails = () => {
 
   // Get Teacher Details
   const { data } = useGetSingleTeachersQuery(id);
-  console.log(data);
+
   return (
     <div>
       <div className="mt-20"></div>
@@ -169,8 +169,8 @@ const TeacherDetails = () => {
                   Professional Skills
                 </h2>
                 <ul className="flex space-x-2    flex-wrap flex-row  ">
-                  {data?.career[0]?.skills &&
-                    data?.career[0]?.skills.map(
+                  {data?.skills &&
+                    data?.skills.map(
                       (skill: any, d: Key | null | undefined) => (
                         <MainTag text={skill.title} key={d} />
                       )

@@ -72,8 +72,7 @@ const Users = () => {
   const handleDelete = (record: DataType) => {
     // Handle delete action
     message.success(`Deleted ${record.firstName} Course`);
-    console.log(record);
-  };
+   };
 
   //   User Role
   const role = (user as { role: string }).role;
@@ -189,8 +188,7 @@ const Users = () => {
   // Data
 
   if (usersData?.length > 0) {
-    console.log(usersData);
-    usersData.map((users: any) => {
+     usersData.map((users: any) => {
       tableData.push({
         firstName: users.firstName,
         userId: users.title,
