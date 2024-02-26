@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const Toggle = () => {
-  const [active, setActive] = useState(false);
+const Toggle = ({ status }: any) => {
+  const [active, setActive] = useState(status);
   return (
     <div
       onClick={() => {

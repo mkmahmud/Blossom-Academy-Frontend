@@ -1,9 +1,24 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/black-logo.png";
 import Font from "../../icons/Font";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import CustomButton from "../../Buttons/CustomButton";
+import { useInsertNewslatterEmailMutation } from "../../../redux/api/newslatter/newslatter";
 const Footer = () => {
+  // Insert Newsletter Email Address in the database
+  const [insertNewslatterEmail] = useInsertNewslatterEmailMutation();
+
+  // Handle newslatter form
+  const handleNewslatter = async (e: any) => {
+    e.preventDefault();
+    const res = await insertNewslatterEmail({ email: e.target.email.value });
+
+    // Notify 
+    if (res) {
+      message.success("Subscribed. Thank you for keeping with us");
+    }
+  };
+
   return (
     <div>
       <div className=" border-t-2 border-primaryHover px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
@@ -83,8 +98,14 @@ const Footer = () => {
           </p>
 
           <div>
-            <Input className="my-4" placeholder="Enter Your Email" />
-            <CustomButton content="Subscribe" />
+            <form onSubmit={handleNewslatter}>
+              <Input
+                name="email"
+                className="my-4"
+                placeholder="Enter Your Email"
+              />
+              <CustomButton type="submit" content="Subscribe" />
+            </form>
           </div>
         </div>
       </div>

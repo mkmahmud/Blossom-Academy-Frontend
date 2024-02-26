@@ -67,7 +67,7 @@ const Notifications = () => {
             <p>Personalized Class Recommendations</p>
           </div>
           <div className="flex space-x-4 items-center my-2">
-            <Toggle />
+            <Toggle status={true} />
             <p>Featured content</p>
           </div>
           <div className="flex space-x-4 items-center my-2">

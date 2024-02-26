@@ -1,19 +1,25 @@
-import { Button } from "antd";
+import { Button, message } from "antd";
 import Search, { SearchProps } from "antd/es/input/Search";
 import Font from "../../../components/icons/Font";
 import { useState } from "react";
 import BatchCard from "../../../components/Dashboard/Ui/Card/BatchCard/BatchCard";
-import { useGetAllBatchQuery } from "../../../redux/api/batch/batchAPI";
+import {
+  useGetAllBatchQuery,
+  useUpdateBatchStatusMutation,
+} from "../../../redux/api/batch/batchAPI";
 import AddNewBatch from "./AddNewBatch";
 import MyTable from "../../../components/Dashboard/Ui/Table/Table";
 import { ColumnsType } from "antd/es/table";
 import AddStudent from "./AddStudent";
 import AddTeacher from "./AddTeacher";
 import AddCourse from "./AddCourse";
+import Toggle from "../../../components/Dashboard/Ui/Toggle/Toggle";
 
 const Batch = () => {
   //   All Batch Data
   const { data } = useGetAllBatchQuery(undefined);
+
+  // Search Value
   const [searchVal, setSearchVal] = useState("");
   const onSearch: SearchProps["onSearch"] = (value, _e) => setSearchVal(value);
 
@@ -30,6 +36,7 @@ const Batch = () => {
     category: string;
     startTime: string;
     _id: any;
+    status: boolean;
     studentsId: any[];
     courseId: any[];
     teachersId: any[];
@@ -82,6 +89,8 @@ const Batch = () => {
       });
     });
   }
+
+ 
   // Course Details Data
   type courseTableType = {
     title: string;
@@ -113,6 +122,20 @@ const Batch = () => {
       });
     });
   }
+
+  const [updateBatchStatus] = useUpdateBatchStatusMutation();
+
+  // Update Batch Status
+  const handleBatchStatus = async () => {
+    const res = await updateBatchStatus({
+      id: details?._id,
+      status: !details?.status,
+    });
+
+    if (res) {
+      message.success("Batch status updated");
+    }
+  };
 
   return (
     <div>
@@ -169,6 +192,14 @@ const Batch = () => {
               <Font iconName="fa-backward" />
             </Button>
             <div className="w-full shadow p-4 border-secondary  ">
+              <div className="flex justify-end mb-10">
+                <div>
+                  <h2 className="my-2">Batch Status</h2>
+                  <div onClick={handleBatchStatus}>
+                    <Toggle status={details?.status} />
+                  </div>
+                </div>
+              </div>
               <div className="px-2 flex justify-between  ">
                 <div>
                   <h2 className="text-xl font-bold my-2 ">{details.title}</h2>

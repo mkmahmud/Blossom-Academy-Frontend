@@ -11,6 +11,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["batch"],
     }),
+    // Update Batch Status
+    updateBatchStatus: build.mutation({
+      query: (data) => ({
+        url: `/batch/update-batch-status?id=${data.id}&status=${data.status}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["batch"],
+    }),
     // Add Student Into Batch
     addStudentIntoBatch: build.mutation({
       query: (data) => ({
@@ -69,6 +77,7 @@ export const {
   useGetAllBatchQuery,
   useCreatebatchMutation,
   useAddStudentIntoBatchMutation,
+  useUpdateBatchStatusMutation,
   useAddTeacherIntoBatchMutation,
   useAddCourseIntoBatchMutation,
   useGetAllActiveBatchQuery,
