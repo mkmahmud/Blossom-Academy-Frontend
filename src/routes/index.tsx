@@ -22,6 +22,8 @@ import SuccessPayment from "../pages/Checkout/SuccessPayment";
 import SocialLinks from "../pages/Dashboard/SocialLinks/SocialLinks";
 import Notifications from "../pages/Dashboard/Notifications/Notifications";
 import Faq from "../pages/Faq/Faq";
+import MyCourses from "../pages/Dashboard/MyCourses/MyCourses";
+import MyCourseDetails from "../pages/Dashboard/MyCourses/MyCourseDetails/MyCourseDetails";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +112,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/social-links",
         element: <SocialLinks />,
+      },
+      {
+        path: "/dashboard/my-courses",
+        element: <MyCourses />,
+      },
+      {
+        path: "/dashboard/my-courses/:id",
+        element: <MyCourseDetails/>,
       },
       {
         path: "/dashboard/batch",

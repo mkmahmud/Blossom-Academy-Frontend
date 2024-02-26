@@ -70,6 +70,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["batch"],
     }),
+    // Get Student Enrolled  Batch
+    getStudentEnrolledBatch: build.query({
+      query: (id) => ({
+        url: `/batch/enrolled-student/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["batch"],
+    }),
   }),
 });
 
@@ -82,4 +90,5 @@ export const {
   useAddCourseIntoBatchMutation,
   useGetAllActiveBatchQuery,
   useGetBatchQuery,
+  useGetStudentEnrolledBatchQuery,
 } = authApi;

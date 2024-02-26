@@ -325,7 +325,6 @@ const Sidebar = () => {
                     <span className="ml-4">Courses</span>
                   </li>
                 </Link>
-               
               </ul>
             )}
             {/*  Teacher */}
@@ -405,7 +404,6 @@ const Sidebar = () => {
                     <span className="ml-4">Schedule</span>
                   </li>
                 </Link>
-             
               </ul>
             )}
             {/*  Student */}
@@ -433,6 +431,18 @@ const Sidebar = () => {
                   >
                     <Font iconName="fa-user" />
                     <span className="ml-4"> Profile</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/my-courses`}>
+                  <li
+                    className={`hover:bg-gray p-4 border-l-4   ${
+                      isActive(`${urlPath}/my-courses`)
+                        ? "bg-gray    border-primary "
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-book" />
+                    <span className="ml-4"> My Courses</span>
                   </li>
                 </Link>
                 <Link to={`${urlPath}/social-links`}>
@@ -467,17 +477,17 @@ const Sidebar = () => {
                 </li>
               </Link>
               <Link to={`${urlPath}/notifications`}>
-                  <li
-                    className={`hover:bg-gray p-4  border-l-4    ${
-                      isActive(`${urlPath}/notifications`)
-                        ? "bg-gray border-primary"
-                        : "border-white"
-                    }`}
-                  >
-                    <Font iconName="fa-first-order" />{" "}
-                    <span className="ml-4">Notifications</span>
-                  </li>
-                </Link>
+                <li
+                  className={`hover:bg-gray p-4  border-l-4    ${
+                    isActive(`${urlPath}/notifications`)
+                      ? "bg-gray border-primary"
+                      : "border-white"
+                  }`}
+                >
+                  <Font iconName="fa-first-order" />{" "}
+                  <span className="ml-4">Notifications</span>
+                </li>
+              </Link>
               <Link to={`${urlPath}/security`}>
                 <li
                   className={`hover:bg-gray p-4 border-l-4   ${

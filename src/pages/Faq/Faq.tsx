@@ -71,7 +71,7 @@ const Faq = () => {
       style: panelStyle,
     },
     {
-      key: "3",
+      key: "4",
       label: " What’s the benefits of the Premium Membership?",
       children: (
         <div>
@@ -91,7 +91,7 @@ const Faq = () => {
       style: panelStyle,
     },
     {
-      key: "3",
+      key: "5",
       label: " How can I cancel my subscription plan?",
       children: (
         <div>
@@ -126,7 +126,7 @@ const Faq = () => {
     <div>
       <PageHead subHead="Most frequently asked questions" title="FAQ" />
       <div>
-        <div>
+        <div className="mx-4">
           <h2 className="text-extraLarge font-semibold">
             Most frequently asked <br /> questions
           </h2>
@@ -135,7 +135,7 @@ const Faq = () => {
             <br />
             getting started
           </p>
-          <div className=" my-10">
+          <div className="mx-6 w-full md:w-2/3 md:mx-auto my-10">
             <Collapse
               bordered={false}
               defaultActiveKey={["1"]}
