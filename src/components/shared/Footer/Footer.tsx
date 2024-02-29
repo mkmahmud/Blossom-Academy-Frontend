@@ -13,7 +13,7 @@ const Footer = () => {
     e.preventDefault();
     const res = await insertNewslatterEmail({ email: e.target.email.value });
 
-    // Notify 
+    // Notify
     if (res) {
       message.success("Subscribed. Thank you for keeping with us");
     }
@@ -111,9 +111,9 @@ const Footer = () => {
       </div>
       <div className="flex justify-between pb-10">
         <div className="flex space-x-2">
-          <a href="#">Terms</a>
+          <Link to="terms">Terms</Link>
           <p className="w-[2px] bg-gray"></p>
-          <a href="#">Privacy</a>
+          <Link to="privacy">Privacy</Link>
         </div>
         <p className="   ">
           Copyright @ 2023 Design & Developed By{" "}

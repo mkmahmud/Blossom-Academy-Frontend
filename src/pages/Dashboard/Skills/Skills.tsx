@@ -17,6 +17,7 @@ const Skills = () => {
     // Update data when user?.skills changes
     if (user?.skills) {
       setData(
+        //@ts-ignore
         user?.skills.map((data, index) => ({ title: data?.title, index }))
       );
     }
@@ -29,6 +30,7 @@ const Skills = () => {
 
     // Update the id property of each item to reflect their new index
     newData.forEach((item, index) => {
+      //@ts-ignore
       item.index = index;
     });
 
@@ -44,7 +46,8 @@ const Skills = () => {
   const handleAddSkill = (e: any) => {
     e.preventDefault();
     const skillvalue = e.target.skill.value;
-    setData([...data , { index: data.length + 1, title: skillvalue }]);
+    //@ts-ignore
+    setData([...data, { index: data.length + 1, title: skillvalue }]);
   };
 
   const [updateUserDetails] = useUpdateUserDetailsMutation();
@@ -89,7 +92,13 @@ const Skills = () => {
                     key={index}
                     className="p-2 m-2  flex items-center justify-between border-2 border-primaryHover"
                   >
-                    <h2> {item?.title}</h2>
+                    <h2>
+                      {" "}
+                      {
+                        //@ts-ignore
+                        item?.title
+                      }
+                    </h2>
                     <a href="#">
                       {" "}
                       <Font iconName="fa-brands fa-hive" />

@@ -2,7 +2,7 @@ import { Progress } from "antd";
 import MainButton from "../../../../Buttons/MainButton";
 
 const StudentEnrolledCard = ({ data }: any) => {
-  const { _id, thambnail, title, category, session, status } = data;
+  const { _id, thambnail, title } = data;
 
   return (
     <div className="  border border-2 border-primary flex p-2 space-x-4">

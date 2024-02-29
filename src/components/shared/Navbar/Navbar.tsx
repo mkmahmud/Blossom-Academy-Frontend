@@ -3,10 +3,20 @@ import logo from "../../../assets/logo/black-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Font from "../../icons/Font";
 import MainButton from "../../Buttons/MainButton";
-import { isLoggedIn, removeUserInfo } from "../../../services/authService";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "../../../services/authService";
 import userImage from "../../../assets/user/dummy.png";
 import { useAppSelector } from "../../../redux/hooks";
 import { Popover, Space } from "antd";
+import {
+  useGetNotificationsQuery,
+  useUpdateNotificationsMutation,
+} from "../../../redux/api/notification/notification";
+import { timeAgo } from "../../../helpers/calculate/calculate";
+import Empty from "../../Dashboard/Ui/Empty/Empty";
 
 const Navbar = () => {
   // User logged data
@@ -37,30 +47,27 @@ const Navbar = () => {
   // Handle Profile Menus
   const [profile, setProfile] = useState(false);
 
-  // Handle Notifications
-  const [notification, setNotification] = useState(false);
-
   //   Handele Mobile Menus
   const [mobileMenu, setMobileMenu] = useState(false);
 
   //   Menus
   const menus = [
-    { title: "about", dropdown: null },
-    { title: "teachers", dropdown: null },
+    { title: "About", dropdown: null },
+    { title: "Teachers", dropdown: null },
     {
       title: "Courses",
       dropdown: [
         {
-          title: "live-courses",
+          title: "Live-courses",
           dropdown: null,
         },
         {
-          title: "video-courses",
+          title: "Video-courses",
           dropdown: null,
         },
       ],
     },
-    { title: "faq", dropdown: null },
+    { title: "Faq", dropdown: null },
   ];
 
   // Handel Logout
@@ -71,6 +78,22 @@ const Navbar = () => {
 
   // User Details Data
   const userDetails = useAppSelector((state) => state.userDetails);
+
+  // Notifications Data
+  const user = getUserInfo();
+  //@ts-ignore
+  const { data: notificationsData } = useGetNotificationsQuery(user?.userId);
+
+  //  Check Is unread Notifications
+  const isNotificationsavailable = notificationsData?.some(
+    (notification: { status: boolean }) => notification.status === true
+  );
+
+  // Update Notification
+  const [updateNotifications] = useUpdateNotificationsMutation();
+  const handleNotificationUpdate = async (id: any) => {
+    await updateNotifications(id);
+  };
 
   return (
     <div
@@ -86,7 +109,7 @@ const Navbar = () => {
         </div>
         {/* Desktop Menus */}
         <div className="hidden md:block">
-          <ul className=" flex space-x-4 uppercase font-medium">
+          <ul className=" flex space-x-4   font-medium">
             {menus.map((menu, index) => (
               <li className="py-2 group" key={index}>
                 <Link
@@ -127,38 +150,53 @@ const Navbar = () => {
                   <Popover
                     content={
                       <div className="  pb-2 w-[400px] mt-2">
-                        <h2 className="font-semibold p-4">Notifications (0)</h2>
+                        <h2 className="font-semibold p-4">Notifications</h2>
                         <div className="h-[400px]  overflow-y-scroll">
-                          <div className="px-4 py-2 flex items-center border-b border-gray">
-                            <div className="text-large w-[70px]   text-center">
-                              <Font iconName="fa-bell" />
-                            </div>
-                            <div className="mx-2">
-                              <h2 className="text-sm">
-                                <strong>
-                                  Dont Forget To update Your Profile! Update
-                                  Profile
-                                </strong>
-                                <span>Update your Profile</span>
-                              </h2>
-                              <p className="my-2 text-sm">10 minute ago</p>
-                            </div>
-                          </div>
-                          <div className="px-4 py-2 flex items-center border-b border-gray">
-                            <div className="text-large w-[70px]   text-center">
-                              <i className="fa-regular fa-bell"></i>
-                            </div>
-                            <div className="mx-2">
-                              <h2 className="text-sm">
-                                <strong>
-                                  Dont Forget To update Your Profile! Update
-                                  Profile
-                                </strong>
-                                <span>Update your Profile</span>
-                              </h2>
-                              <p className="my-2 text-sm">10 minute ago</p>
-                            </div>
-                          </div>
+                          {notificationsData &&
+                            notificationsData
+                              .slice()
+                              .sort(
+                                (
+                                  a: { createdAt: string | number | Date },
+                                  b: { createdAt: string | number | Date }
+                                ) =>
+                                  new Date(b.createdAt).getTime() -
+                                  new Date(a.createdAt).getTime()
+                              )
+                              .map((notification: any) => (
+                                <div
+                                  key={notification._id}
+                                  className="px-4 py-2 flex items-center border-b border-gray cursor-pointer"
+                                  onClick={() => {
+                                    handleNotificationUpdate(notification._id);
+                                  }}
+                                >
+                                  <div className="text-large w-[70px]   text-center text-primary">
+                                    {notification?.status ? (
+                                      <Font iconName="fa-bell" />
+                                    ) : (
+                                      <i className="fa-regular fa-bell"></i>
+                                    )}
+                                  </div>
+                                  <div className="mx-2">
+                                    <Link
+                                      to={notification?.link}
+                                      className="text-sm"
+                                    >
+                                      <strong>{notification?.content}</strong>
+                                    </Link>
+                                    <p className="my-2 text-sm">
+                                      {timeAgo(notification.createdAt)}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+
+                          {/* No Notification */}
+
+                          {notificationsData?.length > 0 && (
+                            <Empty content="No Notification" />
+                          )}
                         </div>
                       </div>
                     }
@@ -167,9 +205,12 @@ const Navbar = () => {
                   >
                     <a onClick={(e) => e.preventDefault()}>
                       <Space>
-                        <div className="cursor-pointer">
-                          <i className="fa-regular fa-bell"></i>
-                          {/* <Font iconName="fa-bell" /> */}
+                        <div className="text-large  cursor-pointer   text-center text-primary">
+                          {isNotificationsavailable ? (
+                            <Font iconName="fa-bell" />
+                          ) : (
+                            <i className="fa-regular fa-bell"></i>
+                          )}
                         </div>
                       </Space>
                     </a>
@@ -284,7 +325,7 @@ const Navbar = () => {
               <div className="text-2xl font-bold py-10">
                 <img className="block mx-auto" src={logo} alt="" />
               </div>
-              <ul className="  uppercase font-medium ">
+              <ul className="    font-medium ">
                 {menus.map((menu, index) => (
                   <li className="py-2 group my-4 w-full relative" key={index}>
                     <Link

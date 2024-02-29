@@ -24,6 +24,8 @@ import Notifications from "../pages/Dashboard/Notifications/Notifications";
 import Faq from "../pages/Faq/Faq";
 import MyCourses from "../pages/Dashboard/MyCourses/MyCourses";
 import MyCourseDetails from "../pages/Dashboard/MyCourses/MyCourseDetails/MyCourseDetails";
+import Terms from "../pages/Terms/Terms";
+import Privacy from "../pages/Privacy/Privacy";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
       {
         path: "/faq",
         element: <Faq />,
+      },
+      {
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />,
       },
       {
         path: "/live-courses",
@@ -119,7 +129,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/my-courses/:id",
-        element: <MyCourseDetails/>,
+        element: <MyCourseDetails />,
       },
       {
         path: "/dashboard/batch",

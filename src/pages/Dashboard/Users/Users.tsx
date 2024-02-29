@@ -10,10 +10,7 @@ import { getUserInfo } from "../../../services/authService";
 import MyTable from "../../../components/Dashboard/Ui/Table/Table";
 import Font from "../../../components/icons/Font";
 import { ColumnsType } from "antd/es/table";
-import {
-  useGetAllStudentsQuery,
-  useGetAllUsersByRoleQuery,
-} from "../../../redux/api/users/usersAPI";
+import { useGetAllUsersByRoleQuery } from "../../../redux/api/users/usersAPI";
 
 const { Option } = Select;
 
@@ -72,7 +69,7 @@ const Users = () => {
   const handleDelete = (record: DataType) => {
     // Handle delete action
     message.success(`Deleted ${record.firstName} Course`);
-   };
+  };
 
   //   User Role
   const role = (user as { role: string }).role;
@@ -188,7 +185,7 @@ const Users = () => {
   // Data
 
   if (usersData?.length > 0) {
-     usersData.map((users: any) => {
+    usersData.map((users: any) => {
       tableData.push({
         firstName: users.firstName,
         userId: users.title,
@@ -250,10 +247,30 @@ const Users = () => {
             <ul className="flex space-x-4">
               {user && (
                 <>
-                  {user.role === "super_admin" && (
-                    <>
-                      {["admin", "teacher", "management", "student"].map(
-                        (role) => (
+                  {
+                    //@ts-ignore
+                    user.role === "super_admin" && (
+                      <>
+                        {["admin", "teacher", "management", "student"].map(
+                          (role) => (
+                            <li
+                              key={role}
+                              onClick={() => setSelectedUsers(role)}
+                              className="bg-primary p-2 text-white cursor-pointer"
+                            >
+                              {role.charAt(0).toUpperCase() + role.slice(1)}
+                            </li>
+                          )
+                        )}
+                      </>
+                    )
+                  }
+
+                  {
+                    //@ts-ignore
+                    user.role === "admin" && (
+                      <>
+                        {["teacher", "management", "student"].map((role) => (
                           <li
                             key={role}
                             onClick={() => setSelectedUsers(role)}
@@ -261,37 +278,26 @@ const Users = () => {
                           >
                             {role.charAt(0).toUpperCase() + role.slice(1)}
                           </li>
-                        )
-                      )}
-                    </>
-                  )}
-
-                  {user.role === "admin" && (
-                    <>
-                      {["teacher", "management", "student"].map((role) => (
-                        <li
-                          key={role}
-                          onClick={() => setSelectedUsers(role)}
-                          className="bg-primary p-2 text-white cursor-pointer"
-                        >
-                          {role.charAt(0).toUpperCase() + role.slice(1)}
-                        </li>
-                      ))}
-                    </>
-                  )}
-                  {user.role === "management" && (
-                    <>
-                      {["teacher", "student"].map((role) => (
-                        <li
-                          key={role}
-                          onClick={() => setSelectedUsers(role)}
-                          className="bg-primary p-2 text-white cursor-pointer"
-                        >
-                          {role.charAt(0).toUpperCase() + role.slice(1)}
-                        </li>
-                      ))}
-                    </>
-                  )}
+                        ))}
+                      </>
+                    )
+                  }
+                  {
+                    //@ts-ignore
+                    user.role === "management" && (
+                      <>
+                        {["teacher", "student"].map((role) => (
+                          <li
+                            key={role}
+                            onClick={() => setSelectedUsers(role)}
+                            className="bg-primary p-2 text-white cursor-pointer"
+                          >
+                            {role.charAt(0).toUpperCase() + role.slice(1)}
+                          </li>
+                        ))}
+                      </>
+                    )
+                  }
                 </>
               )}
             </ul>

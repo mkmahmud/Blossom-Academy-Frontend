@@ -28,21 +28,25 @@ const Profile = () => {
     }
   }, [user?.email]);
 
+  //@ts-ignore
   const { fields, append } = useFieldArray({
     control: methods.control,
     name: "career.0.aboutMe",
   });
 
+  //@ts-ignore
   const { fields: educationFields, append: educationAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.education",
   });
 
+  //@ts-ignore
   const { fields: experienceFields, append: experienceAppend } = useFieldArray({
     control: methods.control,
     name: "career.0.experience",
   });
 
+  //@ts-ignore
   const { fields: certificationsFields, append: certificationsAppend } =
     useFieldArray({
       control: methods.control,

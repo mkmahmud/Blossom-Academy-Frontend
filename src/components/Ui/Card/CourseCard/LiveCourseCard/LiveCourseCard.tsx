@@ -14,6 +14,7 @@ const LiveCourseCard = ({ data }: any) => {
   const addStudent = async () => {
     //   Add student Data
     const addStudentData = {
+      //@ts-ignore
       studentId: user?._id,
       batchId: _id,
     };
