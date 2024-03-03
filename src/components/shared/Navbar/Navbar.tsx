@@ -82,7 +82,10 @@ const Navbar = () => {
   // Notifications Data
   const user = getUserInfo();
   //@ts-ignore
-  const { data: notificationsData } = useGetNotificationsQuery(user?.userId);
+  const { data: notificationsData } = useGetNotificationsQuery(user?.userId, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 20000,
+  });
 
   //  Check Is unread Notifications
   const isNotificationsavailable = notificationsData?.some(
@@ -194,7 +197,7 @@ const Navbar = () => {
 
                           {/* No Notification */}
 
-                          {notificationsData?.length > 0 && (
+                          {notificationsData?.length <= 0 && (
                             <Empty content="No Notification" />
                           )}
                         </div>
@@ -207,7 +210,7 @@ const Navbar = () => {
                       <Space>
                         <div className="text-large  cursor-pointer   text-center text-primary">
                           {isNotificationsavailable ? (
-                            <Font iconName="fa-bell" />
+                            <Font iconName="fa-bell" /> 
                           ) : (
                             <i className="fa-regular fa-bell"></i>
                           )}

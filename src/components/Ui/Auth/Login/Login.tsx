@@ -41,11 +41,52 @@ const Login = () => {
       setincorrectPassword("Password or Id Not valid");
     }
   };
+
+  // Set Login Status
+  const [loginStatus, setLoginStatus] = useState({ id: "", pass: "" });
+
   return (
     <div className="max-w-[400px] mx-auto mt-[150px]">
       <div className="text-center">
         <h2 className="font-bold text-extraLarge">Blossom</h2>
         <p className="text-xl my-4">Sign Into Your Accout</p>
+      </div>
+      <div>
+         
+        <ul className="flex justify-between my-10 border-2 border-white">
+          <li
+            className={`${
+              loginStatus?.id == "A-0001" ? "bg-white text-black" : ""
+            } p-2 cursor-pointer`}
+            onClick={() => setLoginStatus({ id: "A-0001", pass: "1234" })}
+          >
+            Admin
+          </li>
+          <li
+            className={`${
+              loginStatus?.id == "M-0001" ? "bg-white text-black" : ""
+            } p-2 cursor-pointer`}
+            onClick={() => setLoginStatus({ id: "M-0001", pass: "1234" })}
+          >
+            Management
+          </li>
+          <li
+            className={`${
+              loginStatus?.id == "T-0001" ? "bg-white text-black" : ""
+            } p-2 cursor-pointer`}
+            onClick={() => setLoginStatus({ id: "T-0001", pass: "1234" })}
+          >
+            Teacher
+          </li>
+          <li
+            className={`${
+              loginStatus?.id == "S-0001" ? "bg-white text-black" : ""
+            } p-2 cursor-pointer`}
+            onClick={() => setLoginStatus({ id: "S-0001", pass: "1234" })}
+          >
+            Student
+          </li>
+        </ul>
       </div>
       <h2 className="text-xl text-primary text-center">{incorrectPassword}</h2>
       {/* Login Form */}
@@ -56,6 +97,7 @@ const Login = () => {
           icon="fa-envelope"
           register={register("id", { required: true })}
           error={errors.id}
+          defaultValue={loginStatus?.id}
         />
 
         <MainInput
@@ -64,6 +106,7 @@ const Login = () => {
           icon="fa-lock"
           register={register("password", { required: true })}
           error={errors.password}
+          defaultValue={loginStatus?.pass}
         />
 
         {/* Forgot password */}

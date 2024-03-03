@@ -1,11 +1,19 @@
 import Font from "../../icons/Font";
 
-const MainInput = ({ type, placeholder, icon, register, error }: any) => {
+const MainInput = ({
+  type,
+  placeholder,
+  icon,
+  register,
+  error,
+  defaultValue,
+}: any) => {
   return (
     <div className="w-full  relative text-base my-10 ">
       <input
         {...register}
         type={type}
+        defaultValue={defaultValue}
         className="w-full bg-white text-black h-12 rounded pl-6 "
         placeholder={placeholder}
       />
@@ -14,7 +22,9 @@ const MainInput = ({ type, placeholder, icon, register, error }: any) => {
         <Font iconName={icon} />
       </span>
       {/* Show error */}
-      {error && <span className="text-primary">{placeholder} is required</span>}{" "}
+      {error && (
+        <span className="text-primary">{placeholder} is required</span>
+      )}{" "}
     </div>
   );
 };

@@ -18,8 +18,30 @@ export const notificationAPI = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["notification"],
     }),
+    // Create Notification
+    createNotifications: build.mutation({
+      query: (data) => ({
+        url: `/notification/`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["notification"],
+    }),
+    // Create Multiple Notification
+    createMultipleNotifications: build.mutation({
+      query: (data) => ({
+        url: `/notification/multiple`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["notification"],
+    }),
   }),
 });
 
-export const { useGetNotificationsQuery, useUpdateNotificationsMutation } =
-  notificationAPI;
+export const {
+  useGetNotificationsQuery,
+  useUpdateNotificationsMutation,
+  useCreateNotificationsMutation,
+  useCreateMultipleNotificationsMutation,
+} = notificationAPI;

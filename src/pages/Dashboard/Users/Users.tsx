@@ -55,7 +55,9 @@ interface DataType {
 const Users = () => {
   // User Information
   const user = getUserInfo();
-
+  //   User Role
+  const role = (user as { role: string }).role;
+  
   // Actions
   const [isEdit, setIsEdit] = useState(false);
   const [, setIsEditData] = useState({});
@@ -71,8 +73,7 @@ const Users = () => {
     message.success(`Deleted ${record.firstName} Course`);
   };
 
-  //   User Role
-  const role = (user as { role: string }).role;
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 

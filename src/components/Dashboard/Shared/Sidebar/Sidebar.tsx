@@ -457,6 +457,18 @@ const Sidebar = () => {
                     <span className="ml-4">Social Links</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/skills`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/skills`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-brands fa-hive" />
+                    <span className="ml-4">Skills</span>
+                  </li>
+                </Link>
               </ul>
             )}
             <h2 className="uppercase text-lg text-secondary font-semibold mt-4">

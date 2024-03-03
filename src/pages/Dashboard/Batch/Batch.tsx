@@ -50,6 +50,7 @@ const Batch = () => {
   type tableType = {
     fullName: string;
     email: string;
+    userId: string;
   };
 
   const columns: ColumnsType<tableType> = [
@@ -59,6 +60,11 @@ const Batch = () => {
       key: "fullName",
     },
     {
+      title: "User Id",
+      dataIndex: "userId",
+      key: "userId",
+    },
+    {
       title: "Email",
       dataIndex: "email",
       key: "email",
@@ -66,7 +72,7 @@ const Batch = () => {
   ];
 
   // Students Data
-  let studentsData: { key: any; fullName: any; email: any }[] = [];
+  let studentsData: { key: any; userId: any; fullName: any; email: any }[] = [];
 
   if (details && details.studentsId && details.studentsId.length > 0) {
     details.studentsId.map((data: any) => {
@@ -74,11 +80,13 @@ const Batch = () => {
         key: data._id,
         fullName: data.id.fullName,
         email: data.id.email,
+        userId: data.id.userId,
       });
     });
   }
+
   // Teachers Data
-  let teachersData: { key: any; fullName: any; email: any }[] = [];
+  let teachersData: { key: any; userId: any; fullName: any; email: any }[] = [];
 
   if (details && details.teachersId && details?.teachersId?.length > 0) {
     details?.teachersId?.map((data: any) => {
@@ -86,11 +94,11 @@ const Batch = () => {
         key: data._id,
         fullName: data.id.fullName,
         email: data.id.email,
+        userId: data.id.userId,
       });
     });
   }
 
- 
   // Course Details Data
   type courseTableType = {
     title: string;
