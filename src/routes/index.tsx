@@ -26,6 +26,7 @@ import MyCourses from "../pages/Dashboard/MyCourses/MyCourses";
 import MyCourseDetails from "../pages/Dashboard/MyCourses/MyCourseDetails/MyCourseDetails";
 import Terms from "../pages/Terms/Terms";
 import Privacy from "../pages/Privacy/Privacy";
+import Messenger from "../pages/Messenger/Messenger";
 
 const router = createBrowserRouter([
   {
@@ -84,8 +85,17 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/messenger",
+        element: (
+          <ProtectedRoute>
+            <Messenger />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
+
   {
     path: "/dashboard",
     element: (
@@ -131,6 +141,7 @@ const router = createBrowserRouter([
         path: "/dashboard/my-courses/:id",
         element: <MyCourseDetails />,
       },
+
       {
         path: "/dashboard/batch",
         element: <Batch />,

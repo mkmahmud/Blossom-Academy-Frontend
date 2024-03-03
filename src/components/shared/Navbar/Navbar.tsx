@@ -149,6 +149,11 @@ const Navbar = () => {
           <li>
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
+                <div className="text-large  cursor-pointer   text-center text-primary mx-2">
+                  <Link to='/messenger'>
+                  <Font iconName="fa-message" /></Link>
+                  {/* <i className="fa-regular fa-message"></i> */}
+                </div>
                 <div>
                   <Popover
                     content={
@@ -210,7 +215,7 @@ const Navbar = () => {
                       <Space>
                         <div className="text-large  cursor-pointer   text-center text-primary">
                           {isNotificationsavailable ? (
-                            <Font iconName="fa-bell" /> 
+                            <Font iconName="fa-bell" />
                           ) : (
                             <i className="fa-regular fa-bell"></i>
                           )}
@@ -219,6 +224,7 @@ const Navbar = () => {
                     </a>
                   </Popover>
                 </div>
+                
                 <div>
                   <Popover
                     content={
