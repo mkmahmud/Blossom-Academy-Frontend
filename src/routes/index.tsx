@@ -27,6 +27,7 @@ import MyCourseDetails from "../pages/Dashboard/MyCourses/MyCourseDetails/MyCour
 import Terms from "../pages/Terms/Terms";
 import Privacy from "../pages/Privacy/Privacy";
 import Messenger from "../pages/Messenger/Messenger";
+import UserProfile from "../pages/Profile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <Privacy />,
+      },
+      {
+        path: "/p/:id",
+        element: <UserProfile />,
       },
       {
         path: "/live-courses",

@@ -34,6 +34,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+    // Get Single User Details by ID
+    getUserDetailsById: build.query({
+      query: (id) => ({
+        url: `/users/getSingleUserDetailsById/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
+    }),
     // Update User Details
     updateUserDetails: build.mutation({
       query: (data) => ({
@@ -52,4 +60,5 @@ export const {
   useGetUserDetailsQuery,
   useUpdateUserDetailsMutation,
   useGetAllUsersByRoleQuery,
+  useGetUserDetailsByIdQuery,
 } = authApi;

@@ -1,40 +1,107 @@
+// @ts-nocheck
 import { Input } from "antd";
 import UserCard from "../../components/Messenger/UserCard";
 import Font from "../../components/icons/Font";
 import user from "../../assets/user/dummy.png";
+import { io } from "socket.io-client";
+import { getUserInfo } from "../../services/authService";
+import { useEffect, useState } from "react";
+import { timeAgo } from "../../helpers/calculate/calculate";
+import { useMyContactQuery } from "../../redux/api/messenger/messengerAPI";
+import Empty from "../../components/Dashboard/Ui/Empty/Empty";
 
 const Messenger = () => {
+  // Get User Info
+  const userinfo = getUserInfo();
+
+  // Get My Contacts
+  const { data } = useMyContactQuery(userinfo?.userId);
+
+  // Set Selected Contact
+  const [selectedContact, setSelectedContact] = useState(null);
+
+  // Store Messages
+  const [messages, setMessages] = useState([]);
+
+  // Init Socket
+  const socket = io("http://localhost:5000", {
+    query: {
+      // @ts-ignore
+      userId: userinfo.userId,
+    },
+  });
+
+  // socket.on("engaged_user", (data) => {
+  //   console.log(data);
+  // });
+
+  socket.on("getMessages", (data) => {
+    setMessages(data);
+  });
+
+  socket.on("connect", () => {
+    console.log(socket.id);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(socket.id);
+  });
+
+  const handlesend = async (e: any) => {
+    e.preventDefault();
+    const message = e.target.message.value;
+
+    if (message !== "") {
+      socket.emit("chat message", {
+        // @ts-ignore
+        sender: userinfo.userId,
+        message,
+        reciver: selectedContact?.reciver,
+        status: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log(userinfo?.userId, selectedContact?.reciver);
+
+    if (userinfo?.userId && selectedContact?.reciver) {
+      socket.emit("getMessages", {
+        senderid: userinfo?.userId,
+        reciverId: selectedContact?.reciver,
+      });
+    }
+  }, [selectedContact]);
+
   return (
     <div className="mt-16 h-[90vh] overflow-hidden ">
       <div className="flex  w-full py-2 h-full">
-        <div className="w-4/12 bg-primaryHover  ">
+        <div className="w-4/12 bg-gray  ">
           <div className="p-2">
             <Input placeholder={`Search`} className="text-lg rounded-full" />
           </div>
           <div className="border-t-2 border-gray mt-4 overflow-y-scroll h-[90%] ">
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
-            <UserCard />
+            {data &&
+              data.map((user) => (
+                <div
+                  key={user?._id}
+                  onClick={() => {
+                    setSelectedContact(user);
+                  }}
+                >
+                  {" "}
+                  <UserCard data={user} />
+                </div>
+              ))}
           </div>
         </div>
-        <div className="w-6/12 bg-gray relative">
+        <div className="w-6/12 bg-  relative">
           <div className="p-2 bg-gray border-b-2 border-primary">
             <h2 className="text-xl font-bold">
-              Jhon Sina <span className="text-sm">(Teacher)</span>{" "}
+              {selectedContact ? selectedContact?.reciverName : "Name"}{" "}
+              <span className="text-sm">
+                {selectedContact ? selectedContact?.role : "Role"}
+              </span>{" "}
             </h2>
 
             <p>Last active 5m ago</p>
@@ -42,250 +109,89 @@ const Messenger = () => {
 
           {/* Messages */}
           <div className="  h-[80%] overflow-y-scroll   w-full  ">
-            <div className="flex items-end space-x-2 mt-4 ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
+            <div>
+              {messages.length > 0 &&
+                messages
+                  .slice()
+                  // @ts-ignore
+                  .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+                  .map((m) => (
+                    <div key={m._id}>
+                      <div
+                        className={`${
+                          // @ts-ignore
+                          m.sender === userinfo?.userId
+                            ? "justify-end mr-2"
+                            : "justify-start "
+                        } flex items-end space-x-2 mt-4`}
+                      >
+                        <div>
+                          {
+                            // @ts-ignore
+                            m.sender === userinfo?.userId ? (
+                              " "
+                            ) : (
+                              <img
+                                src={selectedContact?.reciverImg}
+                                alt=""
+                                className="h-14 w-14 rounded-full"
+                              />
+                            )
+                          }
+                        </div>
+                        <div>
+                          <div>
+                            <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
+                              {m.message}
+                            </h2>
+                            <p className="text-sm">{timeAgo(m.createdAt)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+              {messages.length === 0 && (
+                <div className="m-4">
+                  <Empty content="No Messages Found" />
                 </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end   mr-2">
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-l-lg rounded-tr-lg">
-                    This is massage form My side
-                  </h2>
-                  <p className="text-sm">4:39 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end   mr-2">
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-l-lg rounded-tr-lg">
-                    This is massage form My side
-                  </h2>
-                  <p className="text-sm">4:39 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end   mr-2">
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-l-lg rounded-tr-lg">
-                    This is massage form My side
-                  </h2>
-                  <p className="text-sm">4:39 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end   mr-2">
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-l-lg rounded-tr-lg">
-                    This is massage form My side
-                  </h2>
-                  <p className="text-sm">4:39 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2  ">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end   mr-2">
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-l-lg rounded-tr-lg">
-                    This is massage form My side
-                  </h2>
-                  <p className="text-sm">4:39 AM</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-end space-x-2 mt-10">
-              <div>
-                <img src={user} alt="" className="h-14 w-14 rounded-full" />
-              </div>
-              <div>
-                <div>
-                  <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                    This is massage form Sender
-                  </h2>
-                  <p className="text-sm">4:38 AM</p>
-                </div>
-              </div>
+              )}
             </div>
           </div>
 
           {/* Send Message */}
-          <div className="absolute bottom-4 py-2 px-6 flex space-x-2 w-full">
-            <Input
-              placeholder={`Type Message`}
-              className="text-lg rounded w-full"
-            />
+          <div className="absolute bottom-4 py-2 px-6 w-full">
+            <form onSubmit={handlesend} className="flex space-x-2 w-full">
+              <Input
+                placeholder={`Type Message`}
+                className="text-lg rounded w-full"
+                name="message"
+                id="messageInput"
+              />
 
-            <button className="bg-primary px-2 text-white">
-              <Font iconName="fa-paper-plane" />
-            </button>
+              <button type="submit" className="bg-primary px-2 text-white">
+                <Font iconName="fa-paper-plane" />
+              </button>
+            </form>
           </div>
         </div>
-        <div className="w-3/12 bg-primaryHover">
+        <div className="w-3/12 bg- ">
           <div className="mt-6 ">
             <img
-              src={user}
+              src={selectedContact ? selectedContact?.reciverImg : "Name"}
               className="h-[200px] w-[200px] border-2 border-primary block mx-auto"
               alt=""
             />
             <h2 className="text-large font-bold mt-2 text-center">
-              (Theacher)
+              {selectedContact ? selectedContact?.role : "Role"}
             </h2>
           </div>
 
           <div className="m-4">
             <p className="font-bold">UserName</p>
-            <h2 className="font-semibold ">Jhon Khobir</h2>
+            <h2 className="font-semibold ">
+              {selectedContact ? selectedContact?.reciverName : "Name"}
+            </h2>
 
             <p className="font-bold mt-4">Bio</p>
             <p>This will be Bio</p>
