@@ -1,1 +1,1 @@
- Live link https://blossom-academy.netlify.app/
+ Live link https://main.d7vx5erdb1w56.amplifyapp.com/

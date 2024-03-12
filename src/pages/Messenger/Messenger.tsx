@@ -59,7 +59,11 @@ const Messenger = () => {
         reciver: selectedContact?.reciver,
         status: true,
       });
+
+      e.target.message.value = ' '
     }
+     
+
   };
 
   useEffect(() => {
@@ -96,111 +100,127 @@ const Messenger = () => {
           </div>
         </div>
         <div className="w-6/12 bg-  relative">
-          <div className="p-2 bg-gray border-b-2 border-primary">
-            <h2 className="text-xl font-bold">
-              {selectedContact ? selectedContact?.reciverName : "Name"}{" "}
-              <span className="text-sm">
-                {selectedContact ? selectedContact?.role : "Role"}
-              </span>{" "}
-            </h2>
+          {selectedContact && (
+            <>
+              <div className="p-2 bg-gray border-b-2 border-primary">
+                <h2 className="text-xl font-bold">
+                  {selectedContact ? selectedContact?.reciverName : "Name"}{" "}
+                  <span className="text-sm">
+                    {selectedContact ? selectedContact?.role : "Role"}
+                  </span>{" "}
+                </h2>
 
-            <p>Last active 5m ago</p>
-          </div>
+                <p>Last active 5m ago</p>
+              </div>
 
-          {/* Messages */}
-          <div className="  h-[80%] overflow-y-scroll   w-full  ">
-            <div>
-              {messages.length > 0 &&
-                messages
-                  .slice()
-                  // @ts-ignore
-                  .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-                  .map((m) => (
-                    <div key={m._id}>
-                      <div
-                        className={`${
-                          // @ts-ignore
-                          m.sender === userinfo?.userId
-                            ? "justify-end mr-2"
-                            : "justify-start "
-                        } flex items-end space-x-2 mt-4`}
-                      >
-                        <div>
-                          {
-                            // @ts-ignore
-                            m.sender === userinfo?.userId ? (
-                              " "
-                            ) : (
-                              <img
-                                src={selectedContact?.reciverImg}
-                                alt=""
-                                className="h-14 w-14 rounded-full"
-                              />
-                            )
-                          }
-                        </div>
-                        <div>
-                          <div>
-                            <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
-                              {m.message}
-                            </h2>
-                            <p className="text-sm">{timeAgo(m.createdAt)}</p>
+              {/* Messages */}
+              <div className="  h-[80%] overflow-y-scroll   w-full  ">
+                <div>
+                  {messages.length > 0 &&
+                    messages
+                      .slice()
+                      // @ts-ignore
+                      .sort(
+                        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+                      )
+                      .map((m) => (
+                        <div key={m._id}>
+                          <div
+                            className={`${
+                              // @ts-ignore
+                              m.sender === userinfo?.userId
+                                ? "justify-end mr-2"
+                                : "justify-start "
+                            } flex items-end space-x-2 mt-4`}
+                          >
+                            <div>
+                              {
+                                // @ts-ignore
+                                m.sender === userinfo?.userId ? (
+                                  " "
+                                ) : (
+                                  <img
+                                    src={selectedContact?.reciverImg}
+                                    alt=""
+                                    className="h-14 w-14 rounded-full"
+                                  />
+                                )
+                              }
+                            </div>
+                            <div>
+                              <div>
+                                <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
+                                  {m.message}
+                                </h2>
+                                <p className="text-sm">
+                                  {timeAgo(m.createdAt)}
+                                </p>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      ))}
+
+                  {messages.length === 0 && (
+                    <div className="m-4">
+                      <Empty content="No Messages Found" />
                     </div>
-                  ))}
-
-              {messages.length === 0 && (
-                <div className="m-4">
-                  <Empty content="No Messages Found" />
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
+              </div>
 
-          {/* Send Message */}
-          <div className="absolute bottom-4 py-2 px-6 w-full">
-            <form onSubmit={handlesend} className="flex space-x-2 w-full">
-              <Input
-                placeholder={`Type Message`}
-                className="text-lg rounded w-full"
-                name="message"
-                id="messageInput"
-              />
+              {/* Send Message */}
+              <div className="absolute bottom-4 py-2 px-6 w-full">
+                <form onSubmit={handlesend} className="flex space-x-2 w-full">
+                  <Input
+                    placeholder={`Type Message`}
+                    className="text-lg rounded w-full"
+                    name="message"
+                    id="messageInput"
+                  />
 
-              <button type="submit" className="bg-primary px-2 text-white">
-                <Font iconName="fa-paper-plane" />
-              </button>
-            </form>
-          </div>
+                  <button type="submit" className="bg-primary px-2 text-white">
+                    <Font iconName="fa-paper-plane" />
+                  </button>
+                </form>
+              </div>
+            </>
+          )}
+
+          {
+            !selectedContact && <h2 className="text-extraLarge text-primary text-center font-semibold mt-20">Select a User to start conversation! </h2>
+          }
         </div>
         <div className="w-3/12 bg- ">
-          <div className="mt-6 ">
-            <img
-              src={selectedContact ? selectedContact?.reciverImg : "Name"}
-              className="h-[200px] w-[200px] border-2 border-primary block mx-auto"
-              alt=""
-            />
-            <h2 className="text-large font-bold mt-2 text-center">
-              {selectedContact ? selectedContact?.role : "Role"}
-            </h2>
-          </div>
+          {selectedContact && (
+            <>
+              <div className="mt-6 ">
+                <img
+                  src={selectedContact ? selectedContact?.reciverImg : "Name"}
+                  className="h-[200px] w-[200px] border-2 border-primary block mx-auto"
+                  alt=""
+                />
+                <h2 className="text-large font-bold mt-2 text-center">
+                  {selectedContact ? selectedContact?.role : "Role"}
+                </h2>
+              </div>
 
-          <div className="m-4">
-            <p className="font-bold">UserName</p>
-            <h2 className="font-semibold ">
-              {selectedContact ? selectedContact?.reciverName : "Name"}
-            </h2>
+              <div className="m-4">
+                <p className="font-bold">UserName</p>
+                <h2 className="font-semibold ">
+                  {selectedContact ? selectedContact?.reciverName : "Name"}
+                </h2>
 
-            <p className="font-bold mt-4">Bio</p>
-            <p>This will be Bio</p>
-          </div>
-          <div className="m-4">
-            <p className="cursor-pointer mt-2">Block User</p>
-            <p className="cursor-pointer mt-2">Clear Chat</p>
-            <p className="cursor-pointer mt-2">Delete Conversation</p>
-          </div>
+                <p className="font-bold mt-4">Bio</p>
+                <p>This will be Bio</p>
+              </div>
+              <div className="m-4">
+                <p className="cursor-pointer mt-2">Block User</p>
+                <p className="cursor-pointer mt-2">Clear Chat</p>
+                <p className="cursor-pointer mt-2">Delete Conversation</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

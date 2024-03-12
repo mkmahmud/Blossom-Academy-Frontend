@@ -1,17 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import CustomButton from "../../../components/Buttons/CustomButton";
 import CustomInput from "../../../components/Dashboard/Ui/Input/CustomInput";
 import Toggle from "../../../components/Dashboard/Ui/Toggle/Toggle";
-import { Select, message } from "antd";
-import { Option } from "antd/es/mentions";
+import { message } from "antd";
+
 import { getUserInfo } from "../../../services/authService";
 import { useCreateNotificationsMutation } from "../../../redux/api/notification/notification";
 
 const Notifications = () => {
   // User Information
-  const user = getUserInfo();
-  //   User Role
-  const role = (user as { role: string }).role;
+  const user = getUserInfo(); 
 
   // INput Types
   interface Inputs {
@@ -24,8 +22,8 @@ const Notifications = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
-    reset,
+    formState: { errors }, 
+
   } = useForm<Inputs>();
 
   // Create Notification using Redux

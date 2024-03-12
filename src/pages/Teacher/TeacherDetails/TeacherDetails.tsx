@@ -6,17 +6,18 @@ import MainTag from "../../../components/Ui/Tag/MainTag";
 import { useParams } from "react-router-dom";
 import { useGetSingleTeachersQuery } from "../../../redux/api/users/teachers/teachersApi";
 import { Key } from "react";
+import Loading from "../../../components/Ui/Loading/Loading";
 
 const TeacherDetails = () => {
   const { id } = useParams();
 
   // Get Teacher Details
-  const { data } = useGetSingleTeachersQuery(id);
+  const { data, isLoading } = useGetSingleTeachersQuery(id);
 
   return (
     <div>
       <div className="mt-20"></div>
-
+      {isLoading && <Loading />}
       {data && (
         <div>
           <div className="h-[200px]     md:flex  justify-between items-center pl-6 my-4 overflow-hidden">

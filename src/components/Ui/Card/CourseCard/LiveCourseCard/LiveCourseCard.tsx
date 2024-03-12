@@ -3,15 +3,25 @@ import { useAddStudentIntoBatchMutation } from "../../../../../redux/api/batch/b
 import { getUserInfo } from "../../../../../services/authService";
 import Font from "../../../../icons/Font";
 import CustomButton from "../../../../Buttons/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 const LiveCourseCard = ({ data }: any) => {
   const { _id, thambnail, title, studentsId, session, startTime } = data;
-  //   User
+  //   User info
   const user = getUserInfo();
+  
+  // Navigate
+  const navigate = useNavigate();
 
+  // add student into batch
   const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
 
   const addStudent = async () => {
+    if (!user) {
+      navigate("/auth");
+      return
+    }
+
     //   Add student Data
     const addStudentData = {
       //@ts-ignore

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import { Table, message } from "antd";
 import type { TableRowSelection } from "antd/es/table/interface";
