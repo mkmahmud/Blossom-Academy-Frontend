@@ -49,7 +49,7 @@ const Checkout = () => {
 
   const onSubmit = async (data: Inputs) => {
     // @ts-expect-error
-    const tranId = generateTransactionId(user.userId, 3333);
+    const tranId = generateTransactionId(user.userId, 45);
     const initData = {
       // @ts-expect-error
       userId: user.userId,
@@ -57,15 +57,17 @@ const Checkout = () => {
       phone: data.phoneNumber,
       address: data.address,
       zipCode: data.zipCode,
-      amount: 3333,
-      currency: "BDT",
-      method: "SSL",
+      courseName:  batchData?.data?.title,
+      amount: 45,
+      currency: "USD",
+      method: "Stripe",
       status: false,
       tranID: tranId,
       courseId: id,
       // @ts-expect-error
       email: user._id,
     };
+
     const response = await initPayment(initData);
 
     if (response) {
@@ -150,8 +152,8 @@ const Checkout = () => {
                 <strong>Start Time:</strong> {batchData?.data?.session}
               </h3>
               <h2 className="my-2 text-primary font-bold">
-                <span>৳</span>
-                <span className="text-extraLarge">3333</span>
+                <span>$</span>
+                <span className="text-extraLarge">45</span>
               </h2>
             </div>
             <h2 className="font-semibold my-4">Benefits</h2>

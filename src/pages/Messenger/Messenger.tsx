@@ -24,7 +24,7 @@ const Messenger = () => {
   const [messages, setMessages] = useState([]);
 
   // Init Socket
-  const socket = io("https://blossom-backend.vercel.app", {
+  const socket = io("http://localhost:5000", {
     query: {
       // @ts-ignore
       userId: userinfo.userId,

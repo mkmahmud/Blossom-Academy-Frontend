@@ -83,7 +83,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/courses/checkout/success",
+        path: "/courses/checkout/success/:id/:tranID",
         element: (
           <ProtectedRoute>
             <SuccessPayment />

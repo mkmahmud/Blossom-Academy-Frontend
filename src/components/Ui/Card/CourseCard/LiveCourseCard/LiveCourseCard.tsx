@@ -9,35 +9,39 @@ const LiveCourseCard = ({ data }: any) => {
   const { _id, thambnail, title, studentsId, session, startTime } = data;
   //   User info
   const user = getUserInfo();
-  
+ 
   // Navigate
   const navigate = useNavigate();
 
   // add student into batch
-  const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
+  // const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
 
   const addStudent = async () => {
     if (!user) {
       navigate("/auth");
-      return
+      return;
     }
 
-    //   Add student Data
-    const addStudentData = {
-      //@ts-ignore
-      studentId: user?._id,
-      batchId: _id,
-    };
+    navigate(`/courses/checkout/${_id}`);
 
-    const res = await addStudentIntoBatch(addStudentData).unwrap();
+    // //   Add student Data
+    // const addStudentData = {
+    //   //@ts-ignore
+    //   studentId: user?._id,
+    //   batchId: _id,
+    // };
 
-    if (res?._id) {
-      message.success("Student added successfully");
-    }
+    // console.log(addStudentData);
 
-    if (res === "student already exists") {
-      message.error("student already exists");
-    }
+    // const res = await addStudentIntoBatch(addStudentData).unwrap();
+
+    // if (res?._id) {
+    //   message.success("Student added successfully");
+    // }
+
+    // if (res === "student already exists") {
+    //   message.error("student already exists");
+    // }
   };
 
   return (
