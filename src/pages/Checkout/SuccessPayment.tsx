@@ -1,19 +1,22 @@
-import { useParams } from "react-router-dom";
-import MainButton from "../../components/Buttons/MainButton";
+import { useNavigate, useParams } from "react-router-dom";
 import Font from "../../components/icons/Font";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useValidateAndUpdateMutation } from "../../redux/api/Payments/paymentsAPI";
 import Loading from "../../components/Ui/Loading/Loading";
 import { useAddStudentIntoBatchMutation } from "../../redux/api/batch/batchAPI";
 import { message } from "antd";
 import { getUserInfo } from "../../services/authService";
+import CustomButton from "../../components/Buttons/CustomButton";
 
 const SuccessPayment = () => {
   //  Payment status
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(true);
 
   // Get User Id
   const { id, tranID } = useParams();
+
+  //
+  const navigate = useNavigate();
 
   //   User info
   const user = getUserInfo();
@@ -23,41 +26,38 @@ const SuccessPayment = () => {
   // Add Student After successful payment
   const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await validateAndUpdate({ id, tranID });
+  const handleSuccess = async () => {
+    const res = await validateAndUpdate({ id, tranID });
+
+    // @ts-ignore
+    if (res?.data?.message === "Payment Success") {
+      setStatus(true);
+      // Add Student Into Batch After Successful Payment
+
+      const addStudentResponse = await addStudentIntoBatch({
+        //@ts-ignore
+        studentId: user?._id,
         // @ts-ignore
-        if (res?.data?.message === "Invalid payment") {
-          setStatus(false);
-          // @ts-ignore
-        } else if (res?.data?.message === "Payment Success") {
-          setStatus(true);
-          // Add Student Into Batch After Successful Payment
-          const data = {
-            //@ts-ignore
-            studentId: user?._id,
-            // @ts-ignore
-            batchId: res?.data?.batchId,
-          };
+        batchId: res?.data?.batchId,
+      }).unwrap();
 
-          const addStudentResponse = await addStudentIntoBatch(data).unwrap();
-
-          if (addStudentResponse?._id) {
-            message.success("Student added successfully");
-          }
-
-          if (addStudentResponse === "student already exists") {
-            message.error("student already exists");
-          }
-        }
-      } catch (error) {
-        console.error("Error:", error);
+      if (addStudentResponse?._id) {
+        message.success("Enrolled successfull");
+        // @ts-ignore
+        navigate(`/dashboard/my-courses/${res?.data?.batchId}`);
       }
-    };
 
-    fetchData();
-  }, [id, tranID]);
+      if (addStudentResponse === "student already exists") {
+        message.error("You Already exists On this Batch");
+      }
+    }
+
+    // @ts-ignore
+    if (res?.data?.message === "Invalid payment") {
+      setStatus(false);
+      // @ts-ignore
+    }
+  };
 
   return (
     <div className="pt-20 relative h-screen">
@@ -75,12 +75,8 @@ const SuccessPayment = () => {
               </h2>
               <p className="my-2">You have successfylly purched our course</p>
             </div>
-            <div className="flex justify-center">
-              <MainButton
-                path="/dashboard"
-                icon="fa-plane"
-                content="Go Profile"
-              />
+            <div className="flex justify-center" onClick={handleSuccess}>
+              <CustomButton icon="fa-plane" content="Confirm Enroll" />
             </div>
           </div>
         </div>

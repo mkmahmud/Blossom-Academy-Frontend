@@ -13,6 +13,7 @@ const MyCourses = () => {
   //   Get enrolled batch details
   //@ts-ignore
   const { data } = useGetStudentEnrolledBatchQuery(user?._id);
+  
   return (
     <div>
       {/* Select Course */}

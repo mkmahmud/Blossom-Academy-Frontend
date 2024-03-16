@@ -1,47 +1,32 @@
-import { message } from "antd";
-import { useAddStudentIntoBatchMutation } from "../../../../../redux/api/batch/batchAPI";
+import { useGetStudentEnrolledBatchQuery } from "../../../../../redux/api/batch/batchAPI";
 import { getUserInfo } from "../../../../../services/authService";
 import Font from "../../../../icons/Font";
 import CustomButton from "../../../../Buttons/CustomButton";
 import { useNavigate } from "react-router-dom";
+import MainButton from "../../../../Buttons/MainButton";
 
 const LiveCourseCard = ({ data }: any) => {
   const { _id, thambnail, title, studentsId, session, startTime } = data;
   //   User info
   const user = getUserInfo();
- 
+
   // Navigate
   const navigate = useNavigate();
 
-  // add student into batch
-  // const [addStudentIntoBatch] = useAddStudentIntoBatchMutation();
+  //   Get enrolled batch details
+  //@ts-ignore
+  const { data: batchData } = useGetStudentEnrolledBatchQuery(user?._id);
 
-  const addStudent = async () => {
+  const isEnrolled =
+    batchData && batchData.some((item: { _id: any }) => item._id === _id);
+
+  const addStudent = async (path: string) => {
     if (!user) {
       navigate("/auth");
       return;
     }
 
-    navigate(`/courses/checkout/${_id}`);
-
-    // //   Add student Data
-    // const addStudentData = {
-    //   //@ts-ignore
-    //   studentId: user?._id,
-    //   batchId: _id,
-    // };
-
-    // console.log(addStudentData);
-
-    // const res = await addStudentIntoBatch(addStudentData).unwrap();
-
-    // if (res?._id) {
-    //   message.success("Student added successfully");
-    // }
-
-    // if (res === "student already exists") {
-    //   message.error("student already exists");
-    // }
+    navigate(path ? path : `/courses/checkout/${_id}`);
   };
 
   return (
@@ -70,14 +55,30 @@ const LiveCourseCard = ({ data }: any) => {
           <span className="text-primary font-semibold ">{session}</span>
         </h2>
       </div>
-      <div className="mx-2" onClick={addStudent}>
-        {/* <MainButton
-          path={`/courses/checkout/${_id}`}
-          content="Enroll"
-          icon="fa-plus"
-        /> */}
-
-        <CustomButton type="button" content="Enroll" icon="fa-plus" />
+      <div
+        className="mx-2"
+        onClick={() => {
+          addStudent(`/dashboard/my-courses/${_id}`);
+        }}
+      >
+        {isEnrolled && (
+          <div className="  w-[200px] mt-4">
+            <MainButton
+              path={`/dashboard/my-courses/${_id}`}
+              content="Continue Course"
+              icon="fa-arrow-right"
+            />
+          </div>
+        )}
+      </div>
+      <div
+        onClick={() => {
+          addStudent("");
+        }}
+      >
+        {!isEnrolled && (
+          <CustomButton type="button" content="Enroll" icon="fa-plus" />
+        )}
       </div>
     </div>
   );
