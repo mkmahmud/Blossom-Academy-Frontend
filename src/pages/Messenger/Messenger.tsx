@@ -7,7 +7,11 @@ import { io } from "socket.io-client";
 import { getUserInfo } from "../../services/authService";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../../helpers/calculate/calculate";
-import { useMyContactQuery } from "../../redux/api/messenger/messengerAPI";
+import {
+  useGetMessagesQuery,
+  useInsertMessageMutation,
+  useMyContactQuery,
+} from "../../redux/api/messenger/messengerAPI";
 import Empty from "../../components/Dashboard/Ui/Empty/Empty";
 
 const Messenger = () => {
@@ -23,36 +27,18 @@ const Messenger = () => {
   // Store Messages
   const [messages, setMessages] = useState([]);
 
-  // Init Socket
-  const socket = io("http://localhost:5000", {
-    query: {
-      // @ts-ignore
-      userId: userinfo.userId,
-    }, 
-  });
+  // Insert Message
+  const [insertMessage] = useInsertMessageMutation();
 
-  // socket.on("engaged_user", (data) => {
-  //   console.log(data);
-  // });
-
-  socket.on("getMessages", (data) => {
-    setMessages(data);
-  });
-
-  socket.on("connect", () => {
-    console.log(socket.id);
-  });
-
-  socket.on("disconnect", () => {
-    console.log(socket.id);
-  });
+  const [inputValue, setInputValue] = useState("");  
 
   const handlesend = async (e: any) => {
     e.preventDefault();
     const message = e.target.message.value;
 
-    if (message !== "") {
-      socket.emit("chat message", {
+    if (message.trim() !== "") {
+      // Trim whitespace from the message
+      await insertMessage({
         // @ts-ignore
         sender: userinfo.userId,
         message,
@@ -60,22 +46,21 @@ const Messenger = () => {
         status: true,
       });
 
-      e.target.message.value = ' '
+      // Clear the input field after sending the message
+      setInputValue("");
     }
-     
-
   };
+  const { data: getAllMessages } = useGetMessagesQuery(
+    {
+      sender: userinfo?.userId,
+      reciver: selectedContact?.reciver,
+    },
+    { pollingInterval: 1000 }
+  );
 
   useEffect(() => {
-    console.log(userinfo?.userId, selectedContact?.reciver);
-
-    if (userinfo?.userId && selectedContact?.reciver) {
-      socket.emit("getMessages", {
-        senderid: userinfo?.userId,
-        reciverId: selectedContact?.reciver,
-      });
-    }
-  }, [selectedContact]);
+    setMessages(getAllMessages);
+  }, [getAllMessages]);
 
   return (
     <div className="mt-16 h-[90vh] overflow-hidden ">
@@ -177,8 +162,9 @@ const Messenger = () => {
                     className="text-lg rounded w-full"
                     name="message"
                     id="messageInput"
+                    value={inputValue} // Set value from state
+                    onChange={(e) => setInputValue(e.target.value)} // Update state on change
                   />
-
                   <button type="submit" className="bg-primary px-2 text-white">
                     <Font iconName="fa-paper-plane" />
                   </button>
@@ -187,9 +173,11 @@ const Messenger = () => {
             </>
           )}
 
-          {
-            !selectedContact && <h2 className="text-extraLarge text-primary text-center font-semibold mt-20">Select a User to start conversation! </h2>
-          }
+          {!selectedContact && (
+            <h2 className="text-extraLarge text-primary text-center font-semibold mt-20">
+              Select a User to start conversation!{" "}
+            </h2>
+          )}
         </div>
         <div className="w-3/12 bg- ">
           {selectedContact && (

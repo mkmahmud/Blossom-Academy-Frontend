@@ -11,6 +11,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["messenger"],
     }),
+    // Insert Message
+    insertMessage: build.mutation({
+      query: (data) => ({
+        url: `/messenger/message`,
+        method: "POST",
+        data: data,
+      }),
+      invalidatesTags: ["messenger"],
+    }),
 
     // Get My contact
     myContact: build.query({
@@ -20,7 +29,21 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["messenger"],
     }),
+    // Get Messages
+
+    getMessages: build.query({
+      query: (data) => ({
+        url: `/messenger/get-all-messages?sender=${data.sender}&reciver=${data.reciver}`,
+        method: "GET",
+      }),
+      providesTags: ["messenger"],
+    }),
   }),
 });
 
-export const { useAddUserIntoContactMutation, useMyContactQuery } = authApi;
+export const {
+  useAddUserIntoContactMutation,
+  useMyContactQuery,
+  useGetMessagesQuery,
+  useInsertMessageMutation,
+} = authApi;
