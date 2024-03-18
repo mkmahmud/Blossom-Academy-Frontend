@@ -30,7 +30,7 @@ const Messenger = () => {
   // Insert Message
   const [insertMessage] = useInsertMessageMutation();
 
-  const [inputValue, setInputValue] = useState("");  
+  const [inputValue, setInputValue] = useState("");
 
   const handlesend = async (e: any) => {
     e.preventDefault();
@@ -134,7 +134,13 @@ const Messenger = () => {
                             </div>
                             <div>
                               <div>
-                                <h2 className="bg-primaryHover p-2 rounded-r-lg rounded-tl-lg">
+                                <h2
+                                  className={`${
+                                    m.sender === userinfo?.userId
+                                      ? "bg-primaryHover "
+                                      : "bg-primary text-white"
+                                  }  p-2 rounded-r-lg rounded-tl-lg`}
+                                >
                                   {m.message}
                                 </h2>
                                 <p className="text-sm">
