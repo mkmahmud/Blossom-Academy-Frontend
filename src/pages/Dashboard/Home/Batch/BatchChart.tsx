@@ -47,12 +47,12 @@ const BatchChart = () => {
     <div className="mt-6 p-2 border-2 border-gray">
       <h2 className="font-bold text-xl text-primary py-2">Batch</h2>
       <div className="md:flex justify-between">
-        <div className="h-[400px] w-full md:w-1/2">
+        <div className="h-[300px] w-full md:w-1/2">
           <Doughnut data={data} />
         </div>
         <div className="w-full md:w-1/2">
           <p className="my-4">Active Batch</p>
-          <div className="h-[300px] overflow-y-scroll">
+          <div className="h-[200px] overflow-y-scroll">
             {batches &&
               batches.map((batch: any) => (
                 <div

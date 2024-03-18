@@ -45,3 +45,14 @@ export const timeAndDate = (timestamp: string | number | Date) => {
 
   return { formattedDate, formattedTime };
 };
+
+// Convert number to spliting
+export const numberToSplitting = (number: number) => {
+  const numberString = number.toString();
+  const parts = [];
+  for (let i = numberString.length - 3; i > 0; i -= 3) {
+    parts.unshift(numberString.slice(i, i + 3));
+  }
+  parts.unshift(numberString.slice(0, numberString.length % 3 || 3));
+  return parts.join(",");
+};
