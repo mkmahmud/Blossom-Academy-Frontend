@@ -18,3 +18,30 @@ export const timeAgo = (timestamp: string): string => {
     return `${seconds} ${seconds === 1 ? "second" : "seconds"} ago`;
   }
 };
+
+// Conver timestamp to time and date
+export const timeAndDate = (timestamp: string | number | Date) => {
+  const dateObject = new Date(timestamp);
+
+  // Date Options
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  // Time Options
+  const timeOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+
+  // @ts-ignore
+  const formattedDate = dateObject.toLocaleDateString("en-GB", options);
+
+  // @ts-ignore
+  const formattedTime = dateObject.toLocaleTimeString("en-US", timeOptions);
+
+  return { formattedDate, formattedTime };
+};

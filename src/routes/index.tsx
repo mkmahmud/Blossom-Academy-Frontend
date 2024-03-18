@@ -28,6 +28,7 @@ import Terms from "../pages/Terms/Terms";
 import Privacy from "../pages/Privacy/Privacy";
 import Messenger from "../pages/Messenger/Messenger";
 import UserProfile from "../pages/Profile/UserProfile";
+import Orders from "../pages/Dashboard/Orders/Orders";
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/my-courses/:id",
         element: <MyCourseDetails />,
+      },
+      {
+        path: "/dashboard/orders",
+        element: <Orders />,
       },
 
       {

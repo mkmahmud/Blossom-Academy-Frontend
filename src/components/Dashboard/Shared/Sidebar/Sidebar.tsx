@@ -155,7 +155,7 @@ const Sidebar = () => {
                         : "border-white"
                     }`}
                   >
-                    <Font iconName="fa-first-order" />{" "}
+                    <Font iconName="fa-tag" />{" "}
                     <span className="ml-4">Orders</span>
                   </li>
                 </Link>
@@ -256,7 +256,7 @@ const Sidebar = () => {
                         : "border-white"
                     }`}
                   >
-                    <Font iconName="fa-first-order" />{" "}
+                    <Font iconName="fa-tag" />{" "}
                     <span className="ml-4">Orders</span>
                   </li>
                 </Link>
