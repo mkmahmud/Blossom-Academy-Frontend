@@ -14,14 +14,11 @@ const Courses = () => {
       <div className="px-2  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ">
         <CourseCard />
         <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
+        <CourseCard /> 
       </div>
       <div className="w-full flex justify-center my-10">
         <MainButton
-          path="/"
+          path="/course-details"
           icon="fa-magnifying-glass-arrow-right"
           content="Find All Courses"
         />

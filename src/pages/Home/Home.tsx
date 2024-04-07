@@ -23,6 +23,11 @@ const Home = () => {
     dispatch(addUserDetails(data));
   }, [user]);
 
+  // Scroll to top of page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Hero />

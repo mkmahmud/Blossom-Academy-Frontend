@@ -6,6 +6,7 @@ import CustomButton from "../../../Buttons/CustomButton";
 import { useForm } from "react-hook-form";
 import CustomInput from "../Input/CustomInput";
 import { useCreateMultipleNotificationsMutation } from "../../../../redux/api/notification/notification";
+import { getUserInfo } from "../../../../services/authService";
 
 interface DataType {
   key: React.ReactNode;
@@ -16,6 +17,9 @@ interface DataType {
 }
 
 const MyTable = ({ columns, data, pageSize }: any) => {
+  // User
+  const userInfo = getUserInfo();
+
   // States for Selected
   const [notificationStatus, setNotificationStatus] = useState(false);
   const [selecteId, setSelectedId] = useState([]);
@@ -70,49 +74,53 @@ const MyTable = ({ columns, data, pageSize }: any) => {
     }
   };
 
+  
+
   return (
     <>
-      <div>
-        {selecteId.length > 0 && (
-          <div>
-            <div className="flex justify-end my-4">
-              <div
-                onClick={() => {
-                  setNotificationStatus(!notificationStatus);
-                }}
-              >
-                <CustomButton type="button" content="Send Notification" />
-              </div>
-            </div>
-            {notificationStatus && (
-              <div>
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="grid grid-cols-3 space-x-2 items-center "
+      {userInfo.role === "management" && (
+        <div>
+          {selecteId.length > 0 && (
+            <div>
+              <div className="flex justify-end my-4">
+                <div
+                  onClick={() => {
+                    setNotificationStatus(!notificationStatus);
+                  }}
                 >
-                  <CustomInput
-                    name="content"
-                    placeholder="Content  "
-                    errors={errors}
-                    control={control}
-                  />
-
-                  <CustomInput
-                    name="link"
-                    placeholder="Path"
-                    errors={errors}
-                    control={control}
-                  />
-
-                  <div>
-                    <CustomButton type="submit" content="Send" />
-                  </div>
-                </form>
+                  <CustomButton type="button" content="Send Notification" />
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+              {notificationStatus && (
+                <div>
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="grid grid-cols-3 space-x-2 items-center "
+                  >
+                    <CustomInput
+                      name="content"
+                      placeholder="Content  "
+                      errors={errors}
+                      control={control}
+                    />
+
+                    <CustomInput
+                      name="link"
+                      placeholder="Path"
+                      errors={errors}
+                      control={control}
+                    />
+
+                    <div>
+                      <CustomButton type="submit" content="Send" />
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
       <Table
         columns={columns}
         rowSelection={{ ...rowSelection, checkStrictly }}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/black-logo.png";
+import logo1 from "../../../assets/logo/logo.png";
 import Font from "../../icons/Font";
 import { Input, message } from "antd";
 import CustomButton from "../../Buttons/CustomButton";
@@ -23,7 +24,10 @@ const Footer = () => {
     <div>
       <div className=" border-t-2 border-primaryHover px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
         <div className="my-6 leading-8">
-          <img src={logo} alt="" />
+          <div className="flex space-x-2">
+            <img src={logo1} className="h-[30px] rotate-90" alt="" />
+            <img src={logo} alt="" />
+          </div>
           <p>
             <span>Call Us</span> <br />
             <span>800 388 80 90or667 234 32 67</span>

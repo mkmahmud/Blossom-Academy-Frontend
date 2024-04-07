@@ -7,6 +7,7 @@ import { ColumnsType } from "antd/es/table";
 import { useGetAllOrdersQuery } from "../../../redux/api/Payments/paymentsAPI";
 import MyTable from "../../../components/Dashboard/Ui/Table/Table";
 import { timeAndDate } from "../../../helpers/calculate/calculate";
+import logo from "../../../assets/images/shape/1.png";
 
 const Orders = () => {
   interface DataType {
@@ -190,7 +191,13 @@ const Orders = () => {
         width={600}
         key={"left"}
       >
-        <div>
+        <div className="relative">
+          <img
+            src={logo}
+            alt="logo"
+            className=" h-[400px] absolute opacity-25  -rotate-45 top-[100px] left-[50px]"
+          />
+
           <h2 className="text-center text-extraLarge text-primary font-bold">
             Invoice
           </h2>

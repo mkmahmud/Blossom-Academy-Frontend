@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import image1 from "../../../../assets/images/courses/1.jpg";
 import Font from "../../../icons/Font";
 
 const CourseCard = () => {
   return (
     <div className="my-2 mx-auto max-w-[400px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white ">
-      <div className="">
+      <Link to="/course-details" className="">
         <div className="h-[300px] bg-primary overflow-hidden">
           <img
             src={image1}
@@ -29,7 +30,7 @@ const CourseCard = () => {
             <h2 className="text-primary">$57.98</h2>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

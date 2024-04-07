@@ -1,9 +1,17 @@
 import img from "../../../assets/images/shape/share.png";
 import CustomButton from "../../../components/Buttons/CustomButton";
 import Font from "../../../components/icons/Font";
+import shape2 from "../../../assets/images/shape/3.png";
+
 const Mentor = () => {
   return (
-    <div className="md:flex space-x-4 justify-center items-center my-20 bg-gray py-10">
+    <div className="md:flex space-x-4 justify-center items-center my-20 bg-gray py-10 relative overflow-hidden">
+      <img
+        src={shape2}
+        className="absolute  rotate-180 -left-[50px] -bottom-[50px]"
+        alt=""
+      />
+
       <div className="w-full md:w-1/2">
         <img src={img} alt="" />
       </div>

@@ -51,6 +51,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
+    // Update User Details
+    getUserGroth: build.query({
+      query: () => ({
+        url: `/users/user-growth`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
+    }),
   }),
 });
 
@@ -61,4 +69,5 @@ export const {
   useUpdateUserDetailsMutation,
   useGetAllUsersByRoleQuery,
   useGetUserDetailsByIdQuery,
+  useGetUserGrothQuery,
 } = authApi;

@@ -10,7 +10,15 @@ export const newslatterAPI = baseApi.injectEndpoints({
         data: data,
       }),
     }),
+    // Get Newslatter EMail
+    getNewslatterEmail: build.query({
+      query: () => ({
+        url: `/newslatter`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useInsertNewslatterEmailMutation } = newslatterAPI;
+export const { useInsertNewslatterEmailMutation, useGetNewslatterEmailQuery } =
+  newslatterAPI;

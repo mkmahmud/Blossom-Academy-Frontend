@@ -14,7 +14,7 @@ const Events = () => {
               <br />
               <span className="text-primary"> Upcoming Events</span>
             </h2>
-            <MainButton path="/" content="ALL EVENTS" icon="fa-calendar" />
+            <MainButton path="/events" content="ALL EVENTS" icon="fa-calendar" />
           </div>
           <div className="mt-20">
             <img src={user} className="mx-auto" alt="" />

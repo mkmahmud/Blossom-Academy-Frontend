@@ -4,7 +4,7 @@ const CustomButton = ({ type, content, icon }: any) => {
   return (
     <button
       type={type ? type : "button"}
-      className="w-full group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-4 text-base text-white font-semibold  rounded-full"
+      className="w-full group overflow-hidden flex justify-center items-center relative   bg-primary px-6 py-2 text-base text-white font-semibold  rounded-full"
     >
       <span>{content}</span>{" "}
       <span className="ml-4">{icon && <Font iconName={icon}></Font>}</span>

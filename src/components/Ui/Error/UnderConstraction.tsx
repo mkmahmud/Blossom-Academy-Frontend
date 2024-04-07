@@ -9,7 +9,7 @@ const UnderConstraction = () => {
       <h2 className="text-extraLargeXL text-primary font-bold my-10">
         <Font iconName="fa-screwdriver-wrench animate-bounce" />
       </h2>
-      <p>We are working on it. We back soon</p>
+      <p>We are working on it. We will back soon</p>
     </div>
   );
 };

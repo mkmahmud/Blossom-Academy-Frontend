@@ -29,6 +29,12 @@ import Privacy from "../pages/Privacy/Privacy";
 import Messenger from "../pages/Messenger/Messenger";
 import UserProfile from "../pages/Profile/UserProfile";
 import Orders from "../pages/Dashboard/Orders/Orders";
+import ClassRoom from "../pages/Dashboard/ClassRoom/ClassRoom";
+import Newslatter from "../pages/Dashboard/NewsLatter/Newslatter";
+import Management from "../pages/Dashboard/Management/Management";
+import Security from "../pages/Dashboard/Security/Security";
+import Events from "../pages/Events/Events";
+import CourseDetails from "../pages/CourseDetails/CourseDetails";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: "/faq",
         element: <Faq />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
+      },
+      {
+        path: "/course-details",
+        element: <CourseDetails />,
       },
       {
         path: "/terms",
@@ -124,6 +138,10 @@ const router = createBrowserRouter([
         element: <Notifications />,
       },
       {
+        path: "/dashboard/newslatter",
+        element: <Newslatter />,
+      },
+      {
         path: "/dashboard/users",
         element: <Users />,
       },
@@ -148,8 +166,21 @@ const router = createBrowserRouter([
         element: <MyCourseDetails />,
       },
       {
+        path: "/dashboard/class-room",
+        element: <ClassRoom />,
+      },
+      {
         path: "/dashboard/orders",
         element: <Orders />,
+      },
+      {
+        path: "/dashboard/management",
+        element: <Management />,
+      },
+
+      {
+        path: "/dashboard/security",
+        element: <Security />,
       },
 
       {

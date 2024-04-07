@@ -1,11 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetBatchQuery } from "../../../../redux/api/batch/batchAPI";
-import CustomButton from "../../../../components/Buttons/CustomButton";
-import { ColumnsType } from "antd/es/table";
+ import { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 import MyTable from "../../../../components/Dashboard/Ui/Table/Table";
-
-
+import MainButton from "../../../../components/Buttons/MainButton";
 
 const MyCourseDetails = () => {
   // Get Batch Id
@@ -47,9 +45,7 @@ const MyCourseDetails = () => {
       title: "Full Name",
       dataIndex: "fullName",
       key: "fullName",
-      render: (text, record) => (
-        <Link to={`/p/${record.userId}`}>{text}</Link>
-      ),
+      render: (text, record) => <Link to={`/p/${record.userId}`}>{text}</Link>,
     },
     {
       title: "User Id",
@@ -75,7 +71,7 @@ const MyCourseDetails = () => {
       });
     });
   }
- 
+
   // Teachers Data
   let teachersData: { key: any; userId: any; fullName: any; email: any }[] = [];
 
@@ -131,7 +127,11 @@ const MyCourseDetails = () => {
             Start Time: <span className="font-semibold">{data?.session}</span>
           </h2>
           <div>
-            <CustomButton type="button" content="Join The Class" />
+            <MainButton
+              path="/dashboard/class-room"
+              type="button"
+              content="Join The Class"
+            />
           </div>
         </div>
       </div>

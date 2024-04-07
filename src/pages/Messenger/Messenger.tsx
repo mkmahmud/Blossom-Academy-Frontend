@@ -5,7 +5,7 @@ import Font from "../../components/icons/Font";
 import user from "../../assets/user/dummy.png";
 import { io } from "socket.io-client";
 import { getUserInfo } from "../../services/authService";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { timeAgo } from "../../helpers/calculate/calculate";
 import {
   useGetMessagesQuery,
@@ -62,8 +62,14 @@ const Messenger = () => {
     setMessages(getAllMessages);
   }, [getAllMessages]);
 
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
-    <div className="mt-16 h-[90vh] overflow-hidden ">
+    <div className="mt-16 h-[100vh] overflow-hidden ">
       <div className="flex  w-full py-2 h-full">
         <div className="w-4/12 bg-gray  ">
           <div className="p-2">
@@ -158,6 +164,7 @@ const Messenger = () => {
                     </div>
                   )}
                 </div>
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Send Message */}

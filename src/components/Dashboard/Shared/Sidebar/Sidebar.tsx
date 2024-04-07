@@ -171,6 +171,18 @@ const Sidebar = () => {
                     <span className="ml-4">Notifications</span>
                   </li>
                 </Link>
+                <Link to={`${urlPath}/newslatter`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/newslatter`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-first-order" />{" "}
+                    <span className="ml-4">Newslatter</span>
+                  </li>
+                </Link>
               </ul>
             )}
             {/*  Admin */}
@@ -258,6 +270,18 @@ const Sidebar = () => {
                   >
                     <Font iconName="fa-tag" />{" "}
                     <span className="ml-4">Orders</span>
+                  </li>
+                </Link>
+                <Link to={`${urlPath}/newslatter`}>
+                  <li
+                    className={`hover:bg-gray p-4  border-l-4    ${
+                      isActive(`${urlPath}/newslatter`)
+                        ? "bg-gray border-primary"
+                        : "border-white"
+                    }`}
+                  >
+                    <Font iconName="fa-first-order" />{" "}
+                    <span className="ml-4">Newslatter</span>
                   </li>
                 </Link>
               </ul>
@@ -476,18 +500,6 @@ const Sidebar = () => {
             </h2>
             {/* Super Admin */}
             <ul className="mt-4">
-              <Link to={`${urlPath}/editUser`}>
-                <li
-                  className={`hover:bg-gray p-4 border-l-4   ${
-                    isActive(`${urlPath}/editUser`)
-                      ? "bg-gray    border-primary "
-                      : "border-white"
-                  }`}
-                >
-                  <Font iconName="fa-user-pen" />{" "}
-                  <span className="ml-4">Edit Profile</span>
-                </li>
-              </Link>
               <Link to={`${urlPath}/notifications`}>
                 <li
                   className={`hover:bg-gray p-4  border-l-4    ${

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import logo from "../../../assets/logo/black-logo.png";
+import logo from "../../../assets/logo/logo.png";
+import logo1 from "../../../assets/logo/black-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Font from "../../icons/Font";
 import MainButton from "../../Buttons/MainButton";
@@ -100,14 +101,15 @@ const Navbar = () => {
 
   return (
     <div
-      className={`container  fixed top-0 w-full z-10  mx-auto p-4 max-w-[1280px]   ease-in-out duration-300 ${
-        isSticky ? " bg-white   ease-in-out duration-300" : ""
+      className={`container   h-[60px] fixed top-0 w-full z-10  mx-auto py-2 px-4 max-w-[1280px]   ease-in-out duration-300 ${
+        isSticky ? " bg-transparent   ease-in-out duration-300" : ""
       }`}
     >
       <nav className="flex items-center justify-between">
         <div className="text-2xl font-bold">
-          <Link to="/">
-            <img src={logo} alt="" />
+          <Link to="/" className="flex space-x-2">
+            <img src={logo} className=" h-[30px] rotate-90" alt="" />
+            <img src={logo1} className="" alt="" />
           </Link>
         </div>
         {/* Desktop Menus */}
@@ -150,8 +152,9 @@ const Navbar = () => {
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
                 <div className="text-large  cursor-pointer   text-center text-primary mx-2">
-                  <Link to='/messenger'>
-                  <Font iconName="fa-message" /></Link>
+                  <Link to="/messenger">
+                    <Font iconName="fa-message" />
+                  </Link>
                   {/* <i className="fa-regular fa-message"></i> */}
                 </div>
                 <div>
@@ -224,7 +227,7 @@ const Navbar = () => {
                     </a>
                   </Popover>
                 </div>
-                
+
                 <div>
                   <Popover
                     content={
