@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetBatchQuery } from "../../../../redux/api/batch/batchAPI";
- import { ColumnsType } from "antd/es/table";
+import { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 import MyTable from "../../../../components/Dashboard/Ui/Table/Table";
 import MainButton from "../../../../components/Buttons/MainButton";
+import CourseTimeline from "./CourseTimeline/CourseTimeline";
 
 const MyCourseDetails = () => {
   // Get Batch Id
@@ -135,7 +136,11 @@ const MyCourseDetails = () => {
           </div>
         </div>
       </div>
-
+      {/* Course Timeline */}
+      <div className="my-10">
+        <CourseTimeline />
+      </div>
+      {/* Course Teachers / Students / Courses */}
       <div>
         {details && (
           <div>

@@ -42,6 +42,15 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["user"],
     }),
+    // Update User Password
+    updateUserPassword: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/users/change-password/${id}`,
+        method: "PATCH",
+        data: data,
+      }),
+      invalidatesTags: ["user"],
+    }),
     // Update User Details
     updateUserDetails: build.mutation({
       query: (data) => ({
@@ -67,6 +76,7 @@ export const {
   useGetAllTeachersQuery,
   useGetUserDetailsQuery,
   useUpdateUserDetailsMutation,
+  useUpdateUserPasswordMutation,
   useGetAllUsersByRoleQuery,
   useGetUserDetailsByIdQuery,
   useGetUserGrothQuery,

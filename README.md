@@ -1,10 +1,13 @@
  <div align="center">
 
-  <img src="src/assets/logo/logo.png" alt="logo" width="200" height="auto" />
+  <img src="src/assets/logo/logo.png" alt="logo" width="auto" height="40" />
+  <img src="src/assets/logo/white-logo.png" alt="logo" width="auto" height="40" />
+   
   <h1>Online Learning Management System</h1>
   
   <p>
-    An awesome README template for your projects! 
+    Welcome to the Blossom Online Learning Management System (OLMS) repository! This project aims to provide a robust and comprehensive platform for managing online learning activities. With features tailored to user management, course organization, classroom interaction, notification systems, exam administration, and performance tracking, OLMS caters to the needs of both students and administrators alike.
+
   </p>
   
    
@@ -147,4 +150,4 @@ Distributed under the no License.
 
 Mahmudul Hasan - [@Linkedin](https://www.linkedin.com/in/mkmahmud/) - mahmudulmk4@gmail.com - mkmahmud.com
 
-Thank you for your interest in Blossom OLMS! 
+Thank you for your interest in Blossom OLMS!

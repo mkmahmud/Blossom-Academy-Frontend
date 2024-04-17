@@ -1,8 +1,14 @@
 import { useForm } from "react-hook-form";
 import CustomInput from "../../../components/Dashboard/Ui/Input/CustomInput";
 import CustomButton from "../../../components/Buttons/CustomButton";
+import { getUserInfo } from "../../../services/authService";
+import { useUpdateUserPasswordMutation } from "../../../redux/api/users/usersAPI";
+import { message } from "antd";
 
 const Security = () => {
+  // Get User information
+  const userInfo = getUserInfo();
+
   // INput Types
   interface Inputs {
     currentPass: string;
@@ -10,14 +16,28 @@ const Security = () => {
     confirmPass: string;
   }
 
+  // Handle submit
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<Inputs>();
 
+  // Handle Update Password by redux
+  const [updateUserDetails] = useUpdateUserPasswordMutation();
+
   const onSubmit = async (data: Inputs) => {
-    console.log(data);
+    // @ts-ignore
+    const id = userInfo.userId;
+    const result = await updateUserDetails({ id, data });
+
+    // @ts-ignore
+    if (result.data == id) {
+      message.success("Password updated successfully");
+      // @ts-ignore
+    } else if (result.data == "invalid password") {
+      message.error("Invalid Password ");
+    }
   };
 
   return (
@@ -36,20 +56,20 @@ const Security = () => {
         </p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <CustomInput
-            name="currentPass"
+            name="currentPassword"
             placeholder="Current Password"
             errors={errors}
             control={control}
           />
           <CustomInput
-            name="newPass"
+            name="newPassword"
             placeholder="New Password"
             errors={errors}
             control={control}
             type="password"
           />
           <CustomInput
-            name="confirmPass"
+            name="confirmNewPassword"
             placeholder="Confirm New Password"
             errors={errors}
             control={control}
@@ -57,7 +77,7 @@ const Security = () => {
           />
           <div className="my-4 flex">
             <div>
-              <CustomButton content="Update" icon="fa-plus" />
+              <CustomButton type="submit" content="Update" icon="fa-check" />
             </div>
           </div>
         </form>
