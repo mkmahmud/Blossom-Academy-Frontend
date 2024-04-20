@@ -65,23 +65,23 @@
 
 ### :dart: Features
 
-### User Management
+### User Management 🧑‍💼
 
 OLMS offers user registration and authentication functionalities for students and administrators. User roles are defined to distinguish between students and administrators/management personnel.
 
-### Course Management
+### Course Management 📚
 
 Administrators have the ability to create and manage courses within the system. Each course can be organized into multiple batches, facilitating efficient management of course offerings.
 
-### Batch Management
+### Batch Management 📅
 
 Batches within OLMS are designed to accommodate up to 30 students each. Administrators can oversee batch scheduling and manage class schedules. A notification system ensures that students and teachers are informed about upcoming class sessions.
 
-### Notification System
+### Notification System 🔔
 
 OLMS incorporates an automated notification system to alert users about various events, including upcoming classes, system updates, new assignments, and exam schedules. This feature enhances communication and keeps users informed about relevant activities within the platform.
 
-### Messaging
+### Messaging 💬
 
 OLMS integrates messaging functionalities such as real-time chat, direct messaging to facilitate seamless communication between users. These messaging features enhance interaction and foster a dynamic learning environment within the platform.
 
@@ -111,6 +111,14 @@ Clone the repository
  cd Blossom-Academy-Frontend
 
 ```
+
+Clone the Backend repository
+
+```bash
+ git clone https://github.com/mkmahmud/Blossom-Academy.git
+```
+
+👉 [![Backend Repository](https://img.shields.io/badge/Backend%20Repository-Click%20Here-blue?style=for-the-badge&logo=github)](https://github.com/mkmahmud/Blossom-Academy)
 
 Set Backend API
 
