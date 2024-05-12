@@ -135,10 +135,22 @@ const MyCourseDetails = () => {
             />
           </div>
         </div>
+        <div className="p-2 border-t-2 border-primary flex items-center justify-between">
+          <h2 className="text-lg">
+            Exams 
+          </h2>
+          <div>
+            <MainButton
+              path={`/dashboard/my-courses/exam/${data?._id}`}
+              type="button"
+              content="All Exams"
+            />
+          </div>
+        </div>
       </div>
       {/* Course Timeline */}
       <div className="my-10">
-        <CourseTimeline />
+        <CourseTimeline id={id} />
       </div>
       {/* Course Teachers / Students / Courses */}
       <div>

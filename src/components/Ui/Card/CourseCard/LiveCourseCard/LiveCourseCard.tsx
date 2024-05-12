@@ -30,7 +30,7 @@ const LiveCourseCard = ({ data }: any) => {
   };
 
   return (
-    <div className="md:flex items-center relative  shadow-lg shadow-gray my-10  w-full  ">
+    <div className="md:flex items-center relative  shadow-lg shadow-gray dark:shadow-gray-dark my-10  w-full dark:bg-gray-dark ">
       <div>
         <img
           src={thambnail}

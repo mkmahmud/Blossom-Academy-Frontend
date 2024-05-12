@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "../../helpers/axiosBaseQuery";
 
-// const apiURL = "http://localhost:5000";
+// const LiveApiURL = "http://localhost:5000";
 const LiveApiURL = "https://blossom-backend.vercel.app";
 
 // Define a service using a base URL and expected endpoints

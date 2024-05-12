@@ -16,7 +16,7 @@ const TeacherDetails = () => {
 
   return (
     <div>
-      <div className="mt-20"></div>
+      <div className="mt-10 pt-10" ></div>
       {isLoading && <Loading />}
       {data && (
         <div>

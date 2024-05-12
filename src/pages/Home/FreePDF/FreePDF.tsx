@@ -14,7 +14,7 @@ const FreePDF = () => {
         alt=""
       />
 
-      <div className="md:flex justify-center items-center w-full bg-gray py-20 px-6">
+      <div className="md:flex justify-center items-center w-full bg-gray dark:bg-gray-dark py-20 px-6">
         <div className="w-full md:w-1/2  ">
           <img src={book} alt="" className="mx-auto " />
         </div>

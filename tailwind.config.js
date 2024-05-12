@@ -1,16 +1,26 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     fontFamily: {
       Roboto: ["Roboto", "sans-serif"],
     },
     colors: {
-      primary: "#f55951",
+      primary: {
+        DEFAULT: "#f55951",
+        dark: "#18122B",
+      },
       primaryHover: "#edd2cb",
-      secondary: "#361d32",
+      secondary: {
+        DEFAULT: "#361d32",
+        dark: "#000000",
+      },
       secondaryHover: "#543c52",
-      gray: "#f1e8e6",
+      gray: {
+        DEFAULT: "#f1e8e6",
+        dark: "hsla(0,0%,13%,1)",
+      },
       black: "#000000",
       white: "#FFFFFF",
       green: "#52c41a",

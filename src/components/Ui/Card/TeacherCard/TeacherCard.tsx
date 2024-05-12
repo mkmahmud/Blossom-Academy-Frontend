@@ -4,10 +4,10 @@ import Font from "../../../icons/Font";
 
 const TeacherCard = ({ data }: any) => {
   const { id, firstName, lastName, bio, profileImage } = data;
- 
+
   return (
     <Link to={`/teacher/${id}`}>
-      <div className="my-6 mx-auto max-w-[300px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white ">
+      <div className="my-6 mx-auto max-w-[300px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white dark:hover:bg-gray-dark">
         <div className="">
           <div className="h-[300px] bg-primary overflow-hidden">
             <img

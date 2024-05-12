@@ -35,6 +35,8 @@ import Management from "../pages/Dashboard/Management/Management";
 import Security from "../pages/Dashboard/Security/Security";
 import Events from "../pages/Events/Events";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
+import BatchSchedule from "../pages/Dashboard/Batch/BatchSchedule";
+import Exams from "../pages/Dashboard/MyCourses/MyCourseDetails/Exams/Exams";
 
 const router = createBrowserRouter([
   {
@@ -166,6 +168,10 @@ const router = createBrowserRouter([
         element: <MyCourseDetails />,
       },
       {
+        path: "/dashboard/my-courses/exam/:id",
+        element: <Exams />,
+      },
+      {
         path: "/dashboard/class-room",
         element: <ClassRoom />,
       },
@@ -181,6 +187,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/security",
         element: <Security />,
+      },
+      {
+        path: "/dashboard/batch/schedule/:id/:title",
+        element: <BatchSchedule />,
       },
 
       {

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo/black-logo.png";
+import logowhite from "../../../assets/logo/white-logo.png";
 import logo1 from "../../../assets/logo/logo.png";
 import Font from "../../icons/Font";
 import { Input, message } from "antd";
 import CustomButton from "../../Buttons/CustomButton";
 import { useInsertNewslatterEmailMutation } from "../../../redux/api/newslatter/newslatter";
-const Footer = () => {
+const Footer = ({ dark }: any) => {
   // Insert Newsletter Email Address in the database
   const [insertNewslatterEmail] = useInsertNewslatterEmailMutation();
 
@@ -22,11 +23,11 @@ const Footer = () => {
 
   return (
     <div>
-      <div className=" border-t-2 border-primaryHover px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
+      <div className=" border-t-2 border-primaryHover dark:border-gray-dark  px-4 py-10 text-lg lg:text-base md:grid md:grid-cols-2 lg:grid-cols-4">
         <div className="my-6 leading-8">
           <div className="flex space-x-2">
             <img src={logo1} className="h-[30px] rotate-90" alt="" />
-            <img src={logo} alt="" />
+            {dark ? <img src={logowhite} alt="" /> : <img src={logo} alt="" />}
           </div>
           <p>
             <span>Call Us</span> <br />
@@ -113,7 +114,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between pb-10">
+      <div className="flex justify-between pb-10 px-4">
         <div className="flex space-x-2">
           <Link to="terms">Terms</Link>
           <p className="w-[2px] bg-gray"></p>

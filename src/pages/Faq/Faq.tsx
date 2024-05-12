@@ -135,7 +135,7 @@ const Faq = () => {
             <br />
             getting started
           </p>
-          <div className="mx-6 w-full md:w-2/3 md:mx-auto my-10">
+          <div className="mx-6 w-full md:w-2/3 md:mx-auto my-10 ">
             <Collapse
               bordered={false}
               defaultActiveKey={["1"]}

@@ -5,7 +5,7 @@ import shape2 from "../../../assets/images/shape/3.png";
 
 const Mentor = () => {
   return (
-    <div className="md:flex space-x-4 justify-center items-center my-20 bg-gray py-10 relative overflow-hidden">
+    <div className="md:flex space-x-4 justify-center items-center my-20 bg-gray dark:bg-gray-dark py-10 relative overflow-hidden">
       <img
         src={shape2}
         className="absolute  rotate-180 -left-[50px] -bottom-[50px]"

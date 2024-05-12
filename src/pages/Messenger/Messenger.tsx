@@ -69,9 +69,9 @@ const Messenger = () => {
   }, [messages]);
 
   return (
-    <div className="mt-16 h-[100vh] overflow-hidden ">
+    <div className="mt-14 h-[100vh] overflow-hidden ">
       <div className="flex  w-full py-2 h-full">
-        <div className="w-4/12 bg-gray  ">
+        <div className="w-4/12 bg-gray  dark:bg-gray-dark">
           <div className="p-2">
             <Input placeholder={`Search`} className="text-lg rounded-full" />
           </div>
@@ -93,7 +93,7 @@ const Messenger = () => {
         <div className="w-6/12 bg-  relative">
           {selectedContact && (
             <>
-              <div className="p-2 bg-gray border-b-2 border-primary">
+              <div className="p-2 bg-gray dark:bg-gray-dark border-b-2 border-primary">
                 <h2 className="text-xl font-bold">
                   {selectedContact ? selectedContact?.reciverName : "Name"}{" "}
                   <span className="text-sm">
@@ -143,7 +143,7 @@ const Messenger = () => {
                                 <h2
                                   className={`${
                                     m.sender === userinfo?.userId
-                                      ? "bg-primaryHover "
+                                      ? "bg-primaryHover dark:bg-gray-dark"
                                       : "bg-primary text-white"
                                   }  p-2 rounded-r-lg rounded-tl-lg`}
                                 >

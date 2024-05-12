@@ -4,7 +4,7 @@ import Font from "../../../icons/Font";
 
 const CourseCard = () => {
   return (
-    <div className="my-2 mx-auto max-w-[400px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white ">
+    <div className="my-2 mx-auto max-w-[400px] overflow-hidden group ease-in-out duration-300   hover:drop-shadow-xl hover:bg-white dark:hover:bg-gray-dark">
       <Link to="/course-details" className="">
         <div className="h-[300px] bg-primary overflow-hidden">
           <img

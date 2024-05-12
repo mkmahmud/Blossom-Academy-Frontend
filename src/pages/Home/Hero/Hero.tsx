@@ -53,7 +53,7 @@ const Hero = () => {
               />
               <div>
                 <h2 className="text-lg font-semibold my-2">Jhon Richerd</h2>
-                <Link to="/" className="underline ">
+                <Link to="/Teacherssdf" className="underline  ">
                   {" "}
                   <span>Find More teacher</span>{" "}
                   <span className="ml-4">

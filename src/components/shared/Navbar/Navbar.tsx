@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import logo from "../../../assets/logo/logo.png";
 import logo1 from "../../../assets/logo/black-logo.png";
+import logowhite from "../../../assets/logo/white-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import Font from "../../icons/Font";
 import MainButton from "../../Buttons/MainButton";
@@ -19,7 +20,7 @@ import {
 import { timeAgo } from "../../../helpers/calculate/calculate";
 import Empty from "../../Dashboard/Ui/Empty/Empty";
 
-const Navbar = () => {
+const Navbar = ({ dark, darkModeHandler }: any) => {
   // User logged data
 
   const loggedUser = isLoggedIn();
@@ -101,15 +102,21 @@ const Navbar = () => {
 
   return (
     <div
-      className={`container   h-[60px] fixed top-0 w-full z-10  mx-auto py-2 px-4 max-w-[1280px]   ease-in-out duration-300 ${
-        isSticky ? " bg-transparent   ease-in-out duration-300" : ""
+      className={`container   h-[60px] fixed top-0 w-full z-10  mx-auto py-2 px-4 max-w-[1280px] dark:text-white   ease-in-out duration-300 ${
+        isSticky
+          ? "dark:bg-gray-dark bg-transparent   ease-in-out duration-300"
+          : "dark:bg-gray-dark "
       }`}
     >
       <nav className="flex items-center justify-between">
         <div className="text-2xl font-bold">
           <Link to="/" className="flex space-x-2">
             <img src={logo} className=" h-[30px] rotate-90" alt="" />
-            <img src={logo1} className="" alt="" />
+            {dark ? (
+              <img src={logowhite} className="" alt="" />
+            ) : (
+              <img src={logo1} className="" alt="" />
+            )}
           </Link>
         </div>
         {/* Desktop Menus */}
@@ -128,7 +135,7 @@ const Navbar = () => {
                 </Link>
                 {/* Dropdown Menus */}
                 {menu?.dropdown && (
-                  <ul className="absolute bg-gray py-2 px-4 top-14 hidden group-hover:block z-10">
+                  <ul className="absolute bg-gray dark:bg-gray-dark py-2 px-4 top-14 hidden group-hover:block z-10">
                     {menu?.dropdown.map((m, i) => (
                       <li className="my-2" key={i}>
                         {" "}
@@ -148,19 +155,41 @@ const Navbar = () => {
         </div>
 
         <ul className="flex space-x-4 hidden md:block ">
-          <li>
+          <li className="flex items-center ">
+            {/* Dark / Light button */}
+            <div className="mr-4">
+              {dark && (
+                <div
+                  onClick={() => darkModeHandler()}
+                  className="text-large  cursor-pointer   text-center text-primary  dark:text-white "
+                >
+                  <i className="fa-regular fa-moon"></i>{" "}
+                </div>
+              )}
+              {!dark && (
+                <div
+                  onClick={() => darkModeHandler()}
+                  className="text-large  cursor-pointer   text-center text-primary  "
+                >
+                  <Font iconName="fa-moon  " />
+                </div>
+              )}
+            </div>
+            {/* Logged User options */}
             {loggedUser ? (
               <div className="relative  flex items-center space-x-4">
+                {/* Message */}
                 <div className="text-large  cursor-pointer   text-center text-primary mx-2">
                   <Link to="/messenger">
                     <Font iconName="fa-message" />
                   </Link>
                   {/* <i className="fa-regular fa-message"></i> */}
                 </div>
+                {/* Notifications */}
                 <div>
                   <Popover
                     content={
-                      <div className="  pb-2 w-[400px] mt-2">
+                      <div className="  pb-2 w-[400px] mt-2 dark:bg-gray-dark dark:text-white">
                         <h2 className="font-semibold p-4">Notifications</h2>
                         <div className="h-[400px]  overflow-y-scroll">
                           {notificationsData &&
@@ -227,11 +256,11 @@ const Navbar = () => {
                     </a>
                   </Popover>
                 </div>
-
+                {/* Profile */}
                 <div>
                   <Popover
                     content={
-                      <div className="     p-4 w-[250px] mt-2">
+                      <div className="  dark:bg-gray-dark dark:text-white   p-4 w-[250px] mt-2">
                         <div className="flex items-center">
                           <img
                             src={
