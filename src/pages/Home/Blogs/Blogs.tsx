@@ -16,7 +16,7 @@ import CountUp from "react-countup";
 const Blogs = () => {
   return (
     <div className="my-20">
-      <div className="bg-primaryHover w-full rounded-xl p-10 flex justify-around mt-20">
+      <div className="bg-primaryHover dark:bg-gray-dark w-full rounded-xl p-10 flex justify-around mt-20">
         <div className="flex space-x-4">
           <div className="bg-white p-2 rounded-xl ">
             <img src={svg11} alt="img" className="block mx-auto" />

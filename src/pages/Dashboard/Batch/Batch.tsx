@@ -14,6 +14,7 @@ import AddStudent from "./AddStudent";
 import AddTeacher from "./AddTeacher";
 import AddCourse from "./AddCourse";
 import Toggle from "../../../components/Dashboard/Ui/Toggle/Toggle";
+import MainButton from "../../../components/Buttons/MainButton";
 
 const Batch = () => {
   //   All Batch Data
@@ -213,6 +214,14 @@ const Batch = () => {
                   <h2 className="text-xl font-bold my-2 ">{details.title}</h2>
                   <p className="my-2  font-bold"> {details.category}</p>
                   <p className=" font-bold"> {details.startTime}</p>
+                  {/* Batch Schedule */}
+                  <div className="mt-4">
+                    <MainButton
+                      content="Class Schedule"
+                      icon="fa-eye"
+                      path={`/dashboard/batch/schedule/${details._id}/${details.title}`}
+                    />
+                  </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-2">
                   <div>

@@ -1,38 +1,27 @@
 import { Timeline } from "antd";
+import { useGetCourseSchudleQuery } from "../../../../../redux/api/courseSchedule/courseScheduleAPI";
 
-const CourseTimeline = () => {
+const CourseTimeline = ({ id }: any) => {
+  // Get Couse Schedule
+  const { data } = useGetCourseSchudleQuery(id);
+
+  const items = data?.schedule
+    ? data.schedule.map((item: any) => {
+        return {
+          label: item.date,
+          children: `[Class ${item.classNummber}] - ${item.title}`,
+        };
+      })
+    : [];
+
   return (
     <div>
-      <Timeline
-        mode={"alternate"}
-        items={[
-          {
-            label: "2015-09-01",
-            children: "Create a services",
-          },
-          {
-            label: "2015-09-01 09:12:11",
-            children: "Solve initial network problems",
-          },
-
-          {
-            label: "2015-09-01 09:12:11",
-            children: "Network problems being solved",
-          },
-          {
-            label: "2015-09-01 09:12:11",
-            children: "Network problems being solved",
-          },
-          {
-            label: "2015-09-01 09:12:11",
-            children: "Network problems being solved",
-          },
-          {
-            label: "2015-09-01 09:12:11",
-            children: "Network problems being solved",
-          },
-        ]}
-      />
+      {!data && (
+        <h2 className="text-red text-large font-semibold text-center">
+          Schedule isn't ready yet !!!!!!
+        </h2>
+      )}
+      {data && <Timeline mode={"alternate"} items={items} />}
     </div>
   );
 };

@@ -7,15 +7,15 @@ const NotFound = () => {
       {/* Shape */}
       <div
         style={{ clipPath: "polygon(100% 0, 100% 0, 40% 100%, 0 99%, 0 52%)" }}
-        className="bg-white h-screen w-full"
+        className="bg-white dark:bg-gray-dark  h-screen w-full"
       ></div>
       {/* Content */}
       <div className="text-black text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <h2 className="text-extraLarge font-bold ">404</h2>
-        <i className="fa-solid fa-triangle-exclamation text-primary text-[80px] my-4"></i>
+        <h2 className="text-extraLarge font-bold dark:text-white ">404</h2>
+        <i className="fa-solid fa-triangle-exclamation text-primary dark:text-white text-[80px] my-4"></i>
 
 
-        <p>Page Not Found</p>
+        <p className="dark:text-white">Page Not Found</p>
         <Link to="/">
           <button
             type="submit"
