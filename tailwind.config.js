@@ -25,7 +25,10 @@ export default {
       white: "#FFFFFF",
       green: "#52c41a",
       red: "#f55951",
-      transparent: "rgb(255 255 255 / 59%)",
+      transparent: {
+        DEFAULT: "rgb(255 255 255 / 59%)",
+        dark:"hsl(0deg 0% 13% / 0%)"
+      },
     },
     fontSize: {
       xs: "0.75rem", // 12 pixels - Extra small font size

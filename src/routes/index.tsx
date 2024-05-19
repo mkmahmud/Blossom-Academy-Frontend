@@ -37,6 +37,8 @@ import Events from "../pages/Events/Events";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import BatchSchedule from "../pages/Dashboard/Batch/BatchSchedule";
 import Exams from "../pages/Dashboard/MyCourses/MyCourseDetails/Exams/Exams";
+import Exam from "../layout/Exam";
+import ExamCenter from "../pages/ExamCenter/ExamCenter";
 
 const router = createBrowserRouter([
   {
@@ -205,6 +207,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // Authentication
   {
     path: "/auth",
     element: <Auth />,
@@ -213,6 +216,21 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  // Exam
+  {
+    path: "/exam",
+    element: (
+      <ProtectedRoute>
+        <Exam />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/exam/details",
+        element: <ExamCenter />,
+      },
+    ],
   },
 ]);
 export default router;
