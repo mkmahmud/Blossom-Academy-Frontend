@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import MyTable from "../../../../components/Dashboard/Ui/Table/Table";
 import MainButton from "../../../../components/Buttons/MainButton";
 import CourseTimeline from "./CourseTimeline/CourseTimeline";
+import Loading from "../../../../components/Ui/Loading/Loading";
 
 const MyCourseDetails = () => {
   // Get Batch Id
@@ -121,107 +122,115 @@ const MyCourseDetails = () => {
 
   return (
     <div>
-      <div className="border-2 border-primary  ">
-        <h1 className="p-2 text-xl font-semibold">{data?.title}</h1>
-        <div className="p-2 border-t-2 border-primary flex items-center justify-between">
-          <h2 className="text-lg">
-            Start Time: <span className="font-semibold">{data?.session}</span>
-          </h2>
-          <div>
-            <MainButton
-              path="/dashboard/class-room"
-              type="button"
-              content="Join The Class"
-            />
+      {/* Loading */}
+      {!data && <Loading />}
+
+      {/* Content */}
+      {data && (
+        <div>
+          <div className="border-2 border-primary  ">
+            <h1 className="p-2 text-xl font-semibold">{data?.title}</h1>
+            <div className="p-2 border-t-2 border-primary flex items-center justify-between">
+              <h2 className="text-lg">
+                Start Time:{" "}
+                <span className="font-semibold">{data?.session}</span>
+              </h2>
+              <div>
+                <MainButton
+                  path="/dashboard/class-room"
+                  type="button"
+                  content="Join The Class"
+                />
+              </div>
+            </div>
+            <div className="p-2 border-t-2 border-primary flex items-center justify-between">
+              <h2 className="text-lg">Exams</h2>
+              <div>
+                <MainButton
+                  path={`/dashboard/my-courses/exam/${data?._id}`}
+                  type="button"
+                  content="All Exams"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="p-2 border-t-2 border-primary flex items-center justify-between">
-          <h2 className="text-lg">
-            Exams 
-          </h2>
-          <div>
-            <MainButton
-              path={`/dashboard/my-courses/exam/${data?._id}`}
-              type="button"
-              content="All Exams"
-            />
+
+          {/* Course Timeline */}
+          <div className="my-10">
+            <CourseTimeline id={id} />
           </div>
-        </div>
-      </div>
-      {/* Course Timeline */}
-      <div className="my-10">
-        <CourseTimeline id={id} />
-      </div>
-      {/* Course Teachers / Students / Courses */}
-      <div>
-        {details && (
+          {/* Course Teachers / Students / Courses */}
           <div>
-            <div className="w-full shadow p-4 border-secondary  ">
-              <div className="px-2 flex justify-between  ">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-2">
-                  <div>
-                    <div
-                      onClick={() => {
-                        setselectedTable("students");
-                      }}
-                      className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
-                        selectedTable && selectedTable == "students"
-                          ? "bg-primary text-white"
-                          : ""
-                      }`}
-                    >
-                      <button className="">Students</button>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      onClick={() => {
-                        setselectedTable("teachers");
-                      }}
-                      className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
-                        selectedTable && selectedTable == "teachers"
-                          ? "bg-primary text-white"
-                          : ""
-                      }`}
-                    >
-                      <button className="">Teachers</button>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      onClick={() => {
-                        setselectedTable("courses");
-                      }}
-                      className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
-                        selectedTable && selectedTable == "courses"
-                          ? "bg-primary text-white"
-                          : ""
-                      }`}
-                    >
-                      <button className="">Courses</button>
+            {details && (
+              <div>
+                <div className="w-full shadow p-4 border-secondary  ">
+                  <div className="px-2 flex justify-between  ">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-2">
+                      <div>
+                        <div
+                          onClick={() => {
+                            setselectedTable("students");
+                          }}
+                          className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
+                            selectedTable && selectedTable == "students"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
+                        >
+                          <button className="">Students</button>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          onClick={() => {
+                            setselectedTable("teachers");
+                          }}
+                          className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
+                            selectedTable && selectedTable == "teachers"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
+                        >
+                          <button className="">Teachers</button>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          onClick={() => {
+                            setselectedTable("courses");
+                          }}
+                          className={`cursor-pointer    p-2 w-[150px] text-center  border border-primaryHover  shadow-lg shadow-primaryHover ${
+                            selectedTable && selectedTable == "courses"
+                              ? "bg-primary text-white"
+                              : ""
+                          }`}
+                        >
+                          <button className="">Courses</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                {/* View Students Teacher and course */}
+                <div>
+                  {/* Students Table */}
+                  {selectedTable && selectedTable == "students" && (
+                    <MyTable columns={columns} data={studentsData} />
+                  )}
+                  {/* Teachsers Table */}
+                  {selectedTable && selectedTable == "teachers" && (
+                    <MyTable columns={columns} data={teachersData} />
+                  )}
+                  {/* Courses Table */}
+                  {selectedTable && selectedTable == "courses" && (
+                    <MyTable columns={courseColumns} data={coursesData} />
+                  )}
+                </div>
               </div>
-            </div>
-            {/* View Students Teacher and course */}
-            <div>
-              {/* Students Table */}
-              {selectedTable && selectedTable == "students" && (
-                <MyTable columns={columns} data={studentsData} />
-              )}
-              {/* Teachsers Table */}
-              {selectedTable && selectedTable == "teachers" && (
-                <MyTable columns={columns} data={teachersData} />
-              )}
-              {/* Courses Table */}
-              {selectedTable && selectedTable == "courses" && (
-                <MyTable columns={courseColumns} data={coursesData} />
-              )}
-            </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

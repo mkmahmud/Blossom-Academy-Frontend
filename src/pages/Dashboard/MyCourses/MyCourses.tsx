@@ -3,6 +3,7 @@ import { useGetStudentEnrolledBatchQuery } from "../../../redux/api/batch/batchA
 import { getUserInfo } from "../../../services/authService";
 import StudentEnrolledCard from "../../../components/Dashboard/Ui/Card/StudentEnrolledCard/StudentEnrolledCard";
 import Empty from "../../../components/Dashboard/Ui/Empty/Empty";
+import Loading from "../../../components/Ui/Loading/Loading";
 
 const MyCourses = () => {
   // Set Active button
@@ -39,6 +40,11 @@ const MyCourses = () => {
           Online Course
         </button>
       </div>
+ 
+      {/* Loading */}
+      {
+        !data && <Loading  />
+      }
 
       {/* Display Live course */}
       {active && (

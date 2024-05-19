@@ -105,7 +105,7 @@ const Navbar = ({ dark, darkModeHandler }: any) => {
       className={`container   h-[60px] fixed top-0 w-full z-10  mx-auto py-2 px-4 max-w-[1280px] dark:text-white   ease-in-out duration-300 ${
         isSticky
           ? "dark:bg-gray-dark bg-transparent   ease-in-out duration-300"
-          : "dark:bg-gray-dark "
+          : "dark:bg-transparent-dark "
       }`}
     >
       <nav className="flex items-center justify-between">
