@@ -15,7 +15,7 @@ const LiveCourses = () => {
       {isLoading && <Loading />}
 
       {/* Content */}
-      <div className="my-10">
+      <div className="my-10 px-4">
         {data && data.map((d: any) => <LiveCourseCard key={d._id} data={d} />)}
       </div>
     </div>

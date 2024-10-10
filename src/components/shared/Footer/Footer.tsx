@@ -114,8 +114,8 @@ const Footer = ({ dark }: any) => {
           </div>
         </div>
       </div>
-      <div className="flex justify-between pb-10 px-4">
-        <div className="flex space-x-2">
+      <div className="text-center md:flex justify-between pb-10 px-4">
+        <div className="flex justify-center md:justify-start space-x-2">
           <Link to="terms">Terms</Link>
           <p className="w-[2px] bg-gray"></p>
           <Link to="privacy">Privacy</Link>

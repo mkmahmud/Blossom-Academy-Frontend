@@ -5,7 +5,7 @@ import { Progress, ProgressProps } from "antd";
 import MCQCard from "../../components/Ui/Card/ExamCard/QuestionCard/MCQCard";
 import Font from "../../components/icons/Font";
 
-const MCQ = () => {
+const MCQ = () => { 
   // Get User Profile
   const { user } = useAppSelector((state) => state.userDetails);
  

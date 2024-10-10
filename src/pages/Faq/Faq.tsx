@@ -125,7 +125,7 @@ const Faq = () => {
   return (
     <div>
       <PageHead subHead="Most frequently asked questions" title="FAQ" />
-      <div>
+      <div className="">
         <div className="mx-4">
           <h2 className="text-extraLarge font-semibold">
             Most frequently asked <br /> questions

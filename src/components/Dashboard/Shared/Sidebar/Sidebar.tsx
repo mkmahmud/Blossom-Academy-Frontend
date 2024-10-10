@@ -498,7 +498,7 @@ const Sidebar = () => {
             <h2 className="uppercase text-lg text-secondary font-semibold mt-4">
               Accounts Settings
             </h2>
-            {/* Super Admin */}
+            {/* All */}
             <ul className="mt-4">
               <Link to={`${urlPath}/notifications`}>
                 <li
@@ -510,6 +510,18 @@ const Sidebar = () => {
                 >
                   <Font iconName="fa-first-order" />{" "}
                   <span className="ml-4">Notifications</span>
+                </li>
+              </Link>
+              <Link to={`${urlPath}/events`}>
+                <li
+                  className={`hover:bg-gray p-4  border-l-4    ${
+                    isActive(`${urlPath}/events`)
+                      ? "bg-gray border-primary"
+                      : "border-white"
+                  }`}
+                >
+                  <Font iconName="fa-calendar" />{" "}
+                  <span className="ml-4">Events</span>
                 </li>
               </Link>
               <Link to={`${urlPath}/security`}>

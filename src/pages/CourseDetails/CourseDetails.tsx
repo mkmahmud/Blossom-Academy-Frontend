@@ -5,7 +5,7 @@ const CourseDetails = () => {
   return (
     <div>
       <div>
-        <UnderConstraction />
+         <UnderConstraction/>
       </div>
     </div>
   );

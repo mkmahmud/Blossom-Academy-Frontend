@@ -2,11 +2,15 @@ import Font from "../../../components/icons/Font";
 import CountUp from "react-countup";
 
 const States = () => {
+  // Card Class
+  const cardClass =
+    "dark:bg-gray-dark mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[180px] md:w-[250px] flex items-center p-2 md:p-6 m-2 rounded shadow-xl md:shadow-2xl";
+
   return (
     <div className="mt-20 ">
       <div className=" h-[100px]"></div>
       <div className="-mt-[50px] grid grid-cols-2 md:grid-cols-4 ">
-        <div className="dark:bg-gray-dark mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
+        <div className={cardClass}>
           <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-book" />
           </div>
@@ -15,7 +19,7 @@ const States = () => {
             <p>Online Course</p>
           </div>
         </div>
-        <div className="dark:bg-gray-dark mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
+        <div className={cardClass}>
           <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-chalkboard-user" />
           </div>
@@ -24,7 +28,7 @@ const States = () => {
             <p>Teachers</p>
           </div>
         </div>
-        <div className="dark:bg-gray-dark mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
+        <div className={cardClass}>
           <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-users" />
           </div>
@@ -37,14 +41,14 @@ const States = () => {
             <p>Students</p>
           </div>
         </div>
-        <div className="dark:bg-gray-dark mx-auto hover:-translate-y-2 ease-in-out duration-300     cursor-pointer w-[250px] flex items-center p-6 m-2 rounded shadow-2xl">
+        <div className={cardClass}>
           <div className="text-extraLarge p-2  text-primary rounded-full       border-primary mx-2">
             <Font iconName="fa-certificate" />
           </div>
           <div>
             <CountUp className="font-semibold text-xl" end={24} duration={4} />
 
-            <p>Certified Course</p>
+            <p>Certified </p>
           </div>
         </div>
       </div>
