@@ -1,6 +1,4 @@
-import { useState } from "react";
-import Font from "../../../components/icons/Font";
-import CustomButton from "../../../components/Buttons/CustomButton";
+import { useState } from "react"; 
 import EventViewCard from "../../../components/Dashboard/Ui/Card/EventViewCard/EventViewCard";
 
 const Events = () => {

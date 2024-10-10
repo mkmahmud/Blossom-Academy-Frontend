@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import Font from "../../components/icons/Font";
+import { useAppSelector } from "../../redux/hooks"; 
 import CustomButton from "../../components/Buttons/CustomButton";
 
 const CQ = () => {
