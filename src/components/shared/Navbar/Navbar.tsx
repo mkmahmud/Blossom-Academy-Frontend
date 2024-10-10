@@ -361,10 +361,17 @@ const Navbar = ({ dark, darkModeHandler }: any) => {
           )}
         </button>
         {mobileMenu && (
-          <div className="absolute bg-gray h-screen top-0 w-2/3 sm:w-1/2 left-0 px-4">
+          <div className="absolute bg-gray dark:bg-gray-dark h-screen top-0 w-2/3 sm:w-1/2 left-0 px-4">
             <div>
               <div className="text-2xl font-bold py-10">
-                <img className="block mx-auto" src={logo} alt="" />
+                <Link to="/" className="flex space-x-2">
+                  <img src={logo} className=" h-[30px] rotate-90" alt="" />
+                  {dark ? (
+                    <img src={logowhite} className="" alt="" />
+                  ) : (
+                    <img src={logo1} className="" alt="" />
+                  )}
+                </Link>{" "}
               </div>
               <ul className="    font-medium ">
                 {menus.map((menu, index) => (
@@ -380,7 +387,7 @@ const Navbar = ({ dark, darkModeHandler }: any) => {
                     </Link>
                     {/* Dropdown Menus */}
                     {menu?.dropdown && (
-                      <ul className="  bg-white py-2 px-4 mt-4  hidden group-hover:block z-10">
+                      <ul className="  bg-white dark:bg-gray-dark py-2 px-4 mt-4  hidden group-hover:block z-10">
                         {menu?.dropdown.map((m, i) => (
                           <li className="my-2" key={i}>
                             {" "}
@@ -398,6 +405,24 @@ const Navbar = ({ dark, darkModeHandler }: any) => {
                 ))}
               </ul>
             </div>
+            <div className="my-4">
+              {dark && (
+                <div
+                  onClick={() => darkModeHandler()}
+                  className="text-large  cursor-pointer     text-primary  dark:text-white "
+                >
+                  <i className="fa-regular fa-moon"></i>{" "}
+                </div>
+              )}
+              {!dark && (
+                <div
+                  onClick={() => darkModeHandler()}
+                  className="text-large  cursor-pointer     text-primary  "
+                >
+                  <Font iconName="fa-moon  " />
+                </div>
+              )}
+            </div>
             <div>
               {loggedUser ? (
                 <div className="relative  ">
@@ -414,7 +439,7 @@ const Navbar = ({ dark, darkModeHandler }: any) => {
                     }}
                   />
                   {profile && (
-                    <div className="absolute right-0 bg-white shadow-lg p-4 w-[250px] mt-2">
+                    <div className="absolute right-0 bg-white dark:bg-gray-dark shadow-lg p-4 w-[250px] mt-2">
                       <div className="flex items-center">
                         <img
                           src={

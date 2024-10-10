@@ -16,8 +16,8 @@ import CountUp from "react-countup";
 const Blogs = () => {
   return (
     <div className="my-20">
-      <div className="bg-primaryHover dark:bg-gray-dark w-full rounded-xl p-10 flex justify-around mt-20">
-        <div className="flex space-x-4">
+      <div className="bg-primaryHover dark:bg-gray-dark w-full rounded-xl p-10 md:flex justify-around mt-20">
+        <div className="flex space-x-4 mt-2" >
           <div className="bg-white p-2 rounded-xl ">
             <img src={svg11} alt="img" className="block mx-auto" />
           </div>
@@ -31,7 +31,7 @@ const Blogs = () => {
             <p className="text-xl">Students Enrolled</p>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mt-2" >
           <div className="bg-white p-2 rounded-xl ">
             <img src={svg12} alt="img" className="block mx-auto" />
           </div>
@@ -43,7 +43,7 @@ const Blogs = () => {
             />            <p className="text-xl">All Course</p>
           </div>
         </div>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 mt-2" >
           <div className="bg-white p-2 rounded-xl ">
             <img src={svg1} alt="img" className="block mx-auto" />
           </div>
@@ -57,7 +57,7 @@ const Blogs = () => {
         </div>
       </div>
       <div className="text-center my-10">
-        <h2 className="text-extraLarge font-semibold">
+        <h2 className="text-large md:text-extraLarge font-semibold">
           Unlimited access to 360+ courses <br />
           and 1,600+ hands-on labs
         </h2>

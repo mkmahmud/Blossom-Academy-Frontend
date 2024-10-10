@@ -39,7 +39,9 @@ import BatchSchedule from "../pages/Dashboard/Batch/BatchSchedule";
 import Exams from "../pages/Dashboard/MyCourses/MyCourseDetails/Exams/Exams";
 import Exam from "../layout/Exam";
 import ExamCenter from "../pages/ExamCenter/ExamCenter";
-
+import DashboardEvents from "../pages/Dashboard/Events/Events";
+import EventDetails from "../pages/Events/EventDetails/EventDetails";
+ 
 const router = createBrowserRouter([
   {
     path: "/",
@@ -93,6 +95,16 @@ const router = createBrowserRouter([
         path: "/video-courses",
         element: <VideoCourses />,
       },
+      // Events
+      {
+        path: "/eventdetails/:id",
+        element: (
+          <ProtectedRoute>
+            <EventDetails />
+          </ProtectedRoute>
+        ),
+      },
+      // Course Rotues
       {
         path: "/courses/checkout/:id",
         element: (
@@ -189,6 +201,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/security",
         element: <Security />,
+      },
+      {
+        path: "/dashboard/events",
+        element: <DashboardEvents />,
       },
       {
         path: "/dashboard/batch/schedule/:id/:title",

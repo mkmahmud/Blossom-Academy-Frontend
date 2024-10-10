@@ -62,11 +62,25 @@ const Messenger = () => {
     setMessages(getAllMessages);
   }, [getAllMessages]);
 
+  // Show messages automatically from  bottom
+
   const messagesEndRef = useRef(null);
+  const messageContainerRef = useRef(null);
+
+  // Function to scroll only the message container
+  const scrollToBottom = () => {
+    messageContainerRef.current?.scrollTo({
+      top: messageContainerRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollToBottom(); 
   }, [messages]);
+
+
+  //  
 
   return (
     <div className="mt-14 h-[100vh] overflow-hidden ">
@@ -105,7 +119,7 @@ const Messenger = () => {
               </div>
 
               {/* Messages */}
-              <div className="  h-[80%] overflow-y-scroll   w-full  ">
+              <div className="  h-[80%] overflow-y-scroll   w-full  " ref={messageContainerRef}>
                 <div>
                   {messages.length > 0 &&
                     messages

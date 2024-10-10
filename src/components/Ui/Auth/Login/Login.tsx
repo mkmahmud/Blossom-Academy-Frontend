@@ -141,6 +141,7 @@ const Login = () => {
           <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-primaryHover opacity-40 group-hover:animate-shine" />
         </button>
       </form>
+      
       {/* Social Media Login */}
       <div className="flex justify-around my-20">
         <div className="cursor-pointer flex">

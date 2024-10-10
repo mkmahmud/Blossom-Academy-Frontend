@@ -1,10 +1,19 @@
-import UnderConstraction from "../../components/Ui/Error/UnderConstraction";
+import EventCard from "../../components/Ui/Card/EventCard/EventCard";
+import { useGetEventsQuery } from "../../redux/api/events/eventsAPI";
 
 const Events = () => {
+  // Events Data
+  const { data } = useGetEventsQuery(undefined);
+
   return (
-    <div>
+    <div className="mt-20">
       <div>
-        <UnderConstraction />
+        <div>
+          {data &&
+            data.map((event: any) => (
+              <EventCard key={event._id} data={event} />
+            ))}
+        </div>
       </div>
     </div>
   );

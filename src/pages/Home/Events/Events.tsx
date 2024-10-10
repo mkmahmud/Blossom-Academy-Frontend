@@ -1,8 +1,13 @@
 import MainButton from "../../../components/Buttons/MainButton";
 import user from "../../../assets/user/u2.png";
 import EventCard from "../../../components/Ui/Card/EventCard/EventCard";
+import { useGetEventsQuery } from "../../../redux/api/events/eventsAPI";
 
 const Events = () => {
+  // Events Data
+  const { data } = useGetEventsQuery(undefined);
+ 
+
   return (
     <div className="mt-20 px-6">
       <div className="w-full md:flex ">
@@ -14,7 +19,11 @@ const Events = () => {
               <br />
               <span className="text-primary"> Upcoming Events</span>
             </h2>
-            <MainButton path="/events" content="ALL EVENTS" icon="fa-calendar" />
+            <MainButton
+              path="/events"
+              content="ALL EVENTS"
+              icon="fa-calendar"
+            />
           </div>
           <div className="mt-20">
             <img src={user} className="mx-auto" alt="" />
@@ -29,9 +38,12 @@ const Events = () => {
               optio. Cumque, beatae consequatur!
             </p>
           </div>
-          <EventCard />
-          <EventCard />
-          <EventCard />
+          <div>
+            {data &&
+              data.map((event: any) => (
+                <EventCard key={event._id} data={event} />
+              ))}
+          </div>
         </div>
       </div>
     </div>

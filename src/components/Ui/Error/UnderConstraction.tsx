@@ -3,7 +3,7 @@ import Font from "../../icons/Font";
 const UnderConstraction = () => {
   return (
     <div className="text-center my-20">
-      <h2 className="text-extraLargeXL text-primary font-bold">
+      <h2 className=" text-extraLarge md:text-extraLargeXL text-primary font-bold">
         The Page is Under Construction
       </h2>
       <h2 className="text-extraLargeXL text-primary font-bold my-10">

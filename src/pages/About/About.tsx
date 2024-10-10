@@ -15,7 +15,7 @@ const About = () => {
     <div>
       <PageHead subHead="About" title="About Us" />
       <div>
-        <div className="md:flex space-x-10 w-full ">
+        <div className="md:flex md:space-x-10 w-full p-2">
           <div className="w-full">
             <img
               src={aboutimage}
@@ -23,8 +23,8 @@ const About = () => {
               className="rounded-lg block mx-auto "
             />
           </div>
-          <div className="w-full">
-            <div className="text-left mb-10">
+          <div className="w-full  ">
+            <div className="text-left md:mb-10 mt-2">
               <p className="text-primary">About Us</p>
               <h2 className="text-extraLarge   font-bold my-4 leading-none">
                 We Care About Your Life
@@ -36,16 +36,14 @@ const About = () => {
                 and believe in the power of simple and easy communication and
                 this is at the heart.
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div className="flex space-x-4 my-4  ">
                   <div className="text-extraLarge text-primary   ">
                     <Font iconName="fa-school" />
                   </div>
                   <div>
                     <h2 className="text-large">Master Coach</h2>
-                    <p>
-                      Quis autem reprehenderit quein voluptate velit esseua.
-                    </p>
+                    <p>Quis autem reprehenderit quein voluptate v .</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 my-4">
@@ -54,7 +52,7 @@ const About = () => {
                   </div>
                   <div>
                     <h2 className="text-large">Professional Advisors</h2>
-                    <p>Sed ut perspiciatis unde omnis natuerror voluptatem.</p>
+                    <p>Sed ut perspiciati natuerror voluptatem.</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 my-4">
@@ -63,7 +61,7 @@ const About = () => {
                   </div>
                   <div>
                     <h2 className="text-large">Coach Certification</h2>
-                    <p>Sed ut perspiciatis unde omnis natuerror voluptatem.</p>
+                    <p>Sed ut perspiciatis unde voluptatem.</p>
                   </div>
                 </div>
                 <div className="flex space-x-4 my-4">
@@ -72,9 +70,7 @@ const About = () => {
                   </div>
                   <div>
                     <h2 className="text-large">Coaching Scholars</h2>
-                    <p>
-                      Quis autem reprehenderit quein voluptate velit esseua.
-                    </p>
+                    <p>Quis autem repreh n voluptate velit esseua.</p>
                   </div>
                 </div>
               </div>
